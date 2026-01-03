@@ -10,8 +10,6 @@ import { GoogleDriveVideo } from "@/components/media/google-drive-video";
 import { GalleryCarousel } from "@/components/media/gallery-carousel";
 import { TocNav } from "@/components/projects/toc-nav";
 
-
-
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -51,10 +49,16 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
   const toc = [
     { id: "overview", label: "Overview" },
-    { id: "highlights", label: "Highlights" },
+    { id: "problem", label: "Problem" },
+    { id: "approach", label: "Approach" },
+    { id: "architecture", label: "Architecture" },
+    { id: "challenges", label: "Challenges" },
+    { id: "outcome", label: "Outcome" },
     { id: "tech", label: "Tech stack" },
     { id: "media", label: "Demo / Media" },
   ];
+
+  const cs = project.caseStudy;
 
   return (
     <div className="space-y-8">
@@ -136,9 +140,59 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
         {/* Content */}
         <div className="min-w-0 space-y-10">
-          <Section id="overview" title="Overview" >
+          <Section id="overview" title="Overview">
             <p>{bullets[0] ?? "Case study overview coming soon."}</p>
           </Section>
+
+          {cs?.problem?.length ? (
+            <Section id="problem" title="Problem">
+              <ul className="list-disc pl-5 space-y-2">
+                {cs.problem.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
+
+          {cs?.approach?.length ? (
+            <Section id="approach" title="Approach">
+              <ul className="list-disc pl-5 space-y-2">
+                {cs.approach.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
+
+          {cs?.architecture?.length ? (
+            <Section id="architecture" title="Architecture">
+              <ul className="list-disc pl-5 space-y-2">
+                {cs.architecture.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
+
+          {cs?.challenges?.length ? (
+            <Section id="challenges" title="Challenges">
+              <ul className="list-disc pl-5 space-y-2">
+                {cs.challenges.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
+
+          {cs?.outcome?.length ? (
+            <Section id="outcome" title="Outcome">
+              <ul className="list-disc pl-5 space-y-2">
+                {cs.outcome.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
 
           <Section id="highlights" title="Highlights">
             <ul className="list-disc pl-5 space-y-2">
@@ -179,9 +233,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
               )}
 
               {project.images?.length ? (
-                <GalleryCarousel
-                  images={project.images}
-                />
+                <GalleryCarousel images={project.images} />
               ) : null}
 
               {!hasLoom && !hasDrive && !project.images?.length ? (

@@ -4,6 +4,14 @@ export type ProjectLink = {
   title: string;
 };
 
+export type CaseStudySection = {
+  problem?: string[];
+  approach?: string[];
+  architecture?: string[];
+  challenges?: string[];
+  outcome?: string[];
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -18,4 +26,5 @@ export type Project = {
     webLink?: ProjectLink[];
     github?: ProjectLink[];
   };
+  caseStudy?: CaseStudySection;
 };

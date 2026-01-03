@@ -48,6 +48,27 @@ export const projects: Project[] = [
       videoType: "loom",
       videoUrl: "https://www.loom.com/share/3aa0db1fee7c4f41af572b317b33660c",
     },
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
+    },
   },
 
   {
@@ -72,8 +93,28 @@ export const projects: Project[] = [
     ],
     links: {
       videoType: "loom",
-      videoUrl:
-        "https://www.loom.com/share/bcec05bdb4cc4561b1cde5c74a83d6ba",
+      videoUrl: "https://www.loom.com/share/bcec05bdb4cc4561b1cde5c74a83d6ba",
+    },
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
     },
   },
 
@@ -110,14 +151,34 @@ export const projects: Project[] = [
     ],
     links: {
       videoType: "loom",
-      videoUrl:
-        "https://www.loom.com/share/8102115876f2471fb1fcf41763aeee23",
+      videoUrl: "https://www.loom.com/share/8102115876f2471fb1fcf41763aeee23",
       webLink: [
         {
           id: 1,
           title: "Website",
           link: "https://www.graana.com/",
         },
+      ],
+    },
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
       ],
     },
   },
@@ -144,8 +205,28 @@ export const projects: Project[] = [
     ],
     links: {
       videoType: "loom",
-      videoUrl:
-        "https://www.loom.com/share/2ae08c108cf34075b6237d111f1a709d",
+      videoUrl: "https://www.loom.com/share/2ae08c108cf34075b6237d111f1a709d",
+    },
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
     },
   },
 
@@ -171,6 +252,27 @@ export const projects: Project[] = [
           "Advanced filtering and fast results for browsing properties efficiently.",
       },
     ],
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
+    },
   },
 
   {
@@ -191,6 +293,27 @@ export const projects: Project[] = [
           "Admin + customer workflows with status tracking and order lifecycle management.",
       },
     ],
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
+    },
   },
 
   {
@@ -211,6 +334,27 @@ export const projects: Project[] = [
           "Entertainment catalog with integrated checkout and payment workflows.",
       },
     ],
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
+    },
   },
 
   {
@@ -231,6 +375,27 @@ export const projects: Project[] = [
           "Location-based discovery with live tracking and vendor information.",
       },
     ],
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
+    },
   },
 
   {
@@ -251,5 +416,26 @@ export const projects: Project[] = [
           "Rent payments, maintenance requests, and admin workflows in one platform.",
       },
     ],
+    caseStudy: {
+      problem: [
+        "Restaurants miss phone orders due to staff load; manual ordering is slow and error-prone.",
+      ],
+      approach: [
+        "Designed a multi-tenant platform with strict scoping (tenant → restaurant → agent).",
+        "Built voice workflow: menu ingestion → cart → checkout tool calls.",
+      ],
+      architecture: [
+        "Next.js admin dashboard + FastAPI backend + PostgreSQL.",
+        "Voice agent layer (Vapi/Deepgram/ElevenLabs) + OrderOut integration path.",
+      ],
+      challenges: [
+        "Tenant isolation + mapping restaurant ↔ voice agent reliably.",
+        "Keeping voice UX deterministic while APIs can fail/timeout.",
+      ],
+      outcome: [
+        "Production-ready admin + integrations foundation for real order placement.",
+        "Clean UI flows + scalable data model for adding more providers.",
+      ],
+    },
   },
 ];
