@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+
 import { projects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -54,6 +55,7 @@ function isBackend(p: any) {
     "sqlalchemy",
     "alembic",
     "postgres",
+    "postgresql",
     "mongodb",
     "dynamodb",
   ]);
@@ -63,6 +65,7 @@ function isSaaS(p: any) {
   const text = `${p.title ?? ""} ${
     p.descriptionDetail?.join(" ") ?? ""
   }`.toLowerCase();
+
   return (
     text.includes("saas") ||
     text.includes("multi-tenant") ||
@@ -91,12 +94,15 @@ const FILTERS: {
 export default function ProjectsPage() {
   const [active, setActive] = React.useState<FilterKey>("all");
   const [query, setQuery] = React.useState("");
+  const deferredQuery = React.useDeferredValue(query);
+
+  const [fading, setFading] = React.useState(false);
 
   const filtered = React.useMemo(() => {
     const f = FILTERS.find((x) => x.key === active) ?? FILTERS[0];
     const base = projects.filter(f.predicate);
 
-    const q = query.trim().toLowerCase();
+    const q = deferredQuery.trim().toLowerCase();
     if (!q) return base;
 
     return base.filter((p) => {
@@ -111,7 +117,14 @@ export default function ProjectsPage() {
 
       return haystack.includes(q);
     });
-  }, [active, query]);
+  }, [active, deferredQuery]);
+
+  // Smooth fade transition on filter/search change (no remount blink)
+  React.useEffect(() => {
+    setFading(true);
+    const t = setTimeout(() => setFading(false), 450); // slower
+    return () => clearTimeout(t);
+  }, [active, deferredQuery]);
 
   return (
     <div className="space-y-8">
@@ -131,29 +144,45 @@ export default function ProjectsPage() {
           performance-focused web platforms.
         </p>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2 pt-2">
-          <Input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search projects (e.g. Next.js, FastAPI, React Native, SaaS...)"
-            className="mb-1"
-          />
-          {FILTERS.map((f) => {
-            const isActive = f.key === active;
-            return (
-              <Button
-                key={f.key}
-                type="button"
-                size="sm"
-                variant={isActive ? "default" : "outline"}
-                className="rounded-full"
-                onClick={() => setActive(f.key)}
-              >
-                {f.label}
-              </Button>
-            );
-          })}
+        {/* Search + Filters */}
+        <div className="space-y-3 pt-2">
+          <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+            <div className="flex-1">
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search projects (e.g. Next.js, FastAPI, React Native, SaaS...)"
+              />
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="rounded-2xl"
+              onClick={() => setQuery("")}
+              disabled={!query.trim()}
+            >
+              Clear
+            </Button>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {FILTERS.map((f) => {
+              const isActive = f.key === active;
+              return (
+                <Button
+                  key={f.key}
+                  type="button"
+                  size="sm"
+                  variant={isActive ? "default" : "outline"}
+                  className="rounded-full"
+                  onClick={() => setActive(f.key)}
+                >
+                  {f.label}
+                </Button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="text-sm text-muted-foreground">
@@ -165,12 +194,18 @@ export default function ProjectsPage() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div
+        className={[
+          "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4",
+          "transition-opacity duration-500 ease-in-out",
+          fading ? "opacity-40" : "opacity-100",
+        ].join(" ")}
+      >
         {filtered.map((p) => (
           <Link
             key={p.slug}
             href={`/projects/${p.slug}`}
-            className="glass rounded-3xl p-6 hover:border-primary/30 transition-colors"
+            className="glass rounded-3xl p-6 hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl"
           >
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-3">
