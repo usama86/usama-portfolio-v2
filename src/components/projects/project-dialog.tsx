@@ -49,67 +49,79 @@ export function ProjectDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Centered modal (NOT fullscreen) */}
-      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-4xl max-h-[90vh] overflow-y-auto overflow-x-hidden min-w-0 [&_*]:max-w-full [&_*]:min-w-0">
-        <DialogHeader>
+      <DialogContent
+        showCloseButton={false}
+        className="w-[calc(100vw-2rem)] sm:max-w-4xl max-h-[90vh] overflow-y-auto overflow-x-hidden min-w-0 [&_*]:max-w-full [&_*]:min-w-0"
+      >
+        <DialogHeader className="sr-only">
+          <DialogTitle>{project.title}</DialogTitle>
+        </DialogHeader>
+        {/* Sticky header */}
+        <div
+          className="sticky top-0 z-20 px-6 py-4
+bg-background/90 backdrop-blur-xl
+border-b border-border/60"
+        >
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <div className="space-y-1">
-              <DialogTitle className="text-xl md:text-2xl">
+            <div className="space-y-1 min-w-0">
+              <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
                 {project.title}
-              </DialogTitle>
+              </h2>
 
               {(project.company || project.timePeriod) && (
                 <div className="text-sm text-muted-foreground">
-                  {project.company ? <span>{project.company}</span> : null}
-                  {project.timePeriod ? (
-                    <span>
-                      {project.company ? " • " : ""}
-                      {project.timePeriod}
-                    </span>
-                  ) : null}
+                  {project.company}
+                  {project.company && project.timePeriod ? " • " : ""}
+                  {project.timePeriod}
                 </div>
               )}
             </div>
 
-            {/* Top actions */}
-            {hasAnyLinks ? (
-              <div className="flex flex-wrap gap-2 sm:justify-end">
-                {onViewCaseStudy ? (
-                  <Button
-                    size="sm"
-                    onClick={() => onViewCaseStudy(project.slug)}
-                  >
-                    View case study
-                  </Button>
-                ) : null}
+            <div className="flex flex-wrap items-center gap-2">
+              {onViewCaseStudy && (
+                <Button size="sm" onClick={() => onViewCaseStudy(project.slug)}>
+                  View case study
+                </Button>
+              )}
 
-                {links?.webLink?.map((l) => (
-                  <Button asChild key={l.id} variant="outline" size="sm">
-                    <a href={l.link} target="_blank" rel="noreferrer">
-                      {l.title}
-                    </a>
-                  </Button>
-                ))}
+              {links?.webLink?.map((l) => (
+                <Button asChild key={l.id} variant="outline" size="sm">
+                  <a href={l.link} target="_blank" rel="noreferrer">
+                    {l.title}
+                  </a>
+                </Button>
+              ))}
 
-                {links?.github?.map((l) => (
-                  <Button asChild key={l.id} variant="outline" size="sm">
-                    <a href={l.link} target="_blank" rel="noreferrer">
-                      {l.title}
-                    </a>
-                  </Button>
-                ))}
-              </div>
-            ) : null}
+              {links?.github?.map((l) => (
+                <Button asChild key={l.id} variant="outline" size="sm">
+                  <a href={l.link} target="_blank" rel="noreferrer">
+                    {l.title}
+                  </a>
+                </Button>
+              ))}
+
+              {/* Close */}
+              <Button
+                size="icon"
+                variant="ghost"
+                className="ml-1"
+                onClick={() => onOpenChange(false)}
+                aria-label="Close dialog"
+              >
+                ×
+              </Button>
+            </div>
           </div>
-        </DialogHeader>
+        </div>
 
-        <div className="space-y-6">
+        <div className="pt-6 space-y-8">
           {/* Description */}
           {!!project.descriptionDetail?.length && (
             <div className="space-y-2">
               {project.descriptionDetail.map((t, idx) => (
                 <p
                   key={`${t}-${idx}`}
-                  className="text-sm md:text-base text-foreground/90"
+                  className="text-sm md:text-[15px] leading-relaxed text-foreground/85"
                 >
                   • {t}
                 </p>
@@ -121,7 +133,11 @@ export function ProjectDialog({
           {!!project.technologies?.length && (
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((t) => (
-                <Badge key={t} variant="secondary" className="rounded-full">
+                <Badge
+                  key={t}
+                  variant="secondary"
+                  className="rounded-full px-3 py-1 text-xs"
+                >
                   {t}
                 </Badge>
               ))}
@@ -163,8 +179,6 @@ export function ProjectDialog({
             </div>
           )}
         </div>
-
-
       </DialogContent>
     </Dialog>
   );

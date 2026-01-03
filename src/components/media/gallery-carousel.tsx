@@ -128,13 +128,12 @@ export function GalleryCarousel({
               onClick={() => openAt(idx)}
               className="group relative block w-full"
             >
-            <div className="relative h-56 sm:h-64 lg:h-72 w-full overflow-hidden rounded-2xl border border-border/60 bg-black/20">
-
+              <div className="relative h-56 sm:h-64 lg:h-72 w-full overflow-hidden rounded-2xl border border-border/60 bg-black/20">
                 <Image
                   src={img.src}
                   alt={img.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.015]"
                 />
               </div>
 
@@ -219,7 +218,6 @@ export function GalleryCarousel({
                     alt={active.title}
                     fill
                     className="object-contain"
-                    priority
                   />
                 ) : null}
               </div>
