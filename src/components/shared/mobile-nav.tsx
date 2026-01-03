@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, ExternalLink } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +21,9 @@ const nav = [
   { label: "Certificates", href: "#certificates" },
   { label: "Contact", href: "#contact" },
 ];
+
+const PSEB_URL =
+  "https://portal.techdestination.com/verify-certificate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpc3RyYXRpb25ObyI6IkZMMjEvUFNFQi8yMDI1LzIyMjkyIiwidHlwZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE3NjcwODAwNzIsImV4cCI6MTc3NDg1NjA3Mn0.8poPngm4g1fKYxFxxRFe_nZYfAbK2b_4NVoyJCNVje0";
 
 type Props = {
   onNavigate?: () => void;
@@ -93,9 +96,15 @@ export function MobileNav({ onNavigate }: Props) {
           </Button>
         </div>
 
-        <p className="mt-6 text-xs text-muted-foreground">
-          PSEB Registered Freelancer • 2025–2026
-        </p>
+        <a
+          href={PSEB_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <span>PSEB Registered Freelancer • 2025–2026</span>
+          <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+        </a>
       </SheetContent>
     </Sheet>
   );

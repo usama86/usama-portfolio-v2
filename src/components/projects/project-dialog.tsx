@@ -14,6 +14,7 @@ import { LoomVideo } from "@/components/media/loom-video";
 import { GoogleDriveVideo } from "@/components/media/google-drive-video";
 import { GalleryCarousel } from "@/components/media/gallery-carousel";
 import type { Project } from "./types";
+import { X } from "lucide-react";
 
 type Props = {
   open: boolean;
@@ -58,10 +59,23 @@ export function ProjectDialog({
         </DialogHeader>
         {/* Sticky header */}
         <div
-          className="sticky top-0 z-20 px-6 py-4
+          className="sticky top-0 z-20 relative px-6 py-4 pr-14
 bg-background/90 backdrop-blur-xl
 border-b border-border/60"
         >
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            onClick={() => onOpenChange(false)}
+            aria-label="Close dialog"
+            className="absolute right-3 top-3 rounded-xl h-10 w-10 md:h-9 md:w-9
+             bg-background/60 hover:bg-background/80
+             border border-border/50 backdrop-blur"
+          >
+            <X className="h-5 w-5" />
+          </Button>
+
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="space-y-1 min-w-0">
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
@@ -77,7 +91,7 @@ border-b border-border/60"
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 pr-2">
               {onViewCaseStudy && (
                 <Button size="sm" onClick={() => onViewCaseStudy(project.slug)}>
                   View case study
@@ -99,17 +113,6 @@ border-b border-border/60"
                   </a>
                 </Button>
               ))}
-
-              {/* Close */}
-              <Button
-                size="icon"
-                variant="ghost"
-                className="ml-1"
-                onClick={() => onOpenChange(false)}
-                aria-label="Close dialog"
-              >
-                ×
-              </Button>
             </div>
           </div>
         </div>
