@@ -44,30 +44,62 @@ export function ProjectDialog({
     })) ?? [];
 
   const hasAnyLinks =
-    !!onViewCaseStudy ||
-    !!links?.webLink?.length ||
-    !!links?.github?.length;
+    !!onViewCaseStudy || !!links?.webLink?.length || !!links?.github?.length;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Centered modal (NOT fullscreen) */}
       <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-4xl max-h-[90vh] overflow-y-auto overflow-x-hidden min-w-0 [&_*]:max-w-full [&_*]:min-w-0">
         <DialogHeader>
-          <DialogTitle className="text-xl md:text-2xl">
-            {project.title}
-          </DialogTitle>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="space-y-1">
+              <DialogTitle className="text-xl md:text-2xl">
+                {project.title}
+              </DialogTitle>
 
-          {(project.company || project.timePeriod) && (
-            <div className="text-sm text-muted-foreground">
-              {project.company ? <span>{project.company}</span> : null}
-              {project.timePeriod ? (
-                <span>
-                  {project.company ? " • " : ""}
-                  {project.timePeriod}
-                </span>
-              ) : null}
+              {(project.company || project.timePeriod) && (
+                <div className="text-sm text-muted-foreground">
+                  {project.company ? <span>{project.company}</span> : null}
+                  {project.timePeriod ? (
+                    <span>
+                      {project.company ? " • " : ""}
+                      {project.timePeriod}
+                    </span>
+                  ) : null}
+                </div>
+              )}
             </div>
-          )}
+
+            {/* Top actions */}
+            {hasAnyLinks ? (
+              <div className="flex flex-wrap gap-2 sm:justify-end">
+                {onViewCaseStudy ? (
+                  <Button
+                    size="sm"
+                    onClick={() => onViewCaseStudy(project.slug)}
+                  >
+                    View case study
+                  </Button>
+                ) : null}
+
+                {links?.webLink?.map((l) => (
+                  <Button asChild key={l.id} variant="outline" size="sm">
+                    <a href={l.link} target="_blank" rel="noreferrer">
+                      {l.title}
+                    </a>
+                  </Button>
+                ))}
+
+                {links?.github?.map((l) => (
+                  <Button asChild key={l.id} variant="outline" size="sm">
+                    <a href={l.link} target="_blank" rel="noreferrer">
+                      {l.title}
+                    </a>
+                  </Button>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -132,36 +164,7 @@ export function ProjectDialog({
           )}
         </div>
 
-        {/* Footer: actions left, close right (clean) */}
-        <DialogFooter className="mt-6 flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-2">
-          <div className="flex flex-wrap gap-2">
-            {onViewCaseStudy ? (
-              <Button size="sm" onClick={() => onViewCaseStudy(project.slug)}>
-                View case study
-              </Button>
-            ) : null}
 
-            {links?.webLink?.map((l) => (
-              <Button asChild key={l.id} variant="outline" size="sm">
-                <a href={l.link} target="_blank" rel="noreferrer">
-                  {l.title}
-                </a>
-              </Button>
-            ))}
-
-            {links?.github?.map((l) => (
-              <Button asChild key={l.id} variant="outline" size="sm">
-                <a href={l.link} target="_blank" rel="noreferrer">
-                  {l.title}
-                </a>
-              </Button>
-            ))}
-          </div>
-
-          <Button variant="outline" size="sm" onClick={() => onOpenChange(false)}>
-            Close
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
