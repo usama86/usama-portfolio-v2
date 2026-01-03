@@ -14,6 +14,8 @@ const FEATURED_SLUGS = new Set<string>([
   "query-builder",
 ]);
 
+const HOME_SELECTED_LIMIT = 8;
+
 export function ProjectsSection() {
   const router = useRouter();
 
@@ -25,8 +27,11 @@ export function ProjectsSection() {
     []
   );
 
-  const more = React.useMemo(
-    () => projects.filter((p) => !FEATURED_SLUGS.has(p.slug)),
+  const selected = React.useMemo(
+    () =>
+      projects
+        .filter((p) => !FEATURED_SLUGS.has(p.slug))
+        .slice(0, HOME_SELECTED_LIMIT),
     []
   );
 
@@ -37,12 +42,11 @@ export function ProjectsSection() {
 
   function closeProject() {
     setOpen(false);
-    // allow dialog close animation before clearing
     setTimeout(() => setActive(null), 120);
   }
 
   return (
-    <section className="space-y-10">
+    <section className="space-y-10" id="projects">
       {/* Header */}
       <div className="space-y-2">
         <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
@@ -54,11 +58,11 @@ export function ProjectsSection() {
         </p>
       </div>
 
-      {/* Featured */}
+      {/* Featured Case Studies */}
       <div className="space-y-4">
         <div className="flex items-end justify-between gap-4">
           <h3 className="text-lg md:text-xl font-semibold tracking-tight">
-            Featured
+            Featured case studies
           </h3>
           <button
             type="button"
@@ -69,7 +73,7 @@ export function ProjectsSection() {
           </button>
         </div>
 
-       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
           {featured.map((p) => (
             <ProjectCard
               key={p.slug}
@@ -82,15 +86,28 @@ export function ProjectsSection() {
         </div>
       </div>
 
-      {/* More */}
+      {/* Selected Work */}
       <div className="space-y-4">
-        <h3 className="text-lg md:text-xl font-semibold tracking-tight">
-          More
-        </h3>
+        <div className="flex items-end justify-between gap-4">
+          <h3 className="text-lg md:text-xl font-semibold tracking-tight">
+            Selected work
+          </h3>
+          <button
+            type="button"
+            onClick={() => router.push("/projects")}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            View all →
+          </button>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-          {more.map((p) => (
-            <ProjectCard key={p.slug} project={p} onOpen={() => openProject(p)} />
+          {selected.map((p) => (
+            <ProjectCard
+              key={p.slug}
+              project={p}
+              onOpen={() => openProject(p)}
+            />
           ))}
         </div>
       </div>

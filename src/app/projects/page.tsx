@@ -1,39 +1,200 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+type FilterKey =
+  | "all"
+  | "featured"
+  | "company"
+  | "freelance"
+  | "saas"
+  | "mobile"
+  | "backend";
+
+const FEATURED_SLUGS = new Set<string>([
+  "cleon-ai-voice-ordering",
+  "query-builder",
+]);
+
+function hasAnyTech(p: any, keywords: string[]) {
+  const tech = (p.technologies ?? []).map((t: string) => t.toLowerCase());
+  return keywords.some((k) => tech.some((t: string) => t.includes(k)));
+}
+
+function isFreelance(p: any) {
+  const c = (p.company ?? "").toLowerCase();
+  return (
+    c.includes("freelance") ||
+    c.includes("client") ||
+    c.includes("personal") ||
+    c.includes("product")
+  );
+}
+
+function isCompany(p: any) {
+  const c = (p.company ?? "").toLowerCase();
+  return !!c && !isFreelance(p);
+}
+
+function isMobile(p: any) {
+  return hasAnyTech(p, ["react native"]);
+}
+
+function isBackend(p: any) {
+  return hasAnyTech(p, [
+    "fastapi",
+    "node",
+    "express",
+    "nestjs",
+    "sqlalchemy",
+    "alembic",
+    "postgres",
+    "mongodb",
+    "dynamodb",
+  ]);
+}
+
+function isSaaS(p: any) {
+  const text = `${p.title ?? ""} ${
+    p.descriptionDetail?.join(" ") ?? ""
+  }`.toLowerCase();
+  return (
+    text.includes("saas") ||
+    text.includes("multi-tenant") ||
+    hasAnyTech(p, ["multi-tenant", "postgresql", "fastapi", "next.js"])
+  );
+}
+
+const FILTERS: {
+  key: FilterKey;
+  label: string;
+  predicate: (p: any) => boolean;
+}[] = [
+  { key: "all", label: "All", predicate: () => true },
+  {
+    key: "featured",
+    label: "Featured",
+    predicate: (p) => FEATURED_SLUGS.has(p.slug),
+  },
+  { key: "company", label: "Company", predicate: isCompany },
+  { key: "freelance", label: "Freelance", predicate: isFreelance },
+  { key: "saas", label: "SaaS", predicate: isSaaS },
+  { key: "mobile", label: "Mobile", predicate: isMobile },
+  { key: "backend", label: "Backend", predicate: isBackend },
+];
 
 export default function ProjectsPage() {
+  const [active, setActive] = React.useState<FilterKey>("all");
+  const [query, setQuery] = React.useState("");
+
+  const filtered = React.useMemo(() => {
+    const f = FILTERS.find((x) => x.key === active) ?? FILTERS[0];
+    const base = projects.filter(f.predicate);
+
+    const q = query.trim().toLowerCase();
+    if (!q) return base;
+
+    return base.filter((p) => {
+      const haystack = [
+        p.title ?? "",
+        p.company ?? "",
+        ...(p.technologies ?? []),
+        ...(p.descriptionDetail ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(q);
+    });
+  }, [active, query]);
+
   return (
     <div className="space-y-8">
-      <div className="space-y-2">
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-          All Projects
-        </h1>
+      {/* Header */}
+      <div className="space-y-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
+            All Projects
+          </h1>
+          <Badge variant="secondary" className="rounded-full">
+            {projects.length} projects
+          </Badge>
+        </div>
+
         <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
-          A selection of product work across SaaS, AI voice, dashboards, and
+          Fast-scannable selection across SaaS, AI voice, dashboards, and
           performance-focused web platforms.
         </p>
+
+        {/* Filters */}
+        <div className="flex flex-wrap gap-2 pt-2">
+          <Input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search projects (e.g. Next.js, FastAPI, React Native, SaaS...)"
+            className="mb-1"
+          />
+          {FILTERS.map((f) => {
+            const isActive = f.key === active;
+            return (
+              <Button
+                key={f.key}
+                type="button"
+                size="sm"
+                variant={isActive ? "default" : "outline"}
+                className="rounded-full"
+                onClick={() => setActive(f.key)}
+              >
+                {f.label}
+              </Button>
+            );
+          })}
+        </div>
+
+        <div className="text-sm text-muted-foreground">
+          Showing{" "}
+          <span className="text-foreground font-medium">{filtered.length}</span>{" "}
+          of{" "}
+          <span className="text-foreground font-medium">{projects.length}</span>
+        </div>
       </div>
 
+      {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        {projects.map((p) => (
+        {filtered.map((p) => (
           <Link
             key={p.slug}
             href={`/projects/${p.slug}`}
-            className="glass rounded-2xl p-5 border border-border/60 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
+            className="glass rounded-3xl p-6 hover:border-primary/30 transition-colors"
           >
             <div className="space-y-3">
-              <div>
-                <h2 className="text-base md:text-lg font-semibold tracking-tight">
-                  {p.title}
-                </h2>
-                {(p.company || p.timePeriod) && (
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {p.company ?? ""}
-                    {p.company && p.timePeriod ? " • " : ""}
-                    {p.timePeriod ?? ""}
-                  </p>
-                )}
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="text-base md:text-lg font-semibold tracking-tight truncate">
+                      {p.title}
+                    </h2>
+
+                    {FEATURED_SLUGS.has(p.slug) ? (
+                      <Badge className="rounded-full" variant="secondary">
+                        Featured
+                      </Badge>
+                    ) : null}
+                  </div>
+
+                  {(p.company || p.timePeriod) && (
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {p.company ?? ""}
+                      {p.company && p.timePeriod ? " • " : ""}
+                      {p.timePeriod ?? ""}
+                    </p>
+                  )}
+                </div>
               </div>
 
               {!!p.technologies?.length && (

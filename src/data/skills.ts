@@ -1,5 +1,15 @@
 import type { LucideIcon } from "lucide-react";
-import { Code2, Server, Database, Wrench, Sparkles } from "lucide-react";
+import {
+  Code2,
+  Smartphone,
+  Server,
+  Database,
+  GitBranch,
+  Network,
+  ShieldCheck,
+  Sparkles,
+  Braces,
+} from "lucide-react";
 
 export type SkillCategory = {
   title: string;
@@ -12,49 +22,74 @@ export const skills: SkillCategory[] = [
     title: "Frontend",
     icon: Code2,
     items: [
-      "Next.js",
       "React",
+      "Next.js",
+      "AngularJS",
       "TypeScript",
-      "Tailwind",
-      "shadcn/ui",
-      "Accessibility",
+      "JavaScript",
+      "Material UI",
+      "Tailwind CSS",
+      "PWA",
+      "Storybook",
     ],
+  },
+  {
+    title: "Mobile",
+    icon: Smartphone,
+    items: ["React Native (Android & iOS)"],
   },
   {
     title: "Backend",
     icon: Server,
     items: [
-      "FastAPI",
-      "Node.js",
-      "REST APIs",
-      "Multi-tenant patterns",
-      "Auth/Scopes",
+      "Node.js (Express, NestJS)",
+      "Python (FastAPI)",
+      "SQLAlchemy",
+      "Alembic",
     ],
   },
   {
-    title: "Data",
+    title: "Databases",
     icon: Database,
-    items: ["PostgreSQL", "Migrations", "Query optimization", "Caching basics"],
+    items: ["PostgreSQL", "MySQL", "MongoDB", "DynamoDB"],
   },
   {
-    title: "Dev / Tooling",
-    icon: Wrench,
-    items: [
-      "CI/CD",
-      "Vercel",
-      "Docker basics",
-      "Testing mindset",
-      "Monitoring basics",
-    ],
+    title: "APIs & Architecture",
+    icon: Network,
+    items: ["REST APIs", "GraphQL", "Multi-tenant SaaS", "System Architecture"],
   },
   {
-    title: "AI / Integrations",
+    title: "Testing & Automation",
+    icon: ShieldCheck,
+    items: ["Cypress", "Puppeteer"],
+  },
+  {
+    title: "AI / Voice",
     icon: Sparkles,
     items: [
-      "Voice AI pipelines",
-      "3rd-party integrations",
-      "Webhooks",
-      "STT/TTS concepts",
+      "Voice Agents (Vapi)",
+      "Speech-to-Text & TTS",
+      "Deepgram",
+      "ElevenLabs",
+    ],
+  },
+  {
+    title: "Dev & Tooling",
+    icon: GitBranch,
+    items: ["Lerna", "Monorepos", "Git", "CI/CD"],
+  },
+  {
+    title: "Languages",
+    icon: Braces,
+    items: [
+      "TypeScript",
+      "JavaScript",
+      "Python",
+      "C/C++",
+      "HTML",
+      "CSS",
+      "Java",
+      "C#",
     ],
   },
 ];
