@@ -151,3 +151,8 @@
 [data-radix-dialog-content] {
   border-radius: 0 !important;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}

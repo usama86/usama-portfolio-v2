@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { LoomVideo } from "@/components/media/loom-video";
 import { GoogleDriveVideo } from "@/components/media/google-drive-video";
 import { GalleryCarousel } from "@/components/media/gallery-carousel";
+import { TocNav } from "@/components/projects/toc-nav";
+
+
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -122,28 +125,18 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
       </div>
 
       {/* Layout: sticky TOC + content */}
-      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-6 items-start">
         {/* TOC */}
         <aside className="lg:sticky lg:top-24 space-y-3">
           <div className="glass rounded-2xl p-4">
             <div className="text-sm font-semibold mb-2">On this page</div>
-            <nav className="space-y-1">
-              {toc.map((t) => (
-                <a
-                  key={t.id}
-                  href={`#${t.id}`}
-                  className="block text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg px-2 py-1 hover:bg-muted"
-                >
-                  {t.label}
-                </a>
-              ))}
-            </nav>
+            <TocNav items={toc} />
           </div>
         </aside>
 
         {/* Content */}
-        <div className="space-y-10">
-          <Section id="overview" title="Overview">
+        <div className="min-w-0 space-y-10">
+          <Section id="overview" title="Overview" >
             <p>{bullets[0] ?? "Case study overview coming soon."}</p>
           </Section>
 

@@ -21,7 +21,7 @@ export function LoomVideo({ videoUrl, className }: LoomVideoProps) {
       try {
         const res = await oembed(videoUrl);
         if (mounted) setHtml(res?.html ?? "");
-      } catch (e) {
+      } catch {
         if (mounted) setHtml("");
       } finally {
         if (mounted) setLoading(false);
@@ -55,15 +55,19 @@ export function LoomVideo({ videoUrl, className }: LoomVideoProps) {
     );
   }
 
-  return (
-    <div
-      className={[
-        "overflow-hidden rounded-xl border bg-background/40",
-        // ensure embed is responsive-ish
-        "[&>iframe]:w-full [&>iframe]:min-h-[260px] [&>iframe]:border-0",
-        className ?? "",
-      ].join(" ")}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+return (
+  <div
+    className={[
+      "min-w-0 max-w-full overflow-hidden rounded-xl border bg-background/40",
+      // Clamp Loom injected DOM (lo-emb-vid) so it can't overflow dialog/grid
+      "[&_.lo-emb-vid]:w-full [&_.lo-emb-vid]:max-w-full [&_.lo-emb-vid]:min-w-0 [&_.lo-emb-vid]:overflow-hidden",
+      "[&_.lo-emb-vid>iframe]:w-full [&_.lo-emb-vid>iframe]:max-w-full [&_.lo-emb-vid>iframe]:min-w-0 [&_.lo-emb-vid>iframe]:border-0",
+      // Safety: clamp ANY injected child
+      "[&_*]:max-w-full [&_*]:min-w-0",
+      className ?? "",
+    ].join(" ")}
+    dangerouslySetInnerHTML={{ __html: html }}
+  />
+);
+
 }

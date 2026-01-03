@@ -114,19 +114,22 @@ export function GalleryCarousel({
       {/* Carousel row */}
       <div
         ref={scrollerRef}
-        className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="min-w-0 flex w-full max-w-full gap-3 overflow-x-auto pb-2
+  snap-x snap-mandatory scroll-px-2 px-2
+  [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {images.map((img, idx) => (
           <div
             key={`${img.src}-${idx}`}
-            className="shrink-0 w-[420px] sm:w-[520px] lg:w-[640px]"
+            className="snap-start shrink-0 w-[min(640px,calc(100vw-3rem))]"
           >
             <button
               type="button"
               onClick={() => openAt(idx)}
               className="group relative block w-full"
             >
-              <div className="relative h-64 sm:h-72 lg:h-80 overflow-hidden rounded-2xl border border-border/60 bg-black/20">
+            <div className="relative h-56 sm:h-64 lg:h-72 w-full overflow-hidden rounded-2xl border border-border/60 bg-black/20">
+
                 <Image
                   src={img.src}
                   alt={img.title}
