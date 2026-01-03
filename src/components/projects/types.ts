@@ -11,7 +11,7 @@ export type Project = {
   timePeriod?: string;
   descriptionDetail: string[];
   technologies?: string[];
-  images?: string[];
+  images: { src: string; title: string; description?: string }[];
   links?: {
     videoType?: "loom" | "googleDrive";
     videoUrl?: string; // loom url OR google drive fileId

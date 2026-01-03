@@ -38,7 +38,7 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
             {cover ? (
               <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border/60 bg-black/20">
                 <Image
-                  src={cover}
+                  src={cover.src}
                   alt={project.title}
                   fill
                   className="object-cover"

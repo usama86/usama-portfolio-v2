@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LoomVideo } from "@/components/sections/media/loom-video";
-import { GoogleDriveVideo } from "@/components/sections/media/google-drive-video";
+import { LoomVideo } from "@/components/media/loom-video";
+import { GoogleDriveVideo } from "@/components/media/google-drive-video";
 import type { Project } from "./types";
 
 type Props = {
@@ -104,7 +104,7 @@ export function ProjectDialog({
                 {project.images.map((src, idx) => (
                   <img
                     key={`${src}-${idx}`}
-                    src={src}
+                    src={src.src}
                     alt={`${project.title} screenshot ${idx + 1}`}
                     className="w-full rounded-xl border border-border/60 object-cover"
                     loading="lazy"

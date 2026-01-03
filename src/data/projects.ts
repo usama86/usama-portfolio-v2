@@ -33,7 +33,17 @@ export const projects: Project[] = [
       "OrderOut",
       "Multi-tenant SaaS",
     ],
-    images: ["/images/projects/CleonLogo.png"],
+    images: [
+      {
+        src: "/images/projects/CleonLogo.png",
+        title: "Cleon Admin Dashboard",
+        description:
+          "Multi-tenant admin to manage restaurants, voice agents, and integrations.",
+      },
+      // Add more when you have them (recommended):
+      // { src: "/images/projects/cleon-analytics.png", title: "Call Analytics", description: "Insights, call volume, and agent performance." },
+      // { src: "/images/projects/cleon-assistant-config.png", title: "Assistant Configuration", description: "Prompting, greeting flow, and business rules setup." },
+    ],
     links: {
       videoType: "loom",
       videoUrl: "https://www.loom.com/share/3aa0db1fee7c4f41af572b317b33660c",
@@ -51,14 +61,15 @@ export const projects: Project[] = [
       "Implemented GraphQL-backed query execution with validation and error handling.",
       "Improved data accessibility and reduced dependency on engineering teams.",
     ],
-    technologies: [
-      "React",
-      "TypeScript",
-      "Material UI",
-      "GraphQL",
-      "NestJS",
+    technologies: ["React", "TypeScript", "Material UI", "GraphQL", "NestJS"],
+    images: [
+      {
+        src: "/images/projects/QueryBuilder.png",
+        title: "Query Builder Canvas",
+        description:
+          "Drag-and-drop interface with validation and real-time query preview.",
+      },
     ],
-    images: ["/images/projects/QueryBuilder.png"],
     links: {
       videoType: "loom",
       videoUrl:
@@ -82,16 +93,20 @@ export const projects: Project[] = [
       "Improved performance across web and mobile views.",
       "Implemented Cloudflare workers and redirect rules.",
     ],
-    technologies: [
-      "Next.js",
-      "React",
-      "Node.js",
-      "React Native",
-      "Cloudflare",
-    ],
+    technologies: ["Next.js", "React", "Node.js", "React Native", "Cloudflare"],
     images: [
-      "/images/projects/GraanaLogo.png",
-      "/images/projects/GraanaApp.png",
+      {
+        src: "/images/projects/GraanaLogo.png",
+        title: "Graana Platform",
+        description:
+          "Property discovery experience with SEO-focused landing pages and fast listing views.",
+      },
+      {
+        src: "/images/projects/GraanaApp.png",
+        title: "Mobile Experience",
+        description:
+          "Responsive/mobile-first flows for browsing, filtering, and viewing listings.",
+      },
     ],
     links: {
       videoType: "loom",
@@ -118,14 +133,15 @@ export const projects: Project[] = [
       "Integrated Storybook for live documentation and previews.",
       "Components were reused across 5+ internal applications.",
     ],
-    technologies: [
-      "React",
-      "TypeScript",
-      "Material UI",
-      "Lerna",
-      "Storybook",
+    technologies: ["React", "TypeScript", "Material UI", "Lerna", "Storybook"],
+    images: [
+      {
+        src: "/images/projects/ZdpUILogo.png",
+        title: "UI Library + Storybook",
+        description:
+          "Reusable components with documented states, variants, and usage guidelines.",
+      },
     ],
-    images: ["/images/projects/ZdpUILogo.png"],
     links: {
       videoType: "loom",
       videoUrl:
@@ -147,7 +163,14 @@ export const projects: Project[] = [
       "Implemented map-based listings and optimized search performance.",
     ],
     technologies: ["React", "Node.js", "MongoDB"],
-    images: ["/images/projects/AqersLogo.png"],
+    images: [
+      {
+        src: "/images/projects/AqersLogo.png",
+        title: "Property Search + Filters",
+        description:
+          "Advanced filtering and fast results for browsing properties efficiently.",
+      },
+    ],
   },
 
   {
@@ -160,7 +183,14 @@ export const projects: Project[] = [
       "Implemented real-time order tracking and status updates.",
     ],
     technologies: ["React", "Node.js", "Express"],
-    images: ["/images/projects/BulkyLogo.png"],
+    images: [
+      {
+        src: "/images/projects/BulkyLogo.png",
+        title: "Delivery Ops Platform",
+        description:
+          "Admin + customer workflows with status tracking and order lifecycle management.",
+      },
+    ],
   },
 
   {
@@ -173,7 +203,14 @@ export const projects: Project[] = [
       "Integrated food ordering functionality within the platform.",
     ],
     technologies: ["React", "Node.js", "Stripe"],
-    images: ["/images/projects/SentraLogo.png"],
+    images: [
+      {
+        src: "/images/projects/SentraLogo.png",
+        title: "Streaming + Ordering",
+        description:
+          "Entertainment catalog with integrated checkout and payment workflows.",
+      },
+    ],
   },
 
   {
@@ -186,7 +223,14 @@ export const projects: Project[] = [
       "Implemented live location tracking and vendor listings.",
     ],
     technologies: ["React Native", "Firebase"],
-    images: ["/images/projects/TyftLogo.png"],
+    images: [
+      {
+        src: "/images/projects/TyftLogo.png",
+        title: "Nearby Food Trucks",
+        description:
+          "Location-based discovery with live tracking and vendor information.",
+      },
+    ],
   },
 
   {
@@ -199,6 +243,13 @@ export const projects: Project[] = [
       "Developed admin panel and backend services.",
     ],
     technologies: ["React Native", "Node.js", "Firebase"],
-    images: ["/images/projects/NomadiqLogo.png"],
+    images: [
+      {
+        src: "/images/projects/NomadiqLogo.png",
+        title: "Resident Operations",
+        description:
+          "Rent payments, maintenance requests, and admin workflows in one platform.",
+      },
+    ],
   },
 ];
