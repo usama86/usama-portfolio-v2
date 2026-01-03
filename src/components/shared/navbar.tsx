@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
+import { MobileNav } from "./mobile-nav";
 
 const nav = [
   { label: "Projects", href: "#projects" },
@@ -29,6 +30,7 @@ export function Navbar() {
             </div>
           </Link>
 
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
             {nav.map((i) => (
               <a
@@ -43,11 +45,16 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Button asChild className="rounded-xl">
+
+            {/* Desktop resume */}
+            <Button asChild className="rounded-xl hidden md:inline-flex">
               <a href="/resume.pdf" target="_blank" rel="noreferrer">
                 Resume
               </a>
             </Button>
+
+            {/* Mobile menu */}
+            <MobileNav />
           </div>
         </div>
       </div>
