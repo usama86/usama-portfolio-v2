@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
+const CALENDLY_URL = "https://calendly.com/usama-amjad32/30min";
+const UPWORK_URL = "https://www.upwork.com/freelancers/~01798f1c775f13992c";
+
 export function HeroSection() {
   return (
     <section className="py-10 md:py-14">
@@ -40,12 +43,24 @@ export function HeroSection() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
-            <Button className="rounded-xl" asChild>
-              <a href="#projects">View projects</a>
+            <Button asChild variant="outline" className="rounded-xl">
+              <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
+                Book a 30-min Call (Calendly)
+              </a>
             </Button>
-            <Button variant="outline" className="rounded-xl" asChild>
-              <a href="mailto:usama.amjad32@gmail.com">Contact</a>
+
+            <Button asChild variant="secondary" className="rounded-xl">
+              <a href={UPWORK_URL} target="_blank" rel="noreferrer">
+                Hire me on Upwork
+              </a>
             </Button>
+
+            <Badge
+              variant="outline"
+              className="rounded-full border-border/60 bg-black/10"
+            >
+              Available for freelance & long-term
+            </Badge>
           </div>
         </div>
       </div>
