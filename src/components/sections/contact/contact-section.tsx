@@ -17,7 +17,7 @@ export function ContactSection() {
         <div className="glass rounded-3xl p-6 md:p-7">
           <form
             className="space-y-3"
-            action="mailto:muhammad.usama4@gmail.com"
+            action="mailto:usama.amjad32@gmail.com"
             method="post"
             encType="text/plain"
           >
@@ -36,7 +36,7 @@ export function ContactSection() {
                 Send
               </Button>
               <Button asChild variant="outline" className="rounded-xl">
-                <a href="mailto:muhammad.usama4@gmail.com">Email directly</a>
+                <a href="mailto:usama.amjad32@gmail.com">Email directly</a>
               </Button>
             </div>
           </form>
@@ -57,9 +57,9 @@ export function ContactSection() {
               <span className="text-muted-foreground">Email:</span>{" "}
               <a
                 className="underline underline-offset-4"
-                href="mailto:muhammad.usama4@gmail.com"
+                href="mailto:usama.amjad32@gmail.com"
               >
-                muhammad.usama4@gmail.com
+                usama.amjad32@gmail.com
               </a>
             </div>
             <div>

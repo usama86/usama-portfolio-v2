@@ -85,7 +85,7 @@ export function MobileNav({ onNavigate }: Props) {
           </Button>
 
           <Button asChild variant="outline" className="w-full rounded-xl">
-            <a href="mailto:muhammad.usama4@gmail.com">Email</a>
+            <a href="mailto:usama.amjad32@gmail.com">Email</a>
           </Button>
 
           <Button asChild variant="outline" className="w-full rounded-xl">

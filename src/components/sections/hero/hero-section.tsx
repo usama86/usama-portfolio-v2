@@ -15,9 +15,8 @@ export function HeroSection() {
           </Badge>
 
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight max-w-3xl">
-            I build{" "}
-            <span className="text-primary">multi-tenant SaaS</span>,{" "}
-            AI voice agents, and high-performance web platforms.
+            I build <span className="text-primary">multi-tenant SaaS</span>, AI
+            voice agents, and high-performance web platforms.
           </h1>
 
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl">
@@ -29,7 +28,11 @@ export function HeroSection() {
           <div className="flex flex-wrap gap-2">
             {["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Voice AI"].map(
               (t) => (
-                <Badge key={t} variant="outline" className="rounded-full border-border/60 bg-black/10">
+                <Badge
+                  key={t}
+                  variant="outline"
+                  className="rounded-full border-border/60 bg-black/10"
+                >
                   {t}
                 </Badge>
               )
@@ -41,7 +44,7 @@ export function HeroSection() {
               <a href="#projects">View projects</a>
             </Button>
             <Button variant="outline" className="rounded-xl" asChild>
-              <a href="mailto:muhammad.usama4@gmail.com">Contact</a>
+              <a href="mailto:usama.amjad32@gmail.com">Contact</a>
             </Button>
           </div>
         </div>

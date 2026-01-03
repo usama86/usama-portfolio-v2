@@ -7,13 +7,13 @@ const certs = [
     title: "PSEB Registered Freelancer",
     meta: "2025 — 2026",
     note: "Government-registered freelancer status (Pakistan).",
-    href: "#", // replace with proof link if you have it
+    href: "https://portal.techdestination.com/verify-certificate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpc3RyYXRpb25ObyI6IkZMMjEvUFNFQi8yMDI1LzIyMjkyIiwidHlwZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE3NjcwODAwNzIsImV4cCI6MTc3NDg1NjA3Mn0.8poPngm4g1fKYxFxxRFe_nZYfAbK2b_4NVoyJCNVje0",
   },
   {
     title: "React / Frontend Certification",
     meta: "Credential",
-    note: "Add your cert name + link here (Coursera/Udemy/Meta etc).",
-    href: "#",
+    note: "Frontend Developer (React, CSS, and JavaScript)",
+    href: "https://www.hackerrank.com/certificates/34855d16681c",
   },
 ];
 
