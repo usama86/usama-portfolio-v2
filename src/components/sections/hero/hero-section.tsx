@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { SocialChips } from "@/components/shared/social-chips";
 
@@ -43,17 +42,22 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Voice AI"].map(
-              (t) => (
-                <Badge
-                  key={t}
-                  variant="outline"
-                  className="rounded-full border-border/60 bg-black/10"
-                >
-                  {t}
-                </Badge>
-              )
-            )}
+            {[
+              "Next.js",
+              "TypeScript",
+              "FastAPI",
+              "Python",
+              "PostgreSQL",
+              "Voice AI",
+            ].map((t) => (
+              <Badge
+                key={t}
+                variant="outline"
+                className="rounded-full border-border/60 bg-black/10"
+              >
+                {t}
+              </Badge>
+            ))}
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">

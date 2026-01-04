@@ -45,7 +45,7 @@ export const projects: Project[] = [
     ],
     links: {
       videoType: "loom",
-      videoUrl: "https://www.loom.com/share/3aa0db1fee7c4f41af572b317b33660c",
+      videoUrl: "https://www.loom.com/share/2d9104b7478f40e29c58bf606b8ceeb5",
     },
     caseStudy: {
       problem: [

@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
 import { usePathname } from "next/navigation";
+import { Github } from "lucide-react";
+
+const GITHUB_REPO_URL = "https://github.com/usama86/usama-portfolio-v2";
 
 const HOME_NAV = [
   { label: "Projects", href: "#projects", type: "hash" as const },
@@ -55,6 +58,18 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
+
+            <Button
+              asChild
+              variant="outline"
+              size="icon"
+              className="rounded-xl hidden md:inline-flex"
+              aria-label="View source on GitHub"
+            >
+              <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
+                <Github className="h-5 w-5" />
+              </a>
+            </Button>
 
             {/* Desktop resume */}
             <Button asChild className="rounded-xl hidden md:inline-flex">

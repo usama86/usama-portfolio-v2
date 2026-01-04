@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import { Github } from "lucide-react";
 
 const HOME_NAV = [
   { label: "Projects", href: "#projects", type: "hash" as const },
@@ -30,6 +31,7 @@ const INNER_NAV = [
 
 const PSEB_URL =
   "https://portal.techdestination.com/verify-certificate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpc3RyYXRpb25ObyI6IkZMMjEvUFNFQi8yMDI1LzIyMjkyIiwidHlwZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE3NjcwODAwNzIsImV4cCI6MTc3NDg1NjA3Mn0.8poPngm4g1fKYxFxxRFe_nZYfAbK2b_4NVoyJCNVje0";
+const GITHUB_REPO_URL = "https://github.com/usama86/usama-portfolio-v2";
 
 type Props = {
   onNavigate?: () => void;
@@ -99,6 +101,14 @@ export function MobileNav({ onNavigate }: Props) {
 
           <Button asChild variant="outline" className="w-full rounded-xl">
             <a href="mailto:usama.amjad32@gmail.com">Email</a>
+          </Button>
+          <Button asChild variant="outline" className="w-full rounded-xl">
+            <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
+              <span className="inline-flex items-center gap-2">
+                <Github className="h-4 w-4" />
+                View source (GitHub)
+              </span>
+            </a>
           </Button>
 
           <Button asChild variant="outline" className="w-full rounded-xl">
