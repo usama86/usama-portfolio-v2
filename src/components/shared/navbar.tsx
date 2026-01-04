@@ -4,16 +4,26 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
+import { usePathname } from "next/navigation";
 
-const nav = [
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Certificates", href: "#certificates" },
-  { label: "Contact", href: "#contact" },
+const HOME_NAV = [
+  { label: "Projects", href: "#projects", type: "hash" as const },
+  { label: "Experience", href: "#experience", type: "hash" as const },
+  { label: "Skills", href: "#skills", type: "hash" as const },
+  { label: "Certificates", href: "#certificates", type: "hash" as const },
+  { label: "Contact", href: "#contact", type: "hash" as const },
+];
+
+const INNER_NAV = [
+  { label: "Home", href: "/", type: "route" as const },
+  { label: "All projects", href: "/projects", type: "route" as const },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const nav = isHome ? HOME_NAV : INNER_NAV;
+
   return (
     <header className="sticky top-0 z-50">
       <div className="glass border-b border-border/60">

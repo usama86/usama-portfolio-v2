@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Menu, ExternalLink } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,12 +15,17 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 
-const nav = [
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Certificates", href: "#certificates" },
-  { label: "Contact", href: "#contact" },
+const HOME_NAV = [
+  { label: "Projects", href: "#projects", type: "hash" as const },
+  { label: "Experience", href: "#experience", type: "hash" as const },
+  { label: "Skills", href: "#skills", type: "hash" as const },
+  { label: "Certificates", href: "#certificates", type: "hash" as const },
+  { label: "Contact", href: "#contact", type: "hash" as const },
+];
+
+const INNER_NAV = [
+  { label: "Home", href: "/", type: "route" as const },
+  { label: "All projects", href: "/projects", type: "route" as const },
 ];
 
 const PSEB_URL =
@@ -31,6 +37,10 @@ type Props = {
 
 export function MobileNav({ onNavigate }: Props) {
   const [open, setOpen] = React.useState(false);
+
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const nav = isHome ? HOME_NAV : INNER_NAV;
 
   function handleNavClick(href: string) {
     setOpen(false);
