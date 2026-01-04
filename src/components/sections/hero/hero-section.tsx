@@ -22,7 +22,7 @@ export function HeroSection() {
             href={PSEB_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border/60
+            className="inline-flex items-center gap-2 rounded-full border border-border/40
              bg-muted/40 px-3 py-1 text-sm text-muted-foreground
              hover:bg-muted/60 hover:text-foreground hover:-translate-y-[1px]
              transition-all w-fit"
@@ -43,28 +43,33 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Voice AI"].map(
-              (t) => (
-                <Badge
-                  key={t}
-                  variant="outline"
-                  className="rounded-full border-border/60 bg-black/10"
-                >
-                  {t}
-                </Badge>
-              )
-            )}
+            {[
+              "Next.js",
+              "TypeScript",
+              "FastAPI",
+              "Python",
+              "PostgreSQL",
+              "Voice AI",
+            ].map((t) => (
+              <Badge
+                key={t}
+                variant="outline"
+                className="rounded-full border-border/60 bg-black/10"
+              >
+                {t}
+              </Badge>
+            ))}
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
-            <Button asChild variant="outline" className="rounded-xl">
-              <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
+            <Button asChild className="rounded-xl">
+              <a href={CALENDLY_URL} target="_blank">
                 Book a 30-min Call
               </a>
             </Button>
 
-            <Button asChild variant="secondary" className="rounded-xl">
-              <a href={UPWORK_URL} target="_blank" rel="noreferrer">
+            <Button asChild variant="outline" className="rounded-xl">
+              <a href={UPWORK_URL} target="_blank">
                 Hire me on Upwork
               </a>
             </Button>

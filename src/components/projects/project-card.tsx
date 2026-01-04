@@ -15,7 +15,7 @@ type Props = {
 export function ProjectCard({ project, onOpen, featured, className }: Props) {
   const cover = project.images?.[0];
   const tech = project.technologies ?? [];
-  const maxTech = featured ? 8 : 6;
+  const maxTech = featured ? 5 : 4;
   const shown = tech.slice(0, maxTech);
   const extra = tech.length - shown.length;
 
@@ -25,6 +25,7 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
         className={[
           "relative overflow-hidden glass transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/30 group-hover:shadow-2xl",
           "h-full",
+          featured && "ring-1 ring-primary/20",
           className ?? "",
         ].join(" ")}
       >

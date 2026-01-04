@@ -56,11 +56,16 @@ export function ProjectDialog({
       >
         <DialogHeader className="sr-only">
           <DialogTitle>{project.title}</DialogTitle>
+          <div className="mt-4 flex flex-wrap gap-3 text-sm text-muted-foreground">
+            <span>Role: Full-stack Engineer</span>
+            <span>•</span>
+            <span>Scope: Architecture, Backend, Admin UI</span>
+          </div>
         </DialogHeader>
         {/* Sticky header */}
         <div
           className="sticky top-0 z-20 relative px-6 py-4 pr-14
-bg-background/90 backdrop-blur-xl
+bg-background/80 backdrop-blur-xl
 border-b border-border/60"
         >
           <Button
