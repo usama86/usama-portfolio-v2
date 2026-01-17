@@ -2,10 +2,15 @@ export type ExperienceItem = {
   id: number;
   title: string;
   company: string;
+  companyUrl?: string;
   timePeriod: string;
   description: string;
   descriptionDetail: string[];
   technologies: string[];
+  logo?: {
+    src: string;
+    alt: string;
+  };
 };
 
 export const experience: ExperienceItem[] = [
@@ -13,6 +18,7 @@ export const experience: ExperienceItem[] = [
     id: 1111,
     title: "Senior Frontend Developer",
     company: "Allshore Talent (ECCO Select / Walsworth Yearbooks)",
+    companyUrl: "https://www.allshoretalent.com/",
     timePeriod: "06/2025 — Present",
     description:
       "Driving a frontend revamp from AngularJS to Next.js + TypeScript, shipping critical UI features, and improving performance/accessibility across internal publishing platforms.",
@@ -35,12 +41,17 @@ export const experience: ExperienceItem[] = [
       "Accessibility",
       "Performance",
     ],
+    logo: {
+      src: "/images/allshorelogo.png",
+      alt: "Allshore Talent logo",
+    },
   },
 
   {
     id: 1,
     title: "Senior Software Engineer",
     company: "Zones IT",
+    companyUrl: "https://www.zones.com/site/home/index.html",
     timePeriod: "05/2023 — Present",
     description:
       "Built drag-and-drop productivity tools, reusable UI packages, and full-stack features with React + TypeScript, NestJS, and Keycloak-based authentication.",
@@ -66,12 +77,17 @@ export const experience: ExperienceItem[] = [
       "SQL",
       "Cypress",
     ],
+    logo: {
+      src: "/images/zones_logo.png",
+      alt: "Zones logo",
+    },
   },
 
   {
     id: 2,
     title: "SEO Technical Lead",
     company: "Graana",
+    companyUrl: "https://www.graana.com/",
     timePeriod: "05/2022 — 05/2023",
     description:
       "Led technical SEO and performance initiatives, redesigning key experiences and scaling automation to grow organic traffic significantly.",
@@ -93,12 +109,17 @@ export const experience: ExperienceItem[] = [
       "Cloudflare",
       "Technical SEO",
     ],
+    logo: {
+      src: "/images/graana_logo.png",
+      alt: "Graana logo",
+    },
   },
 
   {
     id: 3,
     title: "Software Engineer",
     company: "Elixir Technology",
+    companyUrl: "https://elixir.com/",
     timePeriod: "12/2019 — 04/2022",
     description:
       "Built a complex designer tool using React + Canvas, improved developer experience with Storybook, automated testing, and delivered backend APIs in Java.",
@@ -117,6 +138,10 @@ export const experience: ExperienceItem[] = [
       "Java",
       "HTML/CSS",
     ],
+    logo: {
+      src: "/images/elixir_technologies_logo.png",
+      alt: "Elixir Technology logo",
+    },
   },
 
   {
