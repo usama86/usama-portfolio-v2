@@ -89,9 +89,29 @@ export function WorkExperienceSection() {
                   </div>
                 </div>
 
-                <Badge variant="secondary" className="rounded-full w-fit">
-                  {e.timePeriod}
-                </Badge>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="secondary" className="rounded-full w-fit">
+                    {e.timePeriod}
+                  </Badge>
+                  {e.credentialUrl ? (
+                    <Badge
+                      asChild
+                      variant="outline"
+                      className="rounded-full border-border/60 bg-black/10"
+                    >
+                      <a
+                        href={e.credentialUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1"
+                        aria-label={`${e.company} experience letter`}
+                      >
+                        Experience letter
+                        <ExternalLink className="h-3 w-3 opacity-70" />
+                      </a>
+                    </Badge>
+                  ) : null}
+                </div>
               </div>
 
               {e.description ? (

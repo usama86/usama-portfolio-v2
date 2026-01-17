@@ -3,6 +3,7 @@ export type ExperienceItem = {
   title: string;
   company: string;
   companyUrl?: string;
+  credentialUrl?: string;
   timePeriod: string;
   description: string;
   descriptionDetail: string[];
@@ -52,6 +53,7 @@ export const experience: ExperienceItem[] = [
     title: "Senior Software Engineer",
     company: "Zones IT",
     companyUrl: "https://www.zones.com/site/home/index.html",
+    credentialUrl: "/experienceletter_zones.pdf",
     timePeriod: "05/2023 — Present",
     description:
       "Built drag-and-drop productivity tools, reusable UI packages, and full-stack features with React + TypeScript, NestJS, and Keycloak-based authentication.",
@@ -88,6 +90,7 @@ export const experience: ExperienceItem[] = [
     title: "SEO Technical Lead",
     company: "Graana",
     companyUrl: "https://www.graana.com/",
+    credentialUrl: "/experienceletter_graana.pdf",
     timePeriod: "05/2022 — 05/2023",
     description:
       "Led technical SEO and performance initiatives, redesigning key experiences and scaling automation to grow organic traffic significantly.",
@@ -120,6 +123,7 @@ export const experience: ExperienceItem[] = [
     title: "Software Engineer",
     company: "Elixir Technology",
     companyUrl: "https://elixir.com/",
+    credentialUrl: "/experienceletter_elixir.pdf",
     timePeriod: "12/2019 — 04/2022",
     description:
       "Built a complex designer tool using React + Canvas, improved developer experience with Storybook, automated testing, and delivered backend APIs in Java.",
@@ -148,6 +152,7 @@ export const experience: ExperienceItem[] = [
     id: 4,
     title: "MERN Stack Developer",
     company: "Artbot LLC",
+    credentialUrl: "/experienceletter_artbot.pdf",
     timePeriod: "08/2019 — 12/2019",
     description:
       "Built a YouTube-like streaming platform, implemented IPFS-based video storage, and handled deployments on DigitalOcean with Rancher.",
