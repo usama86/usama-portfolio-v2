@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Muhammad Usama — Portfolio
+
+Personal portfolio site showcasing experience, projects, and certifications. Built for speed, clarity, and a clean, modern presentation of work.
+
+## Features
+
+- Experience timeline with company logos, links, and experience letters
+- Project highlights with rich media and details
+- Responsive layout with motion and polish
+- Built-in SEO metadata and Open Graph tags
+
+## Tech Stack
+
+- Next.js (App Router)
+- React + TypeScript
+- Tailwind CSS
+- Radix UI + Lucide Icons
 
 ## Getting Started
 
-First, run the development server:
+Prerequisites:
+- Node.js 18+
+- pnpm (recommended)
+
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run the dev server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open `http://localhost:3000` in your browser.
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm dev     # Start dev server
+pnpm build   # Production build
+pnpm start   # Run production server
+pnpm lint    # Lint code
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app` — Routes, layout, and global styles
+- `src/components` — UI + section components
+- `src/data` — Portfolio content (experience, projects, etc.)
+- `public/images` — Logos and media assets
+- `public/experienceletter_*.pdf` — Experience letters
 
-## Deploy on Vercel
+## Customization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Update experience content in `src/data/experience.ts`
+- Update projects in `src/data/projects.ts`
+- Swap logos in `public/images`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Build and deploy on any Node.js host:
+
+```bash
+pnpm build
+pnpm start
+```
+
+Vercel is a great default choice for Next.js projects.
+
+## License
+
+© 2025 Muhammad Usama. All rights reserved.
