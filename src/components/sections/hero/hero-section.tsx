@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { SocialChips } from "@/components/shared/social-chips";
 import { YouTubeEmbed } from "@/components/media/youtube-embed";
 import { motion, useReducedMotion } from "motion/react";
+import styles from "./hero-section.module.css";
 
 const CALENDLY_URL = "https://calendly.com/usama-amjad32/30min";
 const UPWORK_URL = "https://www.upwork.com/freelancers/~01798f1c775f13992c";
@@ -26,7 +27,20 @@ export function HeroSection() {
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: revealEase },
+      boxShadow: shouldReduceMotion
+        ? "0 24px 80px rgba(0, 0, 0, 0.05)"
+        : [
+            "0 24px 80px rgba(0, 0, 0, 0.05)",
+            "0 30px 100px rgba(0, 0, 0, 0.09)",
+            "0 24px 80px rgba(0, 0, 0, 0.05)",
+          ],
+      transition: {
+        opacity: { duration: 0.7, ease: revealEase },
+        y: { duration: 0.7, ease: revealEase },
+        boxShadow: shouldReduceMotion
+          ? { duration: 0 }
+          : { duration: 12, repeat: Infinity, ease: "easeInOut" as const },
+      },
     },
   };
 
@@ -63,7 +77,7 @@ export function HeroSection() {
   return (
     <section className="py-10 md:py-6">
       <motion.div
-        className="glass rounded-3xl p-6 md:p-10 relative overflow-hidden"
+        className={`${styles.heroCard} glass rounded-3xl p-6 md:p-10 relative overflow-hidden`}
         variants={cardVariants}
         initial="hidden"
         animate="show"
@@ -85,21 +99,21 @@ export function HeroSection() {
           }}
           animate={
             shouldReduceMotion
-              ? { opacity: 0.05 }
+              ? { opacity: 0.04 }
               : {
-                  opacity: [0.045, 0.08, 0.045],
-                  backgroundPosition: ["0px 0px", "32px 32px", "0px 0px"],
+                  opacity: [0.035, 0.06, 0.035],
+                  backgroundPosition: ["0px 0px", "36px 28px", "0px 0px"],
                 }
           }
           transition={
             shouldReduceMotion
               ? { duration: 0 }
-              : { duration: 14, repeat: Infinity, ease: "easeInOut" }
+              : { duration: 18, repeat: Infinity, ease: "easeInOut" }
           }
         />
 
         <motion.div
-          className="relative grid gap-6 md:grid-cols-[1fr_260px] lg:grid-cols-[1fr_280px] md:items-start"
+          className={`${styles.heroContent} relative grid gap-6 md:grid-cols-[1fr_260px] lg:grid-cols-[1fr_280px] md:items-start`}
           variants={containerVariants}
           initial="hidden"
           animate="show"
