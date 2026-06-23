@@ -16,6 +16,39 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
+    id: 0,
+    title: "Co-Lead, AI Agent Training & Product Simulation",
+    company: "Turing",
+    timePeriod: "04/2026 — Present",
+    description:
+      "Co-leading AI training and product simulation initiatives focused on enterprise software environments, workflow evaluation, and high-fidelity product replicas used for AI agent training and reinforcement learning programs.",
+    descriptionDetail: [
+      "Co-led development of a Greenhouse-inspired recruiting platform simulation used for AI training and evaluation.",
+      "Delivered 20+ interconnected modules including Job Creation, Interview Plans, Scorecards, Approval Flows, CRM, Offers, Dashboards, Reports, Sourcing, and Career Site functionality.",
+      "Designed canonical data models, parity frameworks, and workflow validation systems to ensure consistency across complex product simulations.",
+      "Built RCA methodologies, evaluation scenarios, and behavioral test suites used to assess AI agent reasoning and task completion accuracy.",
+      "Reviewed implementations, guided contributors, and coordinated delivery across multiple AI product simulation programs.",
+      "Collaborated on Microsoft Research (MSR) training initiatives focused on real-world software interactions, workflow correctness, and enterprise application behavior.",
+    ],
+    technologies: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "AI Training",
+      "LLM Evaluation",
+      "Product Simulation",
+      "Enterprise SaaS",
+      "Workflow Design",
+      "RCA",
+      "Microsoft Research",
+    ],
+    logo: {
+      src: "/images/TuringLogoMark.png",
+      alt: "Turing logo",
+    },
+  },
+
+  {
     id: 1111,
     title: "Senior Frontend Developer",
     company: "Allshore Talent (ECCO Select / Walsworth Yearbooks)",
