@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
 import { SocialChips } from "@/components/shared/social-chips";
 import { YouTubeEmbed } from "@/components/media/youtube-embed";
 
@@ -21,20 +20,17 @@ export function HeroSection() {
         <div className="pointer-events-none absolute -bottom-28 -left-28 h-72 w-72 rounded-full blur-3xl bg-primary/15" />
 
         <div className="relative grid gap-6 md:grid-cols-[1fr_260px] lg:grid-cols-[1fr_280px] md:items-start">
-          {/* Row 1: PSEB (left) + Quick Intro header (right) */}
+          {/* Row 1: Turing role (left) + Quick Intro header (right) */}
           <div className="flex items-center justify-between md:col-span-2">
-            <a
-              href={PSEB_URL}
-              target="_blank"
-              rel="noreferrer"
+            <div
               className="inline-flex items-center gap-2 rounded-full border border-border/60
        bg-muted/40 px-3 py-1 text-sm text-muted-foreground
-       hover:bg-muted/60 hover:text-foreground hover:-translate-y-[1px]
-       transition-all w-fit"
+       w-fit"
             >
-              <span>PSEB Registered Freelancer • 2025–2026</span>
-              <ExternalLink className="h-4 w-4 opacity-70" />
-            </a>
+              <span>Co-Lead @ </span>
+              <span className="font-medium text-primary">Turing</span>
+              <span> · AI Training &amp; Product Simulation</span>
+            </div>
 
             <div className="hidden md:flex items-center gap-3">
               <div className="text-sm font-medium">Quick intro</div>
@@ -52,24 +48,25 @@ export function HeroSection() {
           {/* Row 2: Main content (left) */}
           <div className="space-y-5">
             <h1 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight max-w-3xl">
-              I build <span className="text-primary">multi-tenant SaaS</span>,
-              AI voice agents, and high-performance web platforms.
+              Co-Leading AI Training Programs and Building Enterprise Software
             </h1>
 
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl">
-              6+ years shipping real products. Strong on architecture, clean UX,
-              integrations, and scaling systems end-to-end (Next.js, TypeScript,
-              FastAPI, PostgreSQL).
+              At <span className="font-medium text-foreground/90">Turing</span>,
+              {" "}I co-lead AI product simulation initiatives and contribute to
+              Microsoft Research training programs while building enterprise SaaS
+              platforms, complex workflows, and modern web applications using
+              React, Next.js, and TypeScript.
             </p>
 
             <div className="flex flex-wrap gap-2">
               {[
+                "React",
                 "Next.js",
                 "TypeScript",
-                "FastAPI",
-                "Python",
-                "PostgreSQL",
-                "Voice AI",
+                "AI Training",
+                "Product Simulation",
+                "Enterprise SaaS",
               ].map((t) => (
                 <Badge
                   key={t}
@@ -108,6 +105,15 @@ export function HeroSection() {
               variant="primary"
               showTooltipValue
             />
+
+            <a
+              href={PSEB_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="block w-fit text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              ✓ PSEB Registered Freelancer
+            </a>
           </div>
 
           {/* Row 2: Video (right) */}
