@@ -54,9 +54,12 @@ export function HeroSection() {
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl">
               At <span className="font-medium text-foreground/90">Turing</span>,
               {" "}I co-lead AI product simulation initiatives and contribute to
-              Microsoft Research training programs while building enterprise SaaS
-              platforms, complex workflows, and modern web applications using
-              React, Next.js, and TypeScript.
+              {" "}
+              <span className="font-medium text-foreground/90">
+                Microsoft Research (MSR)
+              </span>{" "}
+              training programs while building enterprise SaaS platforms, complex
+              workflows, and modern web applications.
             </p>
 
             <div className="flex flex-wrap gap-2">

@@ -15,6 +15,8 @@ export type CaseStudySection = {
 export type Project = {
   slug: string;
   title: string;
+  cardTitle?: string;
+  highlightsTitle?: string;
   company?: string;
   timePeriod?: string;
   descriptionDetail: string[];

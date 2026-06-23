@@ -6,6 +6,66 @@ export const projects: Project[] = [
   ========================== */
 
   {
+    slug: "talentflow-enterprise-recruiting-platform",
+    title:
+      "TalentFlow — Enterprise Recruiting Platform & AI Training Environment",
+    cardTitle: "TalentFlow — Enterprise Recruiting Platform",
+    highlightsTitle: "Key Contributions",
+    company: "Turing (Microsoft Research Programs)",
+    timePeriod: "2025 — Present",
+    descriptionDetail: [
+      "Co-led development of a high-fidelity recruiting platform used for AI training and evaluation. Delivered 20+ interconnected modules including hiring workflows, interviews, scorecards, approvals, offers, dashboards, CRM, sourcing, and reporting with strong focus on workflow correctness and data consistency.",
+      "Co-led product simulation initiatives at Turing.",
+      "Delivered Job Creation, Interview Plans, Scorecards, Approvals, Offers, CRM, Sourcing, Dashboards, Reports, and Career Site modules.",
+      "Designed canonical data models and parity frameworks.",
+      "Built evaluation scenarios and RCA methodologies for AI agents.",
+      "Guided contributors and reviewed implementations across multiple training programs.",
+      "Ensured workflow correctness and product consistency across interconnected modules.",
+    ],
+    technologies: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "AI Product Simulation",
+      "LLM Evaluation",
+      "Reinforcement Learning",
+      "Enterprise SaaS",
+    ],
+    images: [
+      {
+        src: "/images/projects/TalentFlowIcon.svg",
+        title: "TalentFlow recruiting workflow simulation",
+        description:
+          "Enterprise recruiting workflows built for AI training and evaluation.",
+      },
+    ],
+    caseStudy: {
+      problem: [
+        "AI agents need realistic enterprise workflows and stateful data to train against and evaluate reliably.",
+        "Recruiting systems require consistent behavior across interconnected hiring, approval, CRM, sourcing, and reporting modules.",
+      ],
+      approach: [
+        "Built a high-fidelity recruiting platform inspired by enterprise ATS systems for AI agent training, evaluation, and reinforcement learning environments.",
+        "Modeled recruiting workflows with canonical data structures and parity frameworks to maintain product consistency.",
+        "Created evaluation scenarios and RCA methodologies to assess agent behavior and diagnose failures.",
+      ],
+      architecture: [
+        "React, Next.js, TypeScript, and Tailwind CSS application supporting enterprise SaaS workflow simulation.",
+        "Product-simulation patterns model connected candidate, interview, approval, offer, CRM, sourcing, reporting, dashboard, and career-site experiences.",
+      ],
+      challenges: [
+        "Maintaining workflow correctness and data consistency across 20+ connected modules.",
+        "Designing realistic scenarios that measure AI agent reasoning and execution.",
+      ],
+      outcome: [
+        "Delivered a high-fidelity enterprise recruiting environment for AI training, evaluation, and reinforcement learning.",
+        "Established product-parity and RCA frameworks used to improve consistency and assess AI agent performance.",
+      ],
+    },
+  },
+
+  {
     slug: "cleon-ai-voice-ordering",
     title: "Cleon – AI Voice Ordering Platform",
     company: "Personal / SaaS Product",

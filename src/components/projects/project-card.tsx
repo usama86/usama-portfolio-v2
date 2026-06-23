@@ -51,7 +51,7 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <h3 className="text-base md:text-lg font-semibold leading-tight tracking-tight">
-                  {project.title}
+                  {project.cardTitle ?? project.title}
                 </h3>
                 {featured ? (
                   <Badge className="rounded-full" variant="secondary">

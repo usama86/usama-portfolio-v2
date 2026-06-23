@@ -18,6 +18,7 @@ type FilterKey =
   | "backend";
 
 const FEATURED_SLUGS = new Set<string>([
+  "talentflow-enterprise-recruiting-platform",
   "cleon-ai-voice-ordering",
   "query-builder",
 ]);

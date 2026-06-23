@@ -194,7 +194,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
             </Section>
           ) : null}
 
-          <Section id="highlights" title="Highlights">
+          <Section id="highlights" title={project.highlightsTitle ?? "Highlights"}>
             <ul className="list-disc pl-5 space-y-2">
               {bullets.slice(1).map((b, idx) => (
                 <li key={idx}>{b}</li>

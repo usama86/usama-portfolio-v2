@@ -10,6 +10,7 @@ import { ProjectCard } from "@/components/projects/project-card";
 import { ProjectDialog } from "@/components/projects/project-dialog";
 
 const FEATURED_SLUGS = new Set<string>([
+  "talentflow-enterprise-recruiting-platform",
   "cleon-ai-voice-ordering",
   "query-builder",
 ]);
@@ -73,7 +74,7 @@ export function ProjectsSection() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
           {featured.map((p) => (
             <ProjectCard
               key={p.slug}
