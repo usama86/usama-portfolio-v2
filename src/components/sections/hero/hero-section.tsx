@@ -1,7 +1,10 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SocialChips } from "@/components/shared/social-chips";
 import { YouTubeEmbed } from "@/components/media/youtube-embed";
+import { motion, useReducedMotion } from "motion/react";
 
 const CALENDLY_URL = "https://calendly.com/usama-amjad32/30min";
 const UPWORK_URL = "https://www.upwork.com/freelancers/~01798f1c775f13992c";
@@ -12,16 +15,100 @@ const INTRO_SHORT_URL =
   "https://youtube.com/shorts/8iUjJhpUKEE?si=nIhtEEkv6_GUHC3u";
 
 export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+  const heroWords =
+    "Co-Leading AI Training Programs and Building Enterprise Software".split(" ");
+  const revealEase = [0.22, 1, 0.36, 1] as const;
+  const lift = shouldReduceMotion ? 0 : 10;
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: revealEase },
+    },
+  };
+
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.07, delayChildren: 0.08 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : lift },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: revealEase },
+    },
+  };
+
+  const wordVariants = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 8,
+      filter: shouldReduceMotion ? "blur(0px)" : "blur(2px)",
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.4, ease: revealEase },
+    },
+  };
+
   return (
     <section className="py-10 md:py-6">
-      <div className="glass rounded-3xl p-6 md:p-10 relative overflow-hidden">
+      <motion.div
+        className="glass rounded-3xl p-6 md:p-10 relative overflow-hidden"
+        variants={cardVariants}
+        initial="hidden"
+        animate="show"
+      >
         {/* glow blobs */}
         <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full blur-3xl bg-primary/20" />
         <div className="pointer-events-none absolute -bottom-28 -left-28 h-72 w-72 rounded-full blur-3xl bg-primary/15" />
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(113, 113, 122, 0.32) 1px, transparent 1px), linear-gradient(90deg, rgba(113, 113, 122, 0.32) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+            maskImage:
+              "linear-gradient(to right, transparent 0%, transparent 34%, black 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, transparent 34%, black 100%)",
+          }}
+          animate={
+            shouldReduceMotion
+              ? { opacity: 0.05 }
+              : {
+                  opacity: [0.045, 0.08, 0.045],
+                  backgroundPosition: ["0px 0px", "32px 32px", "0px 0px"],
+                }
+          }
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : { duration: 14, repeat: Infinity, ease: "easeInOut" }
+          }
+        />
 
-        <div className="relative grid gap-6 md:grid-cols-[1fr_260px] lg:grid-cols-[1fr_280px] md:items-start">
+        <motion.div
+          className="relative grid gap-6 md:grid-cols-[1fr_260px] lg:grid-cols-[1fr_280px] md:items-start"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
           {/* Row 1: Turing role (left) + Quick Intro header (right) */}
-          <div className="flex items-center justify-between md:col-span-2">
+          <motion.div
+            className="flex items-center justify-between md:col-span-2"
+            variants={itemVariants}
+          >
             <div
               className="inline-flex items-center gap-2 rounded-full border border-border/60
        bg-muted/40 px-3 py-1 text-sm text-muted-foreground
@@ -43,15 +130,29 @@ export function HeroSection() {
                 Open on YouTube
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Row 2: Main content (left) */}
-          <div className="space-y-5">
-            <h1 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight max-w-3xl">
-              Co-Leading AI Training Programs and Building Enterprise Software
-            </h1>
+          <motion.div className="space-y-5" variants={containerVariants}>
+            <motion.h1
+              className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight max-w-3xl"
+              variants={containerVariants}
+            >
+              {heroWords.map((word, index) => (
+                <motion.span
+                  key={`${word}-${index}`}
+                  className="inline-block mr-[0.24em]"
+                  variants={wordVariants}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
 
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl">
+            <motion.p
+              className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl"
+              variants={itemVariants}
+            >
               At <span className="font-medium text-foreground/90">Turing</span>,
               {" "}I co-lead AI product simulation initiatives and contribute to
               {" "}
@@ -60,9 +161,9 @@ export function HeroSection() {
               </span>{" "}
               training programs while building enterprise SaaS platforms, complex
               workflows, and modern web applications.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap gap-2">
+            <motion.div className="flex flex-wrap gap-2" variants={itemVariants}>
               {[
                 "React",
                 "Next.js",
@@ -71,28 +172,46 @@ export function HeroSection() {
                 "Product Simulation",
                 "Enterprise SaaS",
               ].map((t) => (
-                <Badge
+                <motion.div
                   key={t}
-                  variant="outline"
-                  className="rounded-full border-border/60 bg-black/10"
+                  whileHover={shouldReduceMotion ? undefined : { y: -1 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
                 >
-                  {t}
-                </Badge>
+                  <Badge
+                    variant="outline"
+                    className="rounded-full border-border/60 bg-black/10 transition-colors hover:bg-black/15"
+                  >
+                    {t}
+                  </Badge>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Button asChild variant="outline" className="rounded-xl">
-                <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
-                  Book a 30-min Call
-                </a>
-              </Button>
+            <motion.div
+              className="flex flex-wrap items-center gap-3 pt-2"
+              variants={itemVariants}
+            >
+              <motion.div
+                whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+              >
+                <Button asChild variant="outline" className="rounded-xl">
+                  <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
+                    Book a 30-min Call
+                  </a>
+                </Button>
+              </motion.div>
 
-              <Button asChild variant="secondary" className="rounded-xl">
-                <a href={UPWORK_URL} target="_blank" rel="noreferrer">
-                  Hire me on Upwork
-                </a>
-              </Button>
+              <motion.div
+                whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+              >
+                <Button asChild variant="secondary" className="rounded-xl">
+                  <a href={UPWORK_URL} target="_blank" rel="noreferrer">
+                    Hire me on Upwork
+                  </a>
+                </Button>
+              </motion.div>
 
               <Badge
                 variant="outline"
@@ -100,27 +219,52 @@ export function HeroSection() {
               >
                 Available for freelance & long-term
               </Badge>
-            </div>
+            </motion.div>
 
-            <SocialChips
-              className="pt-2"
-              compact
-              variant="primary"
-              showTooltipValue
-            />
+            <motion.div variants={itemVariants}>
+              <SocialChips
+                className="pt-2"
+                compact
+                variant="primary"
+                showTooltipValue
+              />
+            </motion.div>
 
-            <a
+            <motion.a
               href={PSEB_URL}
               target="_blank"
               rel="noreferrer"
               className="block w-fit text-xs text-muted-foreground transition-colors hover:text-foreground"
+              variants={itemVariants}
+              whileHover={shouldReduceMotion ? undefined : { y: -1, opacity: 1 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
             >
               ✓ PSEB Registered Freelancer
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
 
           {/* Row 2: Video (right) */}
-          <div className="md:justify-self-end w-full max-w-[260px] lg:max-w-[280px]">
+          <motion.div
+            className="md:justify-self-end w-full max-w-[260px] lg:max-w-[280px]"
+            variants={itemVariants}
+            animate={
+              shouldReduceMotion
+                ? undefined
+                : {
+                    y: [0, -5, 0],
+                    transition: {
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }
+            }
+            whileHover={
+              shouldReduceMotion
+                ? undefined
+                : { y: -2, boxShadow: "0 18px 40px rgba(0, 0, 0, 0.12)" }
+            }
+          >
             {/* Mobile header for intro */}
             <div className="flex items-center justify-between md:hidden mb-3">
               <div className="text-sm font-medium">Quick intro</div>
@@ -143,9 +287,9 @@ export function HeroSection() {
             <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
               73s overview of what I build + how I work.
             </p>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
