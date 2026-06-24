@@ -147,14 +147,18 @@ export function ProjectsSection() {
         </div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch"
           variants={cardContainerVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.1 }}
         >
           {selected.map((p) => (
-            <motion.div key={p.slug} variants={cardVariants}>
+            <motion.div
+              key={p.slug}
+              className={styles.selectedCard}
+              variants={cardVariants}
+            >
               <ProjectCard project={p} onOpen={() => openProject(p)} />
             </motion.div>
           ))}

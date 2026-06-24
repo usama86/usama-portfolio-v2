@@ -28,14 +28,16 @@
   z-index: 1;
 }
 
-.featuredCard {
+.featuredCard,
+.selectedCard {
   position: relative;
   height: 100%;
   overflow: hidden;
   border-radius: 0.75rem;
 }
 
-.featuredCard > button {
+.featuredCard > button,
+.selectedCard > button {
   height: 100%;
 }
 
@@ -51,7 +53,8 @@
   animation: featured-border-shimmer 7s ease-in-out infinite;
 }
 
-.featuredCard::before {
+.featuredCard::before,
+.selectedCard::before {
   content: "";
   position: absolute;
   inset: -45%;
@@ -69,13 +72,21 @@
   animation: featured-card-sheen 5.2s ease-in-out infinite;
 }
 
-.featuredCard:nth-child(2)::before {
+.featuredCard:nth-child(2)::before,
+.selectedCard:nth-child(2)::before {
   animation-delay: 0.7s;
 }
 
-.featuredCard:nth-child(3)::before {
+.featuredCard:nth-child(3)::before,
+.selectedCard:nth-child(3)::before {
   animation-delay: 1.4s;
 }
+
+.selectedCard:nth-child(4)::before { animation-delay: 2.1s; }
+.selectedCard:nth-child(5)::before { animation-delay: 2.8s; }
+.selectedCard:nth-child(6)::before { animation-delay: 3.5s; }
+.selectedCard:nth-child(7)::before { animation-delay: 4.2s; }
+.selectedCard:nth-child(8)::before { animation-delay: 4.9s; }
 
 :global(.dark) .projectsSection::before {
   background: radial-gradient(
@@ -91,6 +102,16 @@
 }
 
 :global(.dark) .featuredCard::before {
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.15) 48%,
+    rgba(255, 255, 255, 0.1) 52%,
+    transparent 65%
+  );
+}
+
+:global(.dark) .selectedCard::before {
   background: linear-gradient(
     115deg,
     transparent 35%,
@@ -161,7 +182,8 @@
 @media (prefers-reduced-motion: reduce) {
   .projectsSection::before,
   .featuredCard::after,
-  .featuredCard::before {
+  .featuredCard::before,
+  .selectedCard::before {
     animation: none;
   }
 

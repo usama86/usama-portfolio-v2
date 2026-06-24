@@ -1,0 +1,210 @@
+.experienceSection {
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  isolation: isolate;
+}
+
+/* The rail stays in the icon column, keeping the moving light away from copy. */
+.timeline::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.5rem;
+  z-index: 0;
+  width: 1px;
+  content: "";
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.timeline::after {
+  position: absolute;
+  top: 0;
+  left: calc(1.5rem - 1px);
+  z-index: 1;
+  width: 3px;
+  height: 88px;
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 18px 5px rgba(0, 0, 0, 0.08);
+  filter: blur(1px);
+  transform: translateY(-96px);
+  animation: timeline-progress 8.5s ease-in-out infinite;
+}
+
+.experienceCard {
+  position: relative;
+  z-index: 2;
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.experienceCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+.currentRole {
+  overflow: hidden;
+}
+
+.currentRole::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: inherit;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.025);
+  animation: current-role-pulse 6s ease-in-out infinite;
+}
+
+.currentRole > * {
+  position: relative;
+  z-index: 1;
+}
+
+.currentRoleIcon {
+  animation: current-role-icon-breathe 5s ease-in-out infinite;
+}
+
+:global(.dark) .timeline::before {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .timeline::after {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 18px 5px rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .experienceCard:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+}
+
+:global(.dark) .currentRole::after {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.035);
+}
+
+@keyframes timeline-progress {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateY(-96px);
+  }
+
+  25%,
+  70% {
+    opacity: 0.8;
+  }
+
+  88%,
+  100% {
+    opacity: 0;
+    transform: translateY(calc(100% + 96px));
+  }
+}
+
+@keyframes current-role-pulse {
+  0%,
+  100% {
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.025);
+  }
+
+  50% {
+    border-color: rgba(0, 0, 0, 0.16);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  }
+}
+
+@keyframes current-role-icon-breathe {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.025);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+  }
+}
+
+:global(.dark) .currentRole::after {
+  animation-name: current-role-pulse-dark;
+}
+
+:global(.dark) .currentRoleIcon {
+  animation-name: current-role-icon-breathe-dark;
+}
+
+@keyframes current-role-pulse-dark {
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.035);
+  }
+
+  50% {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.07);
+  }
+}
+
+@keyframes current-role-icon-breathe-dark {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.025);
+    box-shadow: 0 5px 14px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (min-width: 768px) {
+  .timeline::before {
+    left: 1.75rem;
+  }
+
+  .timeline::after {
+    left: calc(1.75rem - 1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline::after,
+  .currentRole::after,
+  .currentRoleIcon {
+    animation: none;
+  }
+
+  .timeline::after {
+    opacity: 0;
+  }
+
+  .currentRole::after {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  :global(.dark) .currentRole::after {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}

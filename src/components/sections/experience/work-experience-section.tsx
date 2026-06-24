@@ -1,20 +1,37 @@
+"use client";
+
 import Image from "next/image";
 import { Building2, ExternalLink } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { experience } from "@/data/experience";
 import { SectionHeader } from "@/components/shared/section-header";
+import styles from "./work-experience-section.module.css";
 
 export function WorkExperienceSection() {
-  return (
-    <section id="experience" className="scroll-mt-24 space-y-8">
-      <SectionHeader
-        eyebrow="7+ years shipping production software"
-        title="Work experience"
-        subtitle="Impact-focused timeline — highlights that signal senior ownership, architecture, and execution."
-      />
+  const shouldReduceMotion = useReducedMotion();
 
-      <div className="space-y-4">
-        {experience.map((e) => {
+  return (
+    <section
+      id="experience"
+      className={`scroll-mt-24 space-y-8 ${styles.experienceSection}`}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: shouldReduceMotion ? 0.01 : 0.45, ease: "easeOut" }}
+      >
+        <SectionHeader
+          eyebrow="7+ years shipping production software"
+          title="Work experience"
+          subtitle="Impact-focused timeline — highlights that signal senior ownership, architecture, and execution."
+        />
+      </motion.div>
+
+      <div className={`space-y-4 ${styles.timeline}`}>
+        {experience.map((e, index) => {
+          const isCurrentRole = e.company === "Turing";
           const initials = e.company
             .replace(/\(.*?\)/g, "")
             .trim()
@@ -25,9 +42,19 @@ export function WorkExperienceSection() {
             .join("");
 
           return (
-            <div
+            <motion.div
               key={`${e.company}-${e.timePeriod}`}
-              className="glass rounded-3xl p-6 md:p-7"
+              className={`glass rounded-3xl p-6 md:p-7 ${styles.experienceCard} ${
+                isCurrentRole ? styles.currentRole : ""
+              }`}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{
+                duration: shouldReduceMotion ? 0.01 : 0.45,
+                delay: shouldReduceMotion ? 0 : index * 0.1,
+                ease: "easeOut",
+              }}
             >
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                 <div className="flex items-start gap-4">
@@ -39,7 +66,9 @@ export function WorkExperienceSection() {
                           target="_blank"
                           rel="noreferrer"
                           aria-label={`${e.company} website`}
-                          className="group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-black/10 transition hover:border-primary/50 hover:bg-black/15"
+                          className={`group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-black/10 transition hover:border-primary/50 hover:bg-black/15 ${
+                            isCurrentRole ? styles.currentRoleIcon : ""
+                          }`}
                         >
                           <Image
                             src={e.logo.src}
@@ -50,7 +79,11 @@ export function WorkExperienceSection() {
                           />
                         </a>
                       ) : (
-                        <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-black/10">
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-black/10 ${
+                            isCurrentRole ? styles.currentRoleIcon : ""
+                          }`}
+                        >
                           <Image
                             src={e.logo.src}
                             alt={e.logo.alt}
@@ -61,7 +94,11 @@ export function WorkExperienceSection() {
                         </div>
                       )
                     ) : (
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-black/10 text-xs font-semibold text-muted-foreground">
+                      <div
+                        className={`flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-black/10 text-xs font-semibold text-muted-foreground ${
+                          isCurrentRole ? styles.currentRoleIcon : ""
+                        }`}
+                      >
                         {initials || <Building2 className="h-5 w-5" />}
                       </div>
                     )}
@@ -144,7 +181,7 @@ export function WorkExperienceSection() {
                   ))}
                 </div>
               ) : null}
-            </div>
+            </motion.div>
           );
         })}
       </div>
