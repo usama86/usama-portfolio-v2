@@ -1,9 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 import { SocialChips } from "@/components/shared/social-chips";
+import styles from "./footer.module.css";
 
 export function Footer() {
   return (
-    <footer className="mt-16 pb-10">
+    <footer className={`mt-16 pb-10 ${styles.footer}`}>
       <Separator className="opacity-60" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-8 space-y-4">
@@ -16,19 +17,19 @@ export function Footer() {
 
           <nav className="flex items-center gap-4 text-sm">
             <a
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className={`text-muted-foreground hover:text-foreground transition-colors ${styles.footerLink}`}
               href="#projects"
             >
               Projects
             </a>
             <a
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className={`text-muted-foreground hover:text-foreground transition-colors ${styles.footerLink}`}
               href="#contact"
             >
               Contact
             </a>
             <a
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className={`text-muted-foreground hover:text-foreground transition-colors ${styles.footerLink}`}
               href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
@@ -44,7 +45,7 @@ export function Footer() {
             compact
             variant="all"
             showTooltipValue
-            className="opacity-90 hover:opacity-100 transition-opacity"
+            className={`opacity-90 hover:opacity-100 transition-opacity ${styles.socials}`}
           />
         </div>
       </div>

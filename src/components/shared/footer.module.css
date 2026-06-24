@@ -1,0 +1,239 @@
+.footer {
+  position: relative;
+}
+
+.footer::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.footer::after {
+  position: absolute;
+  top: 0;
+  left: -30%;
+  z-index: 2;
+  width: 30%;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.2),
+    transparent
+  );
+  animation: footer-line-sweep 5s linear infinite;
+}
+
+.footerLink,
+.socials :global(a) {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease;
+}
+
+.footerLink:hover,
+.socials :global(a:hover) {
+  transform: translateY(-2px);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.socials :global(a:hover svg) {
+  opacity: 1;
+}
+
+.socials {
+  position: relative;
+  isolation: isolate;
+}
+
+.socials::before {
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  z-index: 0;
+  width: 220px;
+  height: 70px;
+  content: "";
+  pointer-events: none;
+  border-radius: 9999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.14),
+    transparent 70%
+  );
+  filter: blur(22px);
+  animation: footer-links-glow 7s ease-in-out infinite;
+}
+
+.socials > :global(a[aria-label]),
+.socials > :global(span[aria-label]) {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.socials > :global(a[aria-label])::after,
+.socials > :global(span[aria-label])::after {
+  position: absolute;
+  inset: -70% -42%;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.45;
+  background: linear-gradient(
+    115deg,
+    transparent 44%,
+    rgba(0, 0, 0, 0.1) 50%,
+    transparent 56%
+  );
+  transform: translateX(-75%);
+  animation: footer-pill-shimmer 6s ease-in-out infinite;
+}
+
+.socials > :global(a[aria-label]) > *,
+.socials > :global(span[aria-label]) > * {
+  position: relative;
+  z-index: 1;
+}
+
+.socials > :global(a[aria-label]:nth-child(2))::after,
+.socials > :global(span[aria-label]:nth-child(2))::after {
+  animation-delay: 0.35s;
+}
+
+.socials > :global(a[aria-label]:nth-child(3))::after,
+.socials > :global(span[aria-label]:nth-child(3))::after {
+  animation-delay: 0.7s;
+}
+
+.socials > :global(a[aria-label]:nth-child(4))::after,
+.socials > :global(span[aria-label]:nth-child(4))::after {
+  animation-delay: 1.05s;
+}
+
+.socials > :global(a[aria-label]:nth-child(5))::after,
+.socials > :global(span[aria-label]:nth-child(5))::after {
+  animation-delay: 1.4s;
+}
+
+.socials > :global(a[aria-label]:nth-child(6))::after,
+.socials > :global(span[aria-label]:nth-child(6))::after {
+  animation-delay: 1.75s;
+}
+
+.socials > :global(a[aria-label]:hover)::after {
+  opacity: 0.7;
+}
+
+:global(.dark) .footer::before {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+:global(.dark) .footer::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.26),
+    transparent
+  );
+}
+
+:global(.dark) .socials::before {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.18),
+    transparent 70%
+  );
+}
+
+:global(.dark) .socials > :global(a[aria-label])::after,
+:global(.dark) .socials > :global(span[aria-label])::after {
+  background: linear-gradient(
+    115deg,
+    transparent 44%,
+    rgba(255, 255, 255, 0.14) 50%,
+    transparent 56%
+  );
+}
+
+:global(.dark) .footerLink:hover,
+:global(.dark) .socials :global(a:hover) {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.24);
+}
+
+@keyframes footer-line-sweep {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(430%);
+  }
+}
+
+@keyframes footer-links-glow {
+  0% {
+    opacity: 0.55;
+    transform: translate(-10%, -50%);
+  }
+
+  25% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(140%, -50%);
+  }
+
+  75% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0.55;
+    transform: translate(290%, -50%);
+  }
+}
+
+@keyframes footer-pill-shimmer {
+  0%,
+  14% {
+    opacity: 0;
+    transform: translateX(-75%);
+  }
+
+  28%,
+  48% {
+    opacity: 0.45;
+  }
+
+  66%,
+  100% {
+    opacity: 0;
+    transform: translateX(75%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer::after,
+  .socials::before,
+  .socials > :global(a[aria-label])::after,
+  .socials > :global(span[aria-label])::after {
+    animation: none;
+    opacity: 0;
+  }
+}

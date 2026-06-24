@@ -1,0 +1,240 @@
+.headerSurface {
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    backdrop-filter 240ms ease;
+}
+
+.scrolled {
+  border-color: rgba(0, 0, 0, 0.13);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(22px);
+}
+
+.avatar {
+  animation: avatar-breathe 5.5s ease-in-out infinite;
+}
+
+.desktopNav {
+  position: relative;
+  isolation: isolate;
+}
+
+.desktopNav::before {
+  position: absolute;
+  top: 50%;
+  left: -2%;
+  z-index: 0;
+  width: 104px;
+  height: 28px;
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 9999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.18),
+    rgba(0, 0, 0, 0.06) 48%,
+    transparent 74%
+  );
+  filter: blur(10px);
+  transform: translateY(-50%);
+  animation: nav-spotlight 6s ease-in-out infinite;
+}
+
+.navLink {
+  position: relative;
+  z-index: 1;
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.navLink::after {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.55);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.navLink:hover {
+  transform: translateY(-1px);
+}
+
+.navLink:hover::after {
+  opacity: 0.55;
+  transform: scaleX(1);
+}
+
+.resumeButton {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.resumeButton::after {
+  position: absolute;
+  inset: -70% -45%;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 44%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 56%
+  );
+  transform: translateX(-75%);
+  animation: resume-sheen 4.5s ease-in-out infinite;
+}
+
+.resumeButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+}
+
+.iconControls {
+  display: contents;
+}
+
+.iconControls :global([data-slot="button"]) {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.iconControls :global([data-slot="button"]):hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.iconControls :global([data-slot="button"]):hover svg {
+  opacity: 1;
+}
+
+:global(.dark) .scrolled {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+:global(.dark) .desktopNav::before {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.24),
+    rgba(255, 255, 255, 0.08) 48%,
+    transparent 74%
+  );
+}
+
+:global(.dark) .resumeButton::after {
+  background: linear-gradient(
+    115deg,
+    transparent 44%,
+    rgba(0, 0, 0, 0.16) 50%,
+    transparent 56%
+  );
+}
+
+:global(.dark) .resumeButton:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.32);
+}
+
+:global(.dark) .iconControls :global([data-slot="button"]):hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.24);
+}
+
+@keyframes nav-spotlight {
+  0% {
+    opacity: 0.58;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  16% {
+    opacity: 0.88;
+  }
+
+  68% {
+    opacity: 0.72;
+    transform: translateY(-50%) translateX(360%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) translateX(360%);
+  }
+}
+
+@keyframes avatar-breathe {
+  0%,
+  100% {
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transform: scale(1);
+  }
+
+  50% {
+    border-color: rgba(0, 0, 0, 0.22);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: scale(1.025);
+  }
+}
+
+@keyframes resume-sheen {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateX(-75%);
+  }
+
+  25%,
+  48% {
+    opacity: 1;
+  }
+
+  68%,
+  100% {
+    opacity: 0;
+    transform: translateX(75%);
+  }
+}
+
+:global(.dark) .avatar {
+  animation-name: avatar-breathe-dark;
+}
+
+@keyframes avatar-breathe-dark {
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    transform: scale(1);
+  }
+
+  50% {
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.09);
+    transform: scale(1.025);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktopNav::before,
+  .avatar,
+  .resumeButton::after {
+    animation: none;
+  }
+
+  .desktopNav::before,
+  .resumeButton::after {
+    opacity: 0;
+  }
+}

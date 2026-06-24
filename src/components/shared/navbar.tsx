@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
 import { usePathname } from "next/navigation";
 import { Github } from "lucide-react";
+import styles from "./navbar.module.css";
 
 const GITHUB_REPO_URL = "https://github.com/usama86/usama-portfolio-v2";
 
@@ -24,15 +27,36 @@ const INNER_NAV = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
+  const [isScrolled, setIsScrolled] = useState(false);
   const isHome = pathname === "/";
   const nav = isHome ? HOME_NAV : INNER_NAV;
 
+  useEffect(() => {
+    const updateScrolledState = () => setIsScrolled(window.scrollY > 8);
+
+    updateScrolledState();
+    window.addEventListener("scroll", updateScrolledState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolledState);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50">
-      <div className="glass border-b border-border/60">
+    <motion.header
+      className="sticky top-0 z-50"
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: "easeOut" }}
+    >
+      <div
+        className={`glass border-b border-border/60 ${styles.headerSurface} ${
+          isScrolled ? styles.scrolled : ""
+        }`}
+      >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-primary/15 border border-primary/20 grid place-items-center">
+            <div
+              className={`h-9 w-9 rounded-xl bg-primary/15 border border-primary/20 grid place-items-center ${styles.avatar}`}
+            >
               <span className="text-sm font-semibold">MU</span>
             </div>
             <div className="leading-tight">
@@ -44,12 +68,14 @@ export function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
+          <nav
+            className={`hidden md:flex items-center gap-6 text-sm text-muted-foreground ${styles.desktopNav}`}
+          >
             {nav.map((i) => (
               <a
                 key={i.href}
                 href={i.href}
-                className="hover:text-foreground transition-colors"
+                className={`hover:text-foreground ${styles.navLink}`}
               >
                 {i.label}
               </a>
@@ -57,22 +83,27 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle />
+            <div className={styles.iconControls}>
+              <ThemeToggle />
 
-            <Button
-              asChild
-              variant="outline"
-              size="icon"
-              className="rounded-xl hidden md:inline-flex"
-              aria-label="View source on GitHub"
-            >
-              <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
-                <Github className="h-5 w-5" />
-              </a>
-            </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="icon"
+                className="rounded-xl hidden md:inline-flex"
+                aria-label="View source on GitHub"
+              >
+                <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
+                  <Github className="h-5 w-5" />
+                </a>
+              </Button>
+            </div>
 
             {/* Desktop resume */}
-            <Button asChild className="rounded-xl hidden md:inline-flex">
+            <Button
+              asChild
+              className={`rounded-xl hidden md:inline-flex ${styles.resumeButton}`}
+            >
               <a href="/resume.pdf" target="_blank" rel="noreferrer">
                 Resume
               </a>
@@ -83,6 +114,6 @@ export function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
