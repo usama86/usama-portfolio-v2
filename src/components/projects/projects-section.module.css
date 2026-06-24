@@ -1,0 +1,175 @@
+.projectsSection {
+  position: relative;
+  isolation: isolate;
+}
+
+.projectsSection::before {
+  content: "";
+  position: absolute;
+  top: 140px;
+  left: -30%;
+  z-index: 0;
+  width: 45%;
+  height: 420px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.14),
+    rgba(0, 0, 0, 0.06) 35%,
+    transparent 70%
+  );
+  filter: blur(42px);
+  opacity: 0;
+  pointer-events: none;
+  animation: projects-ambient-wave 10s ease-in-out infinite;
+}
+
+.projectsSection > * {
+  position: relative;
+  z-index: 1;
+}
+
+.featuredCard {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.featuredCard > button {
+  height: 100%;
+}
+
+.featuredCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 0.75rem;
+  opacity: 0.07;
+  pointer-events: none;
+  animation: featured-border-shimmer 7s ease-in-out infinite;
+}
+
+.featuredCard::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  z-index: 3;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(0, 0, 0, 0.12) 48%,
+    rgba(0, 0, 0, 0.08) 52%,
+    transparent 65%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-75%) translateY(25%);
+  animation: featured-card-sheen 5.2s ease-in-out infinite;
+}
+
+.featuredCard:nth-child(2)::before {
+  animation-delay: 0.7s;
+}
+
+.featuredCard:nth-child(3)::before {
+  animation-delay: 1.4s;
+}
+
+:global(.dark) .projectsSection::before {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(161, 161, 170, 0.2),
+    rgba(161, 161, 170, 0.08) 35%,
+    transparent 70%
+  );
+}
+
+:global(.dark) .featuredCard::after {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+:global(.dark) .featuredCard::before {
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.15) 48%,
+    rgba(255, 255, 255, 0.1) 52%,
+    transparent 65%
+  );
+}
+
+@keyframes projects-ambient-wave {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: translateX(145%);
+    opacity: 0.9;
+  }
+
+  85% {
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translateX(260%);
+    opacity: 0;
+  }
+}
+
+@keyframes featured-border-shimmer {
+  0%,
+  100% {
+    opacity: 0.07;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes featured-card-sheen {
+  0% {
+    transform: translateX(-75%) translateY(25%);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(75%) translateY(-25%);
+    opacity: 1;
+  }
+
+  82%,
+  100% {
+    transform: translateX(75%) translateY(-25%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectsSection::before,
+  .featuredCard::after,
+  .featuredCard::before {
+    animation: none;
+  }
+
+  .projectsSection::before {
+    opacity: 0;
+  }
+
+  .featuredCard::after {
+    opacity: 0.07;
+  }
+}

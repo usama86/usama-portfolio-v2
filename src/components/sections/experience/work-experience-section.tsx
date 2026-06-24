@@ -8,7 +8,7 @@ export function WorkExperienceSection() {
   return (
     <section id="experience" className="scroll-mt-24 space-y-8">
       <SectionHeader
-        eyebrow="6+ years shipping production software"
+        eyebrow="7+ years shipping production software"
         title="Work experience"
         subtitle="Impact-focused timeline — highlights that signal senior ownership, architecture, and execution."
       />

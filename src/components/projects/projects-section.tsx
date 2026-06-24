@@ -2,12 +2,14 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
+import { motion, useReducedMotion } from "motion/react";
 
 import { projects } from "@/data/projects";
 import type { Project } from "@/components/projects/types";
 
 import { ProjectCard } from "@/components/projects/project-card";
 import { ProjectDialog } from "@/components/projects/project-dialog";
+import styles from "./projects-section.module.css";
 
 const FEATURED_SLUGS = new Set<string>([
   "talentflow-enterprise-recruiting-platform",
@@ -19,6 +21,7 @@ const HOME_SELECTED_LIMIT = 8;
 
 export function ProjectsSection() {
   const router = useRouter();
+  const shouldReduceMotion = useReducedMotion();
 
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState<Project | null>(null);
@@ -46,10 +49,40 @@ export function ProjectsSection() {
     setTimeout(() => setActive(null), 120);
   }
 
+  const revealEase = [0.22, 1, 0.36, 1] as const;
+  const headerVariants = {
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 12 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: revealEase },
+    },
+  };
+  const cardContainerVariants = {
+    hidden: {},
+    show: {
+      transition: shouldReduceMotion ? { duration: 0 } : { staggerChildren: 0.08 },
+    },
+  };
+  const cardVariants = {
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 16 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: revealEase },
+    },
+  };
+
   return (
-    <section className="space-y-10" id="projects">
+    <section className={`${styles.projectsSection} space-y-10`} id="projects">
       {/* Header */}
-      <div className="space-y-2">
+      <motion.div
+        className="space-y-2"
+        variants={headerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
           Projects
         </h2>
@@ -57,7 +90,7 @@ export function ProjectsSection() {
           Real products & real systems — from multi-tenant SaaS to AI voice
           agents and large-scale UI platforms.
         </p>
-      </div>
+      </motion.div>
 
       {/* Featured Case Studies */}
       <div className="space-y-4">
@@ -74,17 +107,28 @@ export function ProjectsSection() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch"
+          variants={cardContainerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {featured.map((p) => (
-            <ProjectCard
+            <motion.div
               key={p.slug}
-              project={p}
-              featured
-              onOpen={() => openProject(p)}
-              className="h-full"
-            />
+              className={styles.featuredCard}
+              variants={cardVariants}
+            >
+              <ProjectCard
+                project={p}
+                featured
+                onOpen={() => openProject(p)}
+                className="h-full"
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Selected Work */}
@@ -102,15 +146,19 @@ export function ProjectsSection() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+          variants={cardContainerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {selected.map((p) => (
-            <ProjectCard
-              key={p.slug}
-              project={p}
-              onOpen={() => openProject(p)}
-            />
+            <motion.div key={p.slug} variants={cardVariants}>
+              <ProjectCard project={p} onOpen={() => openProject(p)} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Dialog */}

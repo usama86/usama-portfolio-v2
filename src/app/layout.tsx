@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning>
+      <body className="antialiased">
         <ThemeProvider>
           <div className="min-h-screen bg-grid">
             <Navbar />
