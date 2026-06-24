@@ -1,0 +1,116 @@
+.certificateSection {
+  position: relative;
+}
+
+.certificateCard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.certificateCard::after {
+  position: absolute;
+  inset: -50%;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 42%,
+    rgba(0, 0, 0, 0.08) 50%,
+    transparent 58%
+  );
+  transform: translateX(-75%);
+  animation: certificate-shine 7s ease-in-out infinite;
+  animation-delay: var(--certificate-delay);
+}
+
+.certificateCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.credentialButton {
+  transition:
+    transform 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.credentialButton:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.07);
+}
+
+.credentialPill {
+  animation: credential-pill-breathe 7s ease-in-out infinite;
+  animation-delay: var(--certificate-delay);
+}
+
+:global(.dark) .certificateCard::after {
+  background: linear-gradient(
+    115deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 58%
+  );
+}
+
+:global(.dark) .credentialButton:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.24);
+}
+
+@keyframes certificate-shine {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateX(-75%);
+  }
+
+  25%,
+  48% {
+    opacity: 1;
+  }
+
+  68%,
+  100% {
+    opacity: 0;
+    transform: translateX(75%);
+  }
+}
+
+@keyframes credential-pill-breathe {
+  0%,
+  100% {
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  50% {
+    border-color: rgba(0, 0, 0, 0.14);
+  }
+}
+
+:global(.dark) .credentialPill {
+  animation-name: credential-pill-breathe-dark;
+}
+
+@keyframes credential-pill-breathe-dark {
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  50% {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .certificateCard::after,
+  .credentialPill {
+    animation: none;
+  }
+}
