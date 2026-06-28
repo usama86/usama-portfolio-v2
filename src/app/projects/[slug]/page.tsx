@@ -217,21 +217,18 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
             <div className="space-y-4">
               {(hasLoom || hasDrive) && (
                 <div className="glass rounded-2xl p-3">
-                  <div className="aspect-video w-full overflow-hidden rounded-xl">
-                    {hasLoom ? (
-                      <LoomVideo
-                        videoUrl={links!.videoUrl!}
-                        className="h-full w-full"
-                      />
-                    ) : null}
-                    {hasDrive ? (
-                      <GoogleDriveVideo
-                        fileId={links!.videoUrl!}
-                        height={420}
-                        className="h-full w-full"
-                      />
-                    ) : null}
-                  </div>
+                  {hasLoom ? (
+                    <LoomVideo
+                      videoUrl={links!.videoUrl!}
+                      title={`${project.title} demo walkthrough`}
+                    />
+                  ) : null}
+                  {hasDrive ? (
+                    <GoogleDriveVideo
+                      fileId={links!.videoUrl!}
+                      title={`${project.title} demo walkthrough`}
+                    />
+                  ) : null}
                 </div>
               )}
 

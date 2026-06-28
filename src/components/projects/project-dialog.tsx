@@ -90,7 +90,12 @@ export function ProjectDialog({
 
             <div className="flex flex-wrap items-center gap-2 pr-2">
               {onViewCaseStudy && (
-                <Button size="sm" onClick={() => onViewCaseStudy(project.slug)}>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => onViewCaseStudy(project.slug)}
+                  className="rounded-xl border-black/10 bg-white/85 text-foreground shadow-sm transition-all hover:-translate-y-px hover:border-black/20 hover:bg-white hover:shadow-md dark:border-white/15 dark:bg-white/[0.08] dark:hover:border-white/25 dark:hover:bg-white/[0.11]"
+                >
                   View case study
                 </Button>
               )}
@@ -149,22 +154,19 @@ export function ProjectDialog({
             <div className="space-y-5">
               {(hasLoom || hasDrive) && (
                 <div className="glass rounded-2xl p-3 min-w-0 overflow-hidden">
-                  <div className="aspect-video w-full overflow-hidden rounded-xl">
-                    {hasLoom ? (
-                      <LoomVideo
-                        videoUrl={links!.videoUrl!}
-                        className="h-full w-full"
-                      />
-                    ) : null}
+                  {hasLoom ? (
+                    <LoomVideo
+                      videoUrl={links!.videoUrl!}
+                      title={`${project.title} demo walkthrough`}
+                    />
+                  ) : null}
 
-                    {hasDrive ? (
-                      <GoogleDriveVideo
-                        fileId={links!.videoUrl!}
-                        height={420}
-                        className="h-full w-full"
-                      />
-                    ) : null}
-                  </div>
+                  {hasDrive ? (
+                    <GoogleDriveVideo
+                      fileId={links!.videoUrl!}
+                      title={`${project.title} demo walkthrough`}
+                    />
+                  ) : null}
                 </div>
               )}
 
