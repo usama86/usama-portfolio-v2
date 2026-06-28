@@ -46,6 +46,9 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
   const hasDrive = !!links?.videoUrl && links?.videoType === "googleDrive";
 
   const bullets = project.descriptionDetail ?? [];
+  const mediaImages = project.mediaImages?.length
+    ? project.mediaImages
+    : project.images;
 
   const toc = [
     { id: "overview", label: "Overview" },
@@ -232,11 +235,11 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
                 </div>
               )}
 
-              {project.images?.length ? (
-                <GalleryCarousel images={project.images} />
+              {mediaImages?.length ? (
+                <GalleryCarousel images={mediaImages} />
               ) : null}
 
-              {!hasLoom && !hasDrive && !project.images?.length ? (
+              {!hasLoom && !hasDrive && !mediaImages?.length ? (
                 <div className="glass rounded-2xl p-4 text-sm text-muted-foreground">
                   No media attached for this project yet.
                 </div>

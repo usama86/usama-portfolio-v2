@@ -40,6 +40,52 @@ export const projects: Project[] = [
           "Enterprise recruiting workflows built for AI training and evaluation.",
       },
     ],
+    mediaImages: [
+      {
+        src: "/images/projects/turing-screenshot/Dashboard-1.png",
+        title: "TalentFlow hiring workflow screenshot 1",
+        description: "Dashboard overview for the recruiting workflow.",
+      },
+      {
+        src: "/images/projects/turing-screenshot/State-diff-2.png",
+        title: "TalentFlow hiring workflow screenshot 2",
+        description: "State comparison view for workflow evaluation.",
+      },
+      {
+        src: "/images/projects/turing-screenshot/Jobs-page-3.png",
+        title: "TalentFlow hiring workflow screenshot 3",
+        description: "Jobs page for managing open roles.",
+      },
+      {
+        src: "/images/projects/turing-screenshot/Jobs-Candidate-pipeline-4.png",
+        title: "TalentFlow hiring workflow screenshot 4",
+        description: "Candidate pipeline view for a job workflow.",
+      },
+      {
+        src: "/images/projects/turing-screenshot/Candidate-page-5.png",
+        title: "TalentFlow hiring workflow screenshot 5",
+        description: "Candidate listing and recruiting workspace.",
+      },
+      {
+        src: "/images/projects/turing-screenshot/Candidate-profile-6.png",
+        title: "TalentFlow hiring workflow screenshot 6",
+        description: "Candidate profile with hiring details.",
+      },
+      {
+        src: "/images/projects/turing-screenshot/CRM-7.png",
+        title: "TalentFlow hiring workflow screenshot 7",
+        description: "CRM workspace for recruiting relationships.",
+      },
+      {
+        src: "/images/projects/turing-screenshot/Reports-8.png",
+        title: "TalentFlow hiring workflow screenshot 8",
+        description: "Reports view for recruiting analytics.",
+      },
+    ],
+    links: {
+      videoType: "loom",
+      videoUrl: "https://www.loom.com/share/aee744adfdc94f9fa7bdb27edf2db95d",
+    },
     caseStudy: {
       problem: [
         "AI agents need realistic enterprise workflows and stateful data to train against and evaluate reliably.",

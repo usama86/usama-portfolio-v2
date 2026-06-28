@@ -35,10 +35,13 @@ export function ProjectDialog({
   const hasLoom = !!links?.videoUrl && links?.videoType === "loom";
   const hasDrive = !!links?.videoUrl && links?.videoType === "googleDrive";
 
-  // Convert project images into GalleryCarousel shape
-  // (Your Project type already uses { src, title, description? } in images)
+  const mediaImages = project.mediaImages?.length
+    ? project.mediaImages
+    : project.images;
+
+  // Convert project media into GalleryCarousel shape
   const galleryImages =
-    project.images?.map((img) => ({
+    mediaImages?.map((img) => ({
       src: img.src,
       title: img.title ?? "Screenshot",
       description: img.description,

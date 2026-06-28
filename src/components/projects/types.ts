@@ -12,6 +12,12 @@ export type CaseStudySection = {
   outcome?: string[];
 };
 
+export type ProjectImage = {
+  src: string;
+  title: string;
+  description?: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -21,7 +27,8 @@ export type Project = {
   timePeriod?: string;
   descriptionDetail: string[];
   technologies?: string[];
-  images: { src: string; title: string; description?: string }[];
+  images: ProjectImage[];
+  mediaImages?: ProjectImage[];
   links?: {
     videoType?: "loom" | "googleDrive";
     videoUrl?: string; // loom url OR google drive fileId
