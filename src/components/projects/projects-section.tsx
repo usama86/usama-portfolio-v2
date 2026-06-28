@@ -87,8 +87,9 @@ export function ProjectsSection() {
           Projects
         </h2>
         <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
-          Real products & real systems — from multi-tenant SaaS to AI voice
-          agents and large-scale UI platforms.
+          AI training environments, enterprise SaaS platforms, product
+          simulations, and real production systems built across web, AI, and
+          automation.
         </p>
       </motion.div>
 
