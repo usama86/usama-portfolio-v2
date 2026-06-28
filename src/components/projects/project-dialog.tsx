@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -47,24 +46,19 @@ export function ProjectDialog({
       description: img.description,
     })) ?? [];
 
-  const hasAnyLinks =
-    !!onViewCaseStudy || !!links?.webLink?.length || !!links?.github?.length;
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Centered modal (NOT fullscreen) */}
       <DialogContent
         showCloseButton={false}
-        className="w-[calc(100vw-2rem)] sm:max-w-4xl max-h-[90vh] overflow-y-auto overflow-x-hidden min-w-0 [&_*]:max-w-full [&_*]:min-w-0"
+        className="w-[calc(100vw-2rem)] sm:max-w-4xl max-h-[90vh] overflow-hidden p-0 gap-0 flex flex-col min-w-0 [&_*]:max-w-full [&_*]:min-w-0"
       >
         <DialogHeader className="sr-only">
           <DialogTitle>{project.title}</DialogTitle>
         </DialogHeader>
-        {/* Sticky header */}
+        {/* Header remains outside the scroll container so body content cannot bleed behind it. */}
         <div
-          className="sticky top-0 z-20 relative px-6 py-4 pr-14
-bg-background/90 backdrop-blur-xl
-border-b border-border/60"
+          className="relative z-20 shrink-0 rounded-t-lg bg-background px-6 py-4 pr-14 border-b border-border/60"
         >
           <Button
             type="button"
@@ -73,8 +67,8 @@ border-b border-border/60"
             onClick={() => onOpenChange(false)}
             aria-label="Close dialog"
             className="absolute right-3 top-3 rounded-xl h-10 w-10 md:h-9 md:w-9
-             bg-background/60 hover:bg-background/80
-             border border-border/50 backdrop-blur"
+             bg-background hover:bg-muted
+             border border-border/50"
           >
             <X className="h-5 w-5" />
           </Button>
@@ -120,7 +114,7 @@ border-b border-border/60"
           </div>
         </div>
 
-        <div className="pt-6 space-y-8">
+        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-6 py-6 space-y-8">
           {/* Description */}
           {!!project.descriptionDetail?.length && (
             <div className="space-y-2">
