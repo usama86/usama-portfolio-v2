@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "./types";
+import { ProjectIcon } from "./project-icon";
 
 type Props = {
   project: Project;
@@ -13,7 +13,6 @@ type Props = {
 };
 
 export function ProjectCard({ project, onOpen, featured, className }: Props) {
-  const cover = project.images?.[0];
   const tech = project.technologies ?? [];
   const maxTech = featured ? 8 : 6;
   const shown = tech.slice(0, maxTech);
@@ -35,18 +34,7 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
 
         <CardContent className="p-5 h-full flex flex-col gap-4">
           <div className="flex items-start gap-4">
-            {cover ? (
-              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border/60 bg-black/20">
-                <Image
-                  src={cover.src}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ) : (
-              <div className="h-12 w-12 rounded-xl border border-border/60 bg-black/20" />
-            )}
+            <ProjectIcon slug={project.slug} title={project.title} />
 
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">

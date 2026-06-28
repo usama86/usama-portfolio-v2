@@ -7,6 +7,8 @@ import { projects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ProjectIcon } from "@/components/projects/project-icon";
+import type { Project } from "@/components/projects/types";
 
 type FilterKey =
   | "all"
@@ -23,12 +25,12 @@ const FEATURED_SLUGS = new Set<string>([
   "query-builder",
 ]);
 
-function hasAnyTech(p: any, keywords: string[]) {
+function hasAnyTech(p: Project, keywords: string[]) {
   const tech = (p.technologies ?? []).map((t: string) => t.toLowerCase());
   return keywords.some((k) => tech.some((t: string) => t.includes(k)));
 }
 
-function isFreelance(p: any) {
+function isFreelance(p: Project) {
   const c = (p.company ?? "").toLowerCase();
   return (
     c.includes("freelance") ||
@@ -38,16 +40,16 @@ function isFreelance(p: any) {
   );
 }
 
-function isCompany(p: any) {
+function isCompany(p: Project) {
   const c = (p.company ?? "").toLowerCase();
   return !!c && !isFreelance(p);
 }
 
-function isMobile(p: any) {
+function isMobile(p: Project) {
   return hasAnyTech(p, ["react native"]);
 }
 
-function isBackend(p: any) {
+function isBackend(p: Project) {
   return hasAnyTech(p, [
     "fastapi",
     "node",
@@ -62,7 +64,7 @@ function isBackend(p: any) {
   ]);
 }
 
-function isSaaS(p: any) {
+function isSaaS(p: Project) {
   const text = `${p.title ?? ""} ${
     p.descriptionDetail?.join(" ") ?? ""
   }`.toLowerCase();
@@ -77,7 +79,7 @@ function isSaaS(p: any) {
 const FILTERS: {
   key: FilterKey;
   label: string;
-  predicate: (p: any) => boolean;
+  predicate: (p: Project) => boolean;
 }[] = [
   { key: "all", label: "All", predicate: () => true },
   {
@@ -210,26 +212,30 @@ export default function ProjectsPage() {
           >
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="text-base md:text-lg font-semibold tracking-tight truncate">
-                      {p.title}
-                    </h2>
+                <div className="flex min-w-0 items-start gap-4">
+                  <ProjectIcon slug={p.slug} title={p.title} />
 
-                    {FEATURED_SLUGS.has(p.slug) ? (
-                      <Badge className="rounded-full" variant="secondary">
-                        Featured
-                      </Badge>
-                    ) : null}
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h2 className="text-base md:text-lg font-semibold tracking-tight truncate">
+                        {p.title}
+                      </h2>
+
+                      {FEATURED_SLUGS.has(p.slug) ? (
+                        <Badge className="rounded-full" variant="secondary">
+                          Featured
+                        </Badge>
+                      ) : null}
+                    </div>
+
+                    {(p.company || p.timePeriod) && (
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {p.company ?? ""}
+                        {p.company && p.timePeriod ? " • " : ""}
+                        {p.timePeriod ?? ""}
+                      </p>
+                    )}
                   </div>
-
-                  {(p.company || p.timePeriod) && (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {p.company ?? ""}
-                      {p.company && p.timePeriod ? " • " : ""}
-                      {p.timePeriod ?? ""}
-                    </p>
-                  )}
                 </div>
               </div>
 
