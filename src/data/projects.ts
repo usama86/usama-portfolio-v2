@@ -12,7 +12,7 @@ export const projects: Project[] = [
     cardTitle: "TalentFlow — Enterprise Recruiting Platform",
     highlightsTitle: "Key Contributions",
     company: "Turing (Microsoft Research Programs)",
-    timePeriod: "2025 — Present",
+    timePeriod: "04/2026 — Present",
     descriptionDetail: [
       "Co-led development of a high-fidelity recruiting platform used for AI training and evaluation. Delivered 20+ interconnected modules including hiring workflows, interviews, scorecards, approvals, offers, dashboards, CRM, sourcing, and reporting with strong focus on workflow correctness and data consistency.",
       "Co-led product simulation initiatives at Turing.",
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     slug: "cleon-ai-voice-ordering",
     title: "Cleon – AI Voice Ordering Platform",
     company: "Personal / SaaS Product",
-    timePeriod: "12/2025 — Present",
+    timePeriod: "12/2025 — 02/2026",
     descriptionDetail: [
       "Designed and developed a multi-tenant AI voice ordering SaaS enabling restaurants to accept phone orders via conversational voice agents.",
       "Built a FastAPI backend with strict tenant isolation, restaurant ↔ voice-agent mapping, and scoped request validation.",

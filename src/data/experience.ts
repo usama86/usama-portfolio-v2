@@ -87,7 +87,7 @@ export const experience: ExperienceItem[] = [
     company: "Zones IT",
     companyUrl: "https://www.zones.com/site/home/index.html",
     credentialUrl: "/experienceletter_zones.pdf",
-    timePeriod: "05/2023 — Present",
+    timePeriod: "05/2023 — 06/2025",
     description:
       "Built drag-and-drop productivity tools, reusable UI packages, and full-stack features with React + TypeScript, NestJS, and Keycloak-based authentication.",
     descriptionDetail: [
