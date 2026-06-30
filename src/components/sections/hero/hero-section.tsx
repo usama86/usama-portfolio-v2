@@ -12,8 +12,14 @@ const UPWORK_URL = "https://www.upwork.com/freelancers/~01798f1c775f13992c";
 const PSEB_URL =
   "https://portal.techdestination.com/verify-certificate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpc3RyYXRpb25ObyI6IkZMMjEvUFNFQi8yMDI1LzIyMjkyIiwidHlwZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE3NjcwODAwNzIsImV4cCI6MTc3NDg1NjA3Mn0.8poPngm4g1fKYxFxxRFe_nZYfAbK2b_4NVoyJCNVje0";
 
+// const INTRO_SHORT_URL =. (OLD ONE)
+//   "https://youtube.com/shorts/8iUjJhpUKEE?si=nIhtEEkv6_GUHC3u";
+
 const INTRO_SHORT_URL =
-  "https://youtube.com/shorts/8iUjJhpUKEE?si=nIhtEEkv6_GUHC3u";
+  "https://www.youtube.com/shorts/CtqX_YgKrF4?feature=shared";
+
+
+  
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();

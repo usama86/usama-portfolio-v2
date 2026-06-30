@@ -49,12 +49,11 @@ export function YouTubeEmbed({
 }: YouTubeEmbedProps) {
   const id = React.useMemo(() => extractYouTubeId(urlOrId), [urlOrId]);
 
-  // Use standard youtube embed. (nocookie sometimes behaves odd with strict settings)
+  // Match YouTube's oEmbed iframe shape; extra player params can make Shorts
+  // playback less predictable in some browser/privacy-extension combinations.
   const src = React.useMemo(() => {
     const params = new URLSearchParams({
-      modestbranding: "1",
-      rel: "0",
-      playsinline: "1",
+      feature: "oembed",
     });
     return `https://www.youtube.com/embed/${id}?${params.toString()}`;
   }, [id]);
@@ -68,7 +67,6 @@ export function YouTubeEmbed({
         className ?? "",
       ].join(" ")}
     >
-      {/* Always render iframe (no “ready gate”) */}
       <iframe
         className={["w-full", aspectClass, "border-0"].join(" ")}
         src={src}
