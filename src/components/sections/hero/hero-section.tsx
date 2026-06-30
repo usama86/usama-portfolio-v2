@@ -221,9 +221,13 @@ export function HeroSection() {
                 "Enterprise SaaS",
               ].map((t) => (
                 <motion.div
-                key={t}
+                  key={t}
                   whileHover={isFullMotion ? { y: -1 } : undefined}
-                  transition={isFullMotion ? { duration: 0.18, ease: "easeOut" } : undefined}
+                  transition={
+                    isFullMotion
+                      ? { duration: 0.18, ease: "easeOut" }
+                      : undefined
+                  }
                 >
                   <Badge
                     variant="outline"
@@ -241,7 +245,11 @@ export function HeroSection() {
             >
               <motion.div
                 whileHover={isFullMotion ? { y: -2 } : undefined}
-                transition={isFullMotion ? { duration: 0.18, ease: "easeOut" } : undefined}
+                transition={
+                  isFullMotion
+                    ? { duration: 0.18, ease: "easeOut" }
+                    : undefined
+                }
               >
                 <Button
                   asChild
@@ -256,7 +264,11 @@ export function HeroSection() {
 
               <motion.div
                 whileHover={isFullMotion ? { y: -2 } : undefined}
-                transition={isFullMotion ? { duration: 0.18, ease: "easeOut" } : undefined}
+                transition={
+                  isFullMotion
+                    ? { duration: 0.18, ease: "easeOut" }
+                    : undefined
+                }
               >
                 <Button
                   asChild
