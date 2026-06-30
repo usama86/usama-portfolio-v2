@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +9,10 @@ import { Textarea } from "@/components/ui/textarea";
 import styles from "./contact-section.module.css";
 
 export function ContactSection() {
-  const shouldReduceMotion = useReducedMotion();
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
+  const isBalancedMotion = motionLevel === "balanced";
+  const isLiteMotion = motionLevel === "lite";
   const revealEase = [0.22, 1, 0.36, 1] as const;
 
   return (
@@ -21,7 +25,7 @@ export function ContactSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{
-          duration: shouldReduceMotion ? 0.01 : 0.5,
+          duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.5,
           ease: revealEase,
         }}
       >
@@ -36,11 +40,11 @@ export function ContactSection() {
         {/* Form -> mailto (simple, no backend) */}
         <motion.div
           className={`glass rounded-3xl p-6 md:p-7 ${styles.formCard}`}
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 18 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.12 }}
           transition={{
-            duration: shouldReduceMotion ? 0.01 : 0.65,
+            duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.65,
             ease: revealEase,
           }}
         >
@@ -95,12 +99,12 @@ export function ContactSection() {
         {/* CTA card */}
         <motion.div
           className={`glass rounded-3xl p-6 md:p-7 space-y-3 ${styles.infoCard}`}
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 18 : 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.12 }}
           transition={{
-            duration: shouldReduceMotion ? 0.01 : 0.65,
-            delay: shouldReduceMotion ? 0 : 0.1,
+            duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.65,
+            delay: isFullMotion ? 0.1 : 0,
             ease: revealEase,
           }}
         >

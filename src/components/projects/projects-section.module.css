@@ -195,3 +195,23 @@
     opacity: 0.07;
   }
 }
+
+:global(html[data-motion-level="balanced"]) .projectsSection::before,
+:global(html[data-motion-level="lite"]) .projectsSection::before {
+  animation: none;
+  filter: none;
+  opacity: 0;
+}
+
+:global(html[data-motion-level="balanced"]) .featuredCard::after {
+  animation: none;
+  opacity: 0.07;
+}
+
+:global(html[data-motion-level="balanced"]) .selectedCard::before,
+:global(html[data-motion-level="lite"]) .featuredCard::before,
+:global(html[data-motion-level="lite"]) .selectedCard::before,
+:global(html[data-motion-level="lite"]) .featuredCard::after {
+  animation: none;
+  opacity: 0;
+}

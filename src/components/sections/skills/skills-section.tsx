@@ -1,13 +1,17 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 import { skills } from "@/data/skills";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Badge } from "@/components/ui/badge";
 import styles from "./skills-section.module.css";
 
 export function SkillsSection() {
-  const shouldReduceMotion = useReducedMotion();
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
+  const isBalancedMotion = motionLevel === "balanced";
+  const isLiteMotion = motionLevel === "lite";
 
   return (
     <section
@@ -18,7 +22,10 @@ export function SkillsSection() {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: shouldReduceMotion ? 0.01 : 0.45, ease: "easeOut" }}
+        transition={{
+          duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.45,
+          ease: "easeOut",
+        }}
       >
         <SectionHeader
           eyebrow="What I’m strong at"
@@ -33,12 +40,12 @@ export function SkillsSection() {
             key={c.title}
             className={`glass rounded-3xl p-6 ${styles.skillCard}`}
             style={{ "--skill-delay": `${index * 0.35}s` } as React.CSSProperties}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 12 : 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.12 }}
             transition={{
-              duration: shouldReduceMotion ? 0.01 : 0.4,
-              delay: shouldReduceMotion ? 0 : index * 0.08,
+              duration: isLiteMotion ? 0 : isBalancedMotion ? 0.22 : 0.4,
+              delay: isFullMotion ? index * 0.08 : 0,
               ease: "easeOut",
             }}
           >

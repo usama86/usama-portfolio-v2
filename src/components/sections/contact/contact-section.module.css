@@ -183,3 +183,31 @@
     opacity: 0;
   }
 }
+
+:global(html[data-motion-level="balanced"]) .formCard::before,
+:global(html[data-motion-level="balanced"]) .infoCard::after,
+:global(html[data-motion-level="lite"]) .formCard::before,
+:global(html[data-motion-level="lite"]) .infoCard::after {
+  animation: none;
+}
+
+:global(html[data-motion-level="balanced"]) .formCard::before,
+:global(html[data-motion-level="lite"]) .formCard::before {
+  filter: none;
+  opacity: 0;
+}
+
+:global(html[data-motion-level="balanced"]) .contactField:focus,
+:global(html[data-motion-level="balanced"]) .sendButton:hover,
+:global(html[data-motion-level="balanced"]) .emailButton:hover,
+:global(html[data-motion-level="lite"]) .contactField:focus,
+:global(html[data-motion-level="lite"]) .sendButton:hover,
+:global(html[data-motion-level="lite"]) .emailButton:hover {
+  transform: none;
+}
+
+:global(html[data-motion-level="lite"]) .contactField:focus,
+:global(html[data-motion-level="lite"]) .sendButton:hover,
+:global(html[data-motion-level="lite"]) .emailButton:hover {
+  box-shadow: none;
+}

@@ -208,3 +208,24 @@
     border-color: rgba(255, 255, 255, 0.12);
   }
 }
+
+:global(html[data-motion-level="balanced"]) .timeline::after,
+:global(html[data-motion-level="balanced"]) .currentRole::after,
+:global(html[data-motion-level="balanced"]) .currentRoleIcon,
+:global(html[data-motion-level="lite"]) .timeline::after,
+:global(html[data-motion-level="lite"]) .currentRole::after,
+:global(html[data-motion-level="lite"]) .currentRoleIcon {
+  animation: none;
+}
+
+:global(html[data-motion-level="balanced"]) .timeline::after,
+:global(html[data-motion-level="lite"]) .timeline::after {
+  filter: none;
+  opacity: 0;
+}
+
+:global(html[data-motion-level="balanced"]) .experienceCard:hover,
+:global(html[data-motion-level="lite"]) .experienceCard:hover {
+  transform: none;
+  box-shadow: none;
+}

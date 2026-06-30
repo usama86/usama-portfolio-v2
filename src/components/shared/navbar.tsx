@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
 import { usePathname } from "next/navigation";
 import { Github } from "lucide-react";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 import styles from "./navbar.module.css";
 
 const GITHUB_REPO_URL = "https://github.com/usama86/usama-portfolio-v2";
@@ -27,7 +28,8 @@ const INNER_NAV = [
 
 export function Navbar() {
   const pathname = usePathname();
-  const shouldReduceMotion = useReducedMotion();
+  const motionLevel = useMotionLevel();
+  const isLiteMotion = motionLevel === "lite";
   const [isScrolled, setIsScrolled] = useState(false);
   const isHome = pathname === "/";
   const nav = isHome ? HOME_NAV : INNER_NAV;
@@ -43,9 +45,9 @@ export function Navbar() {
   return (
     <motion.header
       className="sticky top-0 z-50"
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
+      initial={{ opacity: isLiteMotion ? 1 : 0, y: isLiteMotion ? 0 : -8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, ease: "easeOut" }}
+      transition={{ duration: isLiteMotion ? 0 : 0.5, ease: "easeOut" }}
     >
       <div
         className={`glass border-b border-border/60 ${styles.headerSurface} ${

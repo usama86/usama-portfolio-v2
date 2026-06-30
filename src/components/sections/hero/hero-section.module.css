@@ -61,11 +61,34 @@
 @media (prefers-reduced-motion: reduce) {
   .heroCard::before {
     animation: none;
-    opacity: 0.45;
+    filter: none;
+    opacity: 0;
   }
 
   .heroCard::after {
     animation: none;
+    filter: none;
     opacity: 0;
   }
+}
+
+:global(html[data-motion-level="balanced"]) .heroCard::before,
+:global(html[data-motion-level="balanced"]) .heroCard::after {
+  animation: none;
+  filter: none;
+}
+
+:global(html[data-motion-level="balanced"]) .heroCard::before {
+  opacity: 0.08;
+}
+
+:global(html[data-motion-level="balanced"]) .heroCard::after {
+  opacity: 0;
+}
+
+:global(html[data-motion-level="lite"]) .heroCard::before,
+:global(html[data-motion-level="lite"]) .heroCard::after {
+  animation: none;
+  filter: none;
+  opacity: 0;
 }

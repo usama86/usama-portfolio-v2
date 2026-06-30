@@ -98,3 +98,15 @@
     animation: none;
   }
 }
+
+:global(html[data-motion-level="balanced"]) .skillCard,
+:global(html[data-motion-level="balanced"]) .skillIcon,
+:global(html[data-motion-level="lite"]) .skillCard,
+:global(html[data-motion-level="lite"]) .skillIcon {
+  animation: none;
+}
+
+:global(html[data-motion-level="balanced"]) .skillChip:hover,
+:global(html[data-motion-level="lite"]) .skillChip:hover {
+  transform: none;
+}

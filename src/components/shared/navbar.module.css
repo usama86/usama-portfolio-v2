@@ -238,3 +238,38 @@
     opacity: 0;
   }
 }
+
+:global(html[data-motion-level="balanced"]) .scrolled,
+:global(html[data-motion-level="lite"]) .scrolled {
+  backdrop-filter: none;
+}
+
+:global(html[data-motion-level="balanced"]) .desktopNav::before,
+:global(html[data-motion-level="balanced"]) .avatar,
+:global(html[data-motion-level="lite"]) .desktopNav::before,
+:global(html[data-motion-level="lite"]) .avatar,
+:global(html[data-motion-level="lite"]) .resumeButton::after {
+  animation: none;
+}
+
+:global(html[data-motion-level="balanced"]) .desktopNav::before,
+:global(html[data-motion-level="lite"]) .desktopNav::before,
+:global(html[data-motion-level="lite"]) .resumeButton::after {
+  opacity: 0;
+}
+
+:global(html[data-motion-level="balanced"]) .navLink:hover,
+:global(html[data-motion-level="balanced"]) .resumeButton:hover,
+:global(html[data-motion-level="balanced"]) .iconControls :global([data-slot="button"]):hover,
+:global(html[data-motion-level="lite"]) .navLink:hover,
+:global(html[data-motion-level="lite"]) .resumeButton:hover,
+:global(html[data-motion-level="lite"]) .iconControls :global([data-slot="button"]):hover {
+  transform: none;
+}
+
+:global(html[data-motion-level="balanced"]) .resumeButton:hover,
+:global(html[data-motion-level="balanced"]) .iconControls :global([data-slot="button"]):hover,
+:global(html[data-motion-level="lite"]) .resumeButton:hover,
+:global(html[data-motion-level="lite"]) .iconControls :global([data-slot="button"]):hover {
+  box-shadow: none;
+}

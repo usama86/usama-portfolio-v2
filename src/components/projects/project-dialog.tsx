@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { LoomVideo } from "@/components/media/loom-video";
 import { GoogleDriveVideo } from "@/components/media/google-drive-video";
 import { GalleryCarousel } from "@/components/media/gallery-carousel";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 import type { Project } from "./types";
 import { X } from "lucide-react";
 
@@ -28,6 +29,8 @@ export function ProjectDialog({
   project,
   onViewCaseStudy,
 }: Props) {
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
   if (!project) return null;
 
   const links = project.links;
@@ -94,7 +97,10 @@ export function ProjectDialog({
                   size="sm"
                   variant="outline"
                   onClick={() => onViewCaseStudy(project.slug)}
-                  className="rounded-xl border-black/10 bg-white/85 text-foreground shadow-sm transition-all hover:-translate-y-px hover:border-black/20 hover:bg-white hover:shadow-md dark:border-white/15 dark:bg-white/[0.08] dark:hover:border-white/25 dark:hover:bg-white/[0.11]"
+                  className={[
+                    "rounded-xl border-black/10 bg-white/85 text-foreground shadow-sm transition-all hover:border-black/20 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:hover:border-white/25 dark:hover:bg-white/[0.11]",
+                    isFullMotion ? "hover:-translate-y-px hover:shadow-md" : "",
+                  ].join(" ")}
                 >
                   View case study
                 </Button>

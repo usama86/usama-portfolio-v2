@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 
 import { projects } from "@/data/projects";
 import type { Project } from "@/components/projects/types";
@@ -21,7 +22,10 @@ const HOME_SELECTED_LIMIT = 8;
 
 export function ProjectsSection() {
   const router = useRouter();
-  const shouldReduceMotion = useReducedMotion();
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
+  const isBalancedMotion = motionLevel === "balanced";
+  const isLiteMotion = motionLevel === "lite";
 
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState<Project | null>(null);
@@ -51,25 +55,31 @@ export function ProjectsSection() {
 
   const revealEase = [0.22, 1, 0.36, 1] as const;
   const headerVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 12 },
+    hidden: { opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 12 : 0 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: revealEase },
+      transition: {
+        duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.5,
+        ease: revealEase,
+      },
     },
   };
   const cardContainerVariants = {
     hidden: {},
     show: {
-      transition: shouldReduceMotion ? { duration: 0 } : { staggerChildren: 0.08 },
+      transition: isFullMotion ? { staggerChildren: 0.08 } : { duration: 0 },
     },
   };
   const cardVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 16 },
+    hidden: { opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 16 : 0 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.45, ease: revealEase },
+      transition: {
+        duration: isLiteMotion ? 0 : isBalancedMotion ? 0.22 : 0.45,
+        ease: revealEase,
+      },
     },
   };
 

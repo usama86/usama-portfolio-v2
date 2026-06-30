@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { allSocials, primarySocials } from "@/data/socials";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 import { cn } from "@/lib/utils";
 import {
   Tooltip,
@@ -23,6 +24,8 @@ export function SocialChips({
   variant = "all",
   showTooltipValue = false,
 }: Props) {
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
   const list = variant === "primary" ? primarySocials : allSocials;
 
   return (
@@ -34,14 +37,16 @@ export function SocialChips({
 
           const base =
             "inline-flex items-center gap-2 rounded-full border transition-all " +
-            "backdrop-blur supports-[backdrop-filter]:bg-background/40";
+            (isFullMotion
+              ? "backdrop-blur supports-[backdrop-filter]:bg-background/40"
+              : "bg-background/80");
 
           const size = compact ? "px-3 py-1 text-xs" : "px-3.5 py-1.5 text-sm";
 
           const style =
             "border-border/60 bg-muted/40 text-muted-foreground " +
             "hover:bg-muted/60 hover:text-foreground hover:border-border " +
-            "hover:-translate-y-[1px] active:translate-y-0";
+            (isFullMotion ? "hover:-translate-y-[1px] active:translate-y-0" : "");
 
           const content = (
             <>

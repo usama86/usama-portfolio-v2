@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ProjectIcon } from "@/components/projects/project-icon";
 import type { Project } from "@/components/projects/types";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 
 type FilterKey =
   | "all"
@@ -95,6 +96,8 @@ const FILTERS: {
 ];
 
 export default function ProjectsPage() {
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
   const [active, setActive] = React.useState<FilterKey>("all");
   const [query, setQuery] = React.useState("");
   const deferredQuery = React.useDeferredValue(query);
@@ -208,7 +211,10 @@ export default function ProjectsPage() {
           <Link
             key={p.slug}
             href={`/projects/${p.slug}`}
-            className="glass rounded-3xl p-6 hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl"
+            className={[
+              "glass rounded-3xl p-6 hover:border-primary/30 transition-all duration-300",
+              isFullMotion ? "hover:-translate-y-0.5 hover:shadow-2xl" : "",
+            ].join(" ")}
           >
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-3">

@@ -2,14 +2,18 @@
 
 import Image from "next/image";
 import { Building2, ExternalLink } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 import { Badge } from "@/components/ui/badge";
 import { experience } from "@/data/experience";
 import { SectionHeader } from "@/components/shared/section-header";
 import styles from "./work-experience-section.module.css";
 
 export function WorkExperienceSection() {
-  const shouldReduceMotion = useReducedMotion();
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
+  const isBalancedMotion = motionLevel === "balanced";
+  const isLiteMotion = motionLevel === "lite";
 
   return (
     <section
@@ -20,7 +24,10 @@ export function WorkExperienceSection() {
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: shouldReduceMotion ? 0.01 : 0.45, ease: "easeOut" }}
+        transition={{
+          duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.45,
+          ease: "easeOut",
+        }}
       >
         <SectionHeader
           eyebrow="7+ years shipping production software"
@@ -47,12 +54,12 @@ export function WorkExperienceSection() {
               className={`glass rounded-3xl p-6 md:p-7 ${styles.experienceCard} ${
                 isCurrentRole ? styles.currentRole : ""
               }`}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 16 : 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.12 }}
               transition={{
-                duration: shouldReduceMotion ? 0.01 : 0.45,
-                delay: shouldReduceMotion ? 0 : index * 0.1,
+                duration: isLiteMotion ? 0 : isBalancedMotion ? 0.22 : 0.45,
+                delay: isFullMotion ? index * 0.1 : 0,
                 ease: "easeOut",
               }}
             >
@@ -75,7 +82,9 @@ export function WorkExperienceSection() {
                             alt={e.logo.alt}
                             width={48}
                             height={48}
-                            className="h-8 w-8 object-contain transition group-hover:scale-[1.03]"
+                            className={`h-8 w-8 object-contain transition ${
+                              isFullMotion ? "group-hover:scale-[1.03]" : ""
+                            }`}
                           />
                         </a>
                       ) : (

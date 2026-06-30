@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogHeader,
 } from "@/components/ui/dialog";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 
 export type GalleryImage = {
   src: string;
@@ -29,6 +30,8 @@ export function GalleryCarousel({
   sectionTitle = "Screenshots",
   sectionDescription = "Key flows and configuration screens from the production system.",
 }: Props) {
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
   const scrollerRef = React.useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = React.useState(false);
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -133,7 +136,9 @@ export function GalleryCarousel({
                   src={img.src}
                   alt={img.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+                  className={`object-cover transition-transform duration-300 ${
+                    isFullMotion ? "group-hover:scale-[1.015]" : ""
+                  }`}
                 />
               </div>
 

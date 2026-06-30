@@ -114,3 +114,21 @@
     animation: none;
   }
 }
+
+:global(html[data-motion-level="balanced"]) .certificateCard::after,
+:global(html[data-motion-level="balanced"]) .credentialPill,
+:global(html[data-motion-level="lite"]) .certificateCard::after,
+:global(html[data-motion-level="lite"]) .credentialPill {
+  animation: none;
+}
+
+:global(html[data-motion-level="balanced"]) .certificateCard::after,
+:global(html[data-motion-level="lite"]) .certificateCard::after {
+  opacity: 0;
+}
+
+:global(html[data-motion-level="balanced"]) .credentialButton:hover,
+:global(html[data-motion-level="lite"]) .credentialButton:hover {
+  transform: none;
+  box-shadow: none;
+}

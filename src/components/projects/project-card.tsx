@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "./types";
 import { ProjectIcon } from "./project-icon";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 
 type Props = {
   project: Project;
@@ -13,6 +14,8 @@ type Props = {
 };
 
 export function ProjectCard({ project, onOpen, featured, className }: Props) {
+  const motionLevel = useMotionLevel();
+  const isFullMotion = motionLevel === "full";
   const tech = project.technologies ?? [];
   const maxTech = featured ? 8 : 6;
   const shown = tech.slice(0, maxTech);
@@ -22,15 +25,18 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
     <button onClick={onOpen} className="text-left w-full group" type="button">
       <Card
         className={[
-          "relative overflow-hidden glass transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/30 group-hover:shadow-2xl",
+          "relative overflow-hidden glass transition-all duration-300 group-hover:border-primary/30",
+          isFullMotion ? "group-hover:-translate-y-1 group-hover:shadow-2xl" : "",
           "h-full",
           className ?? "",
         ].join(" ")}
       >
         {/* subtle glow */}
-        <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full blur-3xl bg-primary/20" />
-        </div>
+        {isFullMotion ? (
+          <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full blur-3xl bg-primary/20" />
+          </div>
+        ) : null}
 
         <CardContent className="p-5 h-full flex flex-col gap-4">
           <div className="flex items-start gap-4">
