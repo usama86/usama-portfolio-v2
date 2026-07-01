@@ -85,6 +85,13 @@ export const projects: Project[] = [
     links: {
       videoType: "loom",
       videoUrl: "https://www.loom.com/share/aee744adfdc94f9fa7bdb27edf2db95d",
+      webLink: [
+        {
+          id: 101,
+          title: "Website",
+          link: "https://talent-flow-lake.vercel.app/",
+        },
+      ],
     },
     caseStudy: {
       problem: [

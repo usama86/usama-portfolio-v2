@@ -76,7 +76,7 @@ export function ProjectDialog({
             <X className="h-5 w-5" />
           </Button>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
             <div className="space-y-1 min-w-0">
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
                 {project.title}
@@ -91,7 +91,7 @@ export function ProjectDialog({
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 pr-2">
+            <div className="flex flex-wrap items-center gap-2 pr-2 sm:flex-nowrap sm:pr-10">
               {onViewCaseStudy && (
                 <Button
                   size="sm"
