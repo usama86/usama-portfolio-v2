@@ -23,7 +23,7 @@ export function HeroSection() {
   const isBalancedMotion = motionLevel === "balanced";
   const isLiteMotion = motionLevel === "lite";
   const heroHeadline =
-    "Building scalable software, AI-powered products, and immersive web experiences.";
+    "Engineering complex systems, from architecture to production.";
   const heroWords = heroHeadline.split(" ");
   const revealEase = [0.22, 1, 0.36, 1] as const;
   const lift = isFullMotion ? 10 : 0;
@@ -193,8 +193,16 @@ export function HeroSection() {
               variants={itemVariants}
             >
               I&apos;m a Senior Software Engineer specializing in React, Next.js,
-              and TypeScript, with experience building enterprise platforms and
-              full-stack SaaS products. I also founded{" "}
+              TypeScript, and full-stack product development. I design, architect,
+              and deliver production software—from complex frontend applications
+              to backend services, databases, and cloud infrastructure.
+            </motion.p>
+
+            <motion.p
+              className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl"
+              variants={itemVariants}
+            >
+              I also founded{" "}
               <a
                 href="https://archwalk.app"
                 target="_blank"
@@ -203,9 +211,9 @@ export function HeroSection() {
               >
                 ArchWalk
               </a>
-              , an interactive 360° experience platform built with Three.js and
-              FastAPI. Previously, I co-led AI product simulation initiatives at
-              Turing.
+              , an immersive 360° experience platform that I architected and built
+              end to end. Previously, I co-led AI product simulation initiatives
+              at Turing.
             </motion.p>
 
             <motion.div className="flex flex-wrap gap-2" variants={itemVariants}>

@@ -38,7 +38,7 @@ export function WorkExperienceSection() {
 
       <div className={`space-y-4 ${styles.timeline}`}>
         {experience.map((e, index) => {
-          const isCurrentRole = e.company === "Turing";
+          const isCurrentRole = e.timePeriod.endsWith("Present");
           const initials = e.company
             .replace(/\(.*?\)/g, "")
             .trim()
