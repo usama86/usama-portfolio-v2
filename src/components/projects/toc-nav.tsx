@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useMotionLevel } from "@/hooks/use-motion-level";
 import { cn } from "@/lib/utils";
 
 type TocItem = { id: string; label: string };
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export function TocNav({ items, className }: Props) {
+  const motionLevel = useMotionLevel();
   const onClick = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -21,17 +23,23 @@ export function TocNav({ items, className }: Props) {
     history.replaceState(null, "", `#${id}`);
 
     // smooth animated scroll
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.scrollIntoView({
+      behavior: motionLevel === "lite" ? "instant" : "smooth",
+      block: "start",
+    });
   };
 
   return (
-    <nav className={cn("space-y-1", className)}>
+    <nav
+      aria-label="Case study contents"
+      className={cn("space-y-1", className)}
+    >
       {items.map((t) => (
         <a
           key={t.id}
           href={`#${t.id}`}
           onClick={onClick(t.id)}
-          className="block text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg px-2 py-1 hover:bg-muted"
+          className="flex min-h-11 items-center text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg px-2 py-1 hover:bg-muted"
         >
           {t.label}
         </a>

@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
-import { useMotionLevel } from "@/hooks/use-motion-level";
+import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,54 +22,31 @@ const certs = [
 ];
 
 export function CertificatesSection() {
-  const motionLevel = useMotionLevel();
-  const isFullMotion = motionLevel === "full";
-  const isBalancedMotion = motionLevel === "balanced";
-  const isLiteMotion = motionLevel === "lite";
-
   return (
     <section
       id="certificates"
-      className={`scroll-mt-24 space-y-8 ${styles.certificateSection}`}
+      className={`section-shell scroll-mt-24 space-y-8 ${styles.certificateSection}`}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.45,
-          ease: "easeOut",
-        }}
-      >
+      <Reveal>
         <SectionHeader
           eyebrow="Proof"
           title="Certificates"
-          subtitle="Verified proof of credibility, certifications, and professional registration."
+          subtitle="Professional registration and verified technical credentials."
         />
-      </motion.div>
+      </Reveal>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {certs.map((c, index) => (
-          <motion.div
+          <Reveal
             key={c.title}
-            className={`glass rounded-3xl p-6 space-y-3 ${styles.certificateCard}`}
-            style={
-              { "--certificate-delay": `${index}s` } as React.CSSProperties
-            }
-            initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 12 : 0 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.12 }}
-            transition={{
-              duration: isLiteMotion ? 0 : isBalancedMotion ? 0.22 : 0.4,
-              delay: isFullMotion ? index * 0.08 : 0,
-              ease: "easeOut",
-            }}
+            delay={index * 0.045}
+            className={`glass rounded-2xl p-6 space-y-3 ${styles.certificateCard}`}
           >
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <div className="text-lg font-semibold tracking-tight">
+                <h3 className="text-lg font-medium tracking-tight">
                   {c.title}
-                </div>
+                </h3>
                 <div className="text-sm text-muted-foreground">{c.note}</div>
               </div>
               <Badge
@@ -92,7 +68,7 @@ export function CertificatesSection() {
                 </a>
               </Button>
             </div>
-          </motion.div>
+          </Reveal>
         ))}
       </div>
     </section>

@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
-import { useMotionLevel } from "@/hooks/use-motion-level";
+import Link from "next/link";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 
 import { projects } from "@/data/projects";
 import type { Project } from "@/components/projects/types";
@@ -22,17 +23,12 @@ const HOME_SELECTED_LIMIT = 8;
 
 export function ProjectsSection() {
   const router = useRouter();
-  const motionLevel = useMotionLevel();
-  const isFullMotion = motionLevel === "full";
-  const isBalancedMotion = motionLevel === "balanced";
-  const isLiteMotion = motionLevel === "lite";
-
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState<Project | null>(null);
 
   const featured = React.useMemo(
     () => projects.filter((p) => FEATURED_SLUGS.has(p.slug)),
-    []
+    [],
   );
 
   const selected = React.useMemo(
@@ -40,7 +36,7 @@ export function ProjectsSection() {
       projects
         .filter((p) => !FEATURED_SLUGS.has(p.slug))
         .slice(0, HOME_SELECTED_LIMIT),
-    []
+    [],
   );
 
   function openProject(p: Project) {
@@ -53,83 +49,40 @@ export function ProjectsSection() {
     setTimeout(() => setActive(null), 120);
   }
 
-  const revealEase = [0.22, 1, 0.36, 1] as const;
-  const headerVariants = {
-    hidden: { opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 12 : 0 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.5,
-        ease: revealEase,
-      },
-    },
-  };
-  const cardContainerVariants = {
-    hidden: {},
-    show: {
-      transition: isFullMotion ? { staggerChildren: 0.08 } : { duration: 0 },
-    },
-  };
-  const cardVariants = {
-    hidden: { opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 16 : 0 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: isLiteMotion ? 0 : isBalancedMotion ? 0.22 : 0.45,
-        ease: revealEase,
-      },
-    },
-  };
-
   return (
-    <section className={`${styles.projectsSection} space-y-10`} id="projects">
+    <section
+      className={`${styles.projectsSection} section-shell scroll-mt-24 space-y-10`}
+      id="projects"
+    >
       {/* Header */}
-      <motion.div
-        className="space-y-2"
-        variants={headerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-          Projects
-        </h2>
-        <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
-          AI training environments, enterprise SaaS platforms, product
-          simulations, and real production systems built across web, AI, and
-          automation.
-        </p>
-      </motion.div>
+      <Reveal className="space-y-2">
+        <SectionHeader
+          eyebrow="Selected engineering work"
+          title="Projects"
+          subtitle="AI training environments, enterprise SaaS platforms, product simulations, and real production systems built across web, AI, and automation."
+        />
+      </Reveal>
 
       {/* Featured Case Studies */}
       <div className="space-y-4">
         <div className="flex items-end justify-between gap-4">
-          <h3 className="text-lg md:text-xl font-semibold tracking-tight">
+          <h3 className="text-base md:text-lg font-medium tracking-tight">
             Featured case studies
           </h3>
-          <button
-            type="button"
-            onClick={() => router.push("/projects")}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          <Link
+            href="/projects"
+            className="inline-flex min-h-11 shrink-0 items-center text-sm text-primary hover:underline underline-offset-4"
           >
             View all →
-          </button>
+          </Link>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch"
-          variants={cardContainerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
-        >
-          {featured.map((p) => (
-            <motion.div
+        <div className="project-grid items-stretch">
+          {featured.map((p, index) => (
+            <Reveal
               key={p.slug}
+              delay={index * 0.045}
               className={styles.featuredCard}
-              variants={cardVariants}
             >
               <ProjectCard
                 project={p}
@@ -137,43 +90,36 @@ export function ProjectsSection() {
                 onOpen={() => openProject(p)}
                 className="h-full"
               />
-            </motion.div>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Selected Work */}
       <div className="space-y-4">
         <div className="flex items-end justify-between gap-4">
-          <h3 className="text-lg md:text-xl font-semibold tracking-tight">
+          <h3 className="text-base md:text-lg font-medium tracking-tight">
             Selected work
           </h3>
-          <button
-            type="button"
-            onClick={() => router.push("/projects")}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          <Link
+            href="/projects"
+            className="inline-flex min-h-11 shrink-0 items-center text-sm text-primary hover:underline underline-offset-4"
           >
             View all →
-          </button>
+          </Link>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch"
-          variants={cardContainerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {selected.map((p) => (
-            <motion.div
+        <div className="project-grid items-stretch">
+          {selected.map((p, index) => (
+            <Reveal
               key={p.slug}
+              delay={index * 0.045}
               className={styles.selectedCard}
-              variants={cardVariants}
             >
               <ProjectCard project={p} onOpen={() => openProject(p)} />
-            </motion.div>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Dialog */}

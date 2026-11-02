@@ -24,7 +24,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 space-y-3">
+    <section id={id} className="section-shell scroll-mt-24 space-y-4">
       <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
         {title}
       </h2>
@@ -64,7 +64,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
   const cs = project.caseStudy;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pt-10 md:pt-16">
       {/* Back */}
       <div>
         <Button asChild variant="outline" className="rounded-xl">
@@ -92,7 +92,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
               <Badge
                 key={t}
                 variant="outline"
-                className="rounded-full border-border/60 bg-black/10"
+                className="rounded-full border-border/60 bg-secondary/50"
               >
                 {t}
               </Badge>
@@ -197,7 +197,10 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
             </Section>
           ) : null}
 
-          <Section id="highlights" title={project.highlightsTitle ?? "Highlights"}>
+          <Section
+            id="highlights"
+            title={project.highlightsTitle ?? "Highlights"}
+          >
             <ul className="list-disc pl-5 space-y-2">
               {bullets.slice(1).map((b, idx) => (
                 <li key={idx}>{b}</li>

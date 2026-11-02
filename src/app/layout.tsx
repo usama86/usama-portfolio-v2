@@ -26,11 +26,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-3 focus:text-primary-foreground"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
           <MotionLevelAttribute />
           <div className="min-h-screen bg-grid">
             <Navbar />
-            <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
+            <main
+              id="main-content"
+              tabIndex={-1}
+              className="mx-auto w-full max-w-[1248px] px-5 sm:px-8 lg:px-12 pb-8"
+            >
               {children}
             </main>
             <Footer />

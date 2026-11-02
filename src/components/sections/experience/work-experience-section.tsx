@@ -2,39 +2,25 @@
 
 import Image from "next/image";
 import { Building2, ExternalLink } from "lucide-react";
-import { motion } from "motion/react";
-import { useMotionLevel } from "@/hooks/use-motion-level";
+import { Reveal } from "@/components/motion/reveal";
 import { Badge } from "@/components/ui/badge";
 import { experience } from "@/data/experience";
 import { SectionHeader } from "@/components/shared/section-header";
 import styles from "./work-experience-section.module.css";
 
 export function WorkExperienceSection() {
-  const motionLevel = useMotionLevel();
-  const isFullMotion = motionLevel === "full";
-  const isBalancedMotion = motionLevel === "balanced";
-  const isLiteMotion = motionLevel === "lite";
-
   return (
     <section
       id="experience"
-      className={`scroll-mt-24 space-y-8 ${styles.experienceSection}`}
+      className={`section-shell scroll-mt-24 space-y-8 ${styles.experienceSection}`}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.45,
-          ease: "easeOut",
-        }}
-      >
+      <Reveal>
         <SectionHeader
           eyebrow="7+ years shipping production software"
           title="Work experience"
-          subtitle="Impact-focused timeline — highlights that signal senior ownership, architecture, and execution."
+          subtitle="Enterprise platforms, product engineering, and technical ownership across my professional work."
         />
-      </motion.div>
+      </Reveal>
 
       <div className={`space-y-4 ${styles.timeline}`}>
         {experience.map((e, index) => {
@@ -49,19 +35,12 @@ export function WorkExperienceSection() {
             .join("");
 
           return (
-            <motion.div
+            <Reveal
               key={`${e.company}-${e.timePeriod}`}
-              className={`glass rounded-3xl p-6 md:p-7 ${styles.experienceCard} ${
+              delay={index * 0.035}
+              className={`glass rounded-2xl p-6 md:p-7 ${styles.experienceCard} ${
                 isCurrentRole ? styles.currentRole : ""
               }`}
-              initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 16 : 0 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.12 }}
-              transition={{
-                duration: isLiteMotion ? 0 : isBalancedMotion ? 0.22 : 0.45,
-                delay: isFullMotion ? index * 0.1 : 0,
-                ease: "easeOut",
-              }}
             >
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                 <div className="flex items-start gap-4">
@@ -73,7 +52,7 @@ export function WorkExperienceSection() {
                           target="_blank"
                           rel="noreferrer"
                           aria-label={`${e.company} website`}
-                          className={`group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-black/10 transition hover:border-primary/50 hover:bg-black/15 ${
+                          className={`group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-secondary/50 transition hover:border-primary/50 hover:bg-accent ${
                             isCurrentRole ? styles.currentRoleIcon : ""
                           }`}
                         >
@@ -82,14 +61,12 @@ export function WorkExperienceSection() {
                             alt={e.logo.alt}
                             width={48}
                             height={48}
-                            className={`h-8 w-8 object-contain transition ${
-                              isFullMotion ? "group-hover:scale-[1.03]" : ""
-                            }`}
+                            className="h-8 w-8 object-contain"
                           />
                         </a>
                       ) : (
                         <div
-                          className={`flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-black/10 ${
+                          className={`flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-secondary/50 ${
                             isCurrentRole ? styles.currentRoleIcon : ""
                           }`}
                         >
@@ -104,7 +81,7 @@ export function WorkExperienceSection() {
                       )
                     ) : (
                       <div
-                        className={`flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-black/10 text-xs font-semibold text-muted-foreground ${
+                        className={`flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-secondary/50 text-xs font-semibold text-muted-foreground ${
                           isCurrentRole ? styles.currentRoleIcon : ""
                         }`}
                       >
@@ -114,9 +91,9 @@ export function WorkExperienceSection() {
                   </div>
 
                   <div className="space-y-1">
-                    <div className="text-lg font-semibold tracking-tight">
+                    <h3 className="text-lg font-medium tracking-tight">
                       {e.title}
-                    </div>
+                    </h3>
                     <div className="text-sm text-muted-foreground">
                       {e.companyUrl ? (
                         <a
@@ -139,11 +116,19 @@ export function WorkExperienceSection() {
                   <Badge variant="secondary" className="rounded-full w-fit">
                     {e.timePeriod}
                   </Badge>
+                  {isCurrentRole ? (
+                    <Badge
+                      variant="outline"
+                      className="rounded-full border-primary/40 text-primary"
+                    >
+                      Current
+                    </Badge>
+                  ) : null}
                   {e.credentialUrl ? (
                     <Badge
                       asChild
                       variant="outline"
-                      className="rounded-full border-border/60 bg-black/10"
+                      className="rounded-full border-border/60 bg-secondary/50"
                     >
                       <a
                         href={e.credentialUrl}
@@ -183,14 +168,14 @@ export function WorkExperienceSection() {
                     <Badge
                       key={t}
                       variant="outline"
-                      className="rounded-full border-border/60 bg-black/10"
+                      className="rounded-full border-border/60 bg-secondary/50"
                     >
                       {t}
                     </Badge>
                   ))}
                 </div>
               ) : null}
-            </motion.div>
+            </Reveal>
           );
         })}
       </div>

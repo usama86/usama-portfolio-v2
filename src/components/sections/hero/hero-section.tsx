@@ -1,352 +1,81 @@
 "use client";
 
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SocialChips } from "@/components/shared/social-chips";
-import { YouTubeEmbed } from "@/components/media/youtube-embed";
-import { useMotionLevel } from "@/hooks/use-motion-level";
-import { motion } from "motion/react";
+import { IntroVideoDialog } from "@/components/media/intro-video-dialog";
 import styles from "./hero-section.module.css";
 
-// const INTRO_SHORT_URL =. (OLD ONE)
-//   "https://youtube.com/shorts/8iUjJhpUKEE?si=nIhtEEkv6_GUHC3u";
-
-const INTRO_SHORT_URL =
-  "https://www.youtube.com/shorts/CtqX_YgKrF4?feature=shared";
-
-
-  
-
 export function HeroSection() {
-  const motionLevel = useMotionLevel();
-  const isFullMotion = motionLevel === "full";
-  const isBalancedMotion = motionLevel === "balanced";
-  const isLiteMotion = motionLevel === "lite";
-  const heroHeadline =
-    "Engineering complex systems, from architecture to production.";
-  const heroWords = heroHeadline.split(" ");
-  const revealEase = [0.22, 1, 0.36, 1] as const;
-  const lift = isFullMotion ? 10 : 0;
-
-  const cardVariants = {
-    hidden: { opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 16 : 0 },
-    show: {
-      opacity: 1,
-      y: 0,
-      boxShadow: isFullMotion
-        ? [
-            "0 24px 80px rgba(0, 0, 0, 0.05)",
-            "0 30px 100px rgba(0, 0, 0, 0.09)",
-            "0 24px 80px rgba(0, 0, 0, 0.05)",
-          ]
-        : "0 24px 80px rgba(0, 0, 0, 0.05)",
-      transition: {
-        opacity: {
-          duration: isLiteMotion ? 0 : isBalancedMotion ? 0.3 : 0.7,
-          ease: revealEase,
-        },
-        y: { duration: isFullMotion ? 0.7 : 0, ease: revealEase },
-        boxShadow: isFullMotion
-          ? { duration: 12, repeat: Infinity, ease: "easeInOut" as const }
-          : { duration: 0 },
-      },
-    },
-  };
-
-  const containerVariants = {
-    hidden: {},
-    show: {
-      transition: isFullMotion
-        ? { staggerChildren: 0.07, delayChildren: 0.08 }
-        : { duration: 0 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: isLiteMotion ? 1 : 0, y: lift },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.45,
-        ease: revealEase,
-      },
-    },
-  };
-
-  const wordVariants = {
-    hidden: {
-      opacity: 0,
-      y: 8,
-      filter: "blur(2px)",
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.4, ease: revealEase },
-    },
-  };
-
   return (
-    <section className="py-6 sm:py-8 md:py-6">
-      <motion.div
-        className={`${styles.heroCard} glass rounded-[1.75rem] p-5 sm:p-6 md:p-10 relative overflow-hidden`}
-        variants={cardVariants}
-        initial="hidden"
-        animate="show"
+    <section aria-labelledby="hero-title" className={styles.hero}>
+      <div
+        className={`${styles.part} ${styles.eyebrow}`}
+        style={{ "--entrance-order": 0 } as React.CSSProperties}
       >
-        {/* glow blobs */}
-        {isFullMotion ? (
-          <>
-            <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full blur-3xl bg-primary/20" />
-            <div className="pointer-events-none absolute -bottom-28 -left-28 h-72 w-72 rounded-full blur-3xl bg-primary/15" />
-          </>
-        ) : null}
-        {!isLiteMotion ? (
-          <motion.div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(113, 113, 122, 0.32) 1px, transparent 1px), linear-gradient(90deg, rgba(113, 113, 122, 0.32) 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-              maskImage:
-                "linear-gradient(to right, transparent 0%, transparent 34%, black 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, transparent 34%, black 100%)",
-              opacity: isBalancedMotion ? 0.035 : undefined,
-            }}
-            animate={
-              isFullMotion
-                ? {
-                    opacity: [0.035, 0.06, 0.035],
-                    backgroundPosition: ["0px 0px", "36px 28px", "0px 0px"],
-                  }
-                : undefined
-            }
-            transition={
-              isFullMotion
-                ? { duration: 18, repeat: Infinity, ease: "easeInOut" }
-                : undefined
-            }
-          />
-        ) : null}
-
-        <motion.div
-          className={`${styles.heroContent} relative grid gap-7 md:grid-cols-[1fr_260px] lg:grid-cols-[1fr_280px] md:items-start`}
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-        >
-          {/* Row 1: Engineering experience (left) + Quick Intro header (right) */}
-          <motion.div
-            className="flex min-w-0 items-start justify-between gap-4 md:col-span-2 md:items-center"
-            variants={itemVariants}
+        <span className={styles.status} aria-hidden="true" />
+        Senior Software Engineer{" "}
+        <span className="text-muted-foreground">· 7+ Years</span>
+      </div>
+      <h1
+        id="hero-title"
+        className={`${styles.headline} ${styles.part}`}
+        style={{ "--entrance-order": 1 } as React.CSSProperties}
+      >
+        Engineering complex systems,{" "}
+        <span>from architecture to production.</span>
+      </h1>
+      <div
+        className={`${styles.introduction} ${styles.part}`}
+        style={{ "--entrance-order": 2 } as React.CSSProperties}
+      >
+        <p>
+          I&apos;m a Senior Software Engineer specializing in React, Next.js,
+          TypeScript, and full-stack product development. I design, architect,
+          and deliver production software—from complex frontend applications to
+          backend services, databases, and cloud infrastructure.
+        </p>
+        <p>
+          I also founded{" "}
+          <a
+            href="https://archwalk.app"
+            target="_blank"
+            rel="noreferrer"
+            className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary"
           >
-            <div
-              className="flex w-full min-w-0 flex-col items-start gap-0.5 rounded-2xl border border-border/60 bg-muted/40 px-4 py-3 text-sm text-muted-foreground sm:inline-flex sm:w-fit sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:px-3 sm:py-1"
-            >
-              <span className="font-medium text-primary">
-                Senior Software Engineer
-              </span>
-              <span className="hidden sm:inline" aria-hidden="true">
-                ·
-              </span>
-              <span className="max-w-full leading-snug">7+ Years</span>
-            </div>
-
-            <div className="hidden md:flex items-center gap-3">
-              <div className="text-sm font-medium">Quick intro</div>
-              <a
-                href={INTRO_SHORT_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Open on YouTube
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Row 2: Main content (left) */}
-          <motion.div className="space-y-5" variants={containerVariants}>
-            <motion.h1
-              className="max-w-3xl text-[2.15rem] font-semibold leading-[1.12] tracking-tight sm:text-4xl md:text-5xl md:leading-tight"
-              variants={isFullMotion ? containerVariants : itemVariants}
-            >
-              {isFullMotion
-                ? heroWords.map((word, index) => (
-                    <motion.span
-                      key={`${word}-${index}`}
-                      className="inline-block mr-[0.24em]"
-                      variants={wordVariants}
-                    >
-                      {word}
-                    </motion.span>
-                  ))
-                : heroHeadline}
-            </motion.h1>
-
-            <motion.p
-              className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl"
-              variants={itemVariants}
-            >
-              I&apos;m a Senior Software Engineer specializing in React, Next.js,
-              TypeScript, and full-stack product development. I design, architect,
-              and deliver production software—from complex frontend applications
-              to backend services, databases, and cloud infrastructure.
-            </motion.p>
-
-            <motion.p
-              className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl"
-              variants={itemVariants}
-            >
-              I also founded{" "}
-              <a
-                href="https://archwalk.app"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium text-foreground/90 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-              >
-                ArchWalk
-              </a>
-              , an immersive 360° experience platform that I architected and built
-              end to end. Previously, I co-led AI product simulation initiatives
-              at Turing.
-            </motion.p>
-
-            <motion.div className="flex flex-wrap gap-2" variants={itemVariants}>
-              {[
-                "React",
-                "Next.js",
-                "TypeScript",
-                "FastAPI",
-                "Three.js",
-                "SaaS",
-              ].map((t) => (
-                <motion.div
-                  key={t}
-                  whileHover={isFullMotion ? { y: -1 } : undefined}
-                  transition={
-                    isFullMotion
-                      ? { duration: 0.18, ease: "easeOut" }
-                      : undefined
-                  }
-                >
-                  <Badge
-                    variant="outline"
-                    className="rounded-full border-border/60 bg-black/10 transition-colors hover:bg-black/15"
-                  >
-                    {t}
-                  </Badge>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              className="grid grid-cols-1 items-center gap-3 pt-2 min-[420px]:grid-cols-[auto_auto] sm:flex sm:flex-wrap"
-              variants={itemVariants}
-            >
-              <motion.div
-                whileHover={isFullMotion ? { y: -2 } : undefined}
-                transition={
-                  isFullMotion
-                    ? { duration: 0.18, ease: "easeOut" }
-                    : undefined
-                }
-              >
-                <Button
-                  asChild
-                  className="w-full rounded-xl min-[420px]:w-auto"
-                >
-                  <a href="#projects">View Projects</a>
-                </Button>
-              </motion.div>
-
-              <motion.div
-                whileHover={isFullMotion ? { y: -2 } : undefined}
-                transition={
-                  isFullMotion
-                    ? { duration: 0.18, ease: "easeOut" }
-                    : undefined
-                }
-              >
-                <Button
-                  asChild
-                  variant="secondary"
-                  className="w-full rounded-xl min-[420px]:w-auto"
-                >
-                  <a href="#contact">Get in Touch</a>
-                </Button>
-              </motion.div>
-            </motion.div>
-
-            <motion.p
-              className="text-sm text-muted-foreground leading-relaxed"
-              variants={itemVariants}
-            >
-              Based in Pakistan · Open to global remote roles and relocation
-              opportunities.
-            </motion.p>
-
-            <motion.div variants={itemVariants}>
-              <SocialChips
-                className="pt-2"
-                compact
-                variant="primary"
-                showTooltipValue
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Row 2: Video (right) */}
-          <motion.div
-            className="mx-auto w-full max-w-[min(280px,100%)] md:mx-0 md:max-w-[260px] md:justify-self-end lg:max-w-[280px]"
-            variants={itemVariants}
-            animate={
-              isFullMotion
-                ? {
-                    y: [0, -5, 0],
-                    transition: {
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    },
-                  }
-                : undefined
-            }
-            whileHover={
-              isFullMotion
-                ? { y: -2, boxShadow: "0 18px 40px rgba(0, 0, 0, 0.12)" }
-                : undefined
-            }
-          >
-            {/* Mobile header for intro */}
-            <div className="flex items-center justify-between md:hidden mb-3">
-              <div className="text-sm font-medium">Quick intro</div>
-              <a
-                href={INTRO_SHORT_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Open on YouTube
-              </a>
-            </div>
-
-            <YouTubeEmbed
-              urlOrId={INTRO_SHORT_URL}
-              aspect="9/16"
-              title="Muhammad Usama — Intro"
-            />
-
-            <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
-              73s overview of what I build + how I work.
-            </p>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+            ArchWalk
+          </a>
+          , an immersive 360° experience platform that I architected and built
+          end to end. Previously, I co-led AI product simulation initiatives at
+          Turing.
+        </p>
+      </div>
+      <div
+        className={`${styles.actions} ${styles.part}`}
+        style={{ "--entrance-order": 3 } as React.CSSProperties}
+      >
+        <Button asChild size="lg" className="rounded-xl">
+          <a href="#projects">
+            View Projects <ArrowDown aria-hidden="true" />
+          </a>
+        </Button>
+        <Button asChild size="lg" variant="outline" className="rounded-xl">
+          <a href="#contact">
+            Get in Touch <ArrowUpRight aria-hidden="true" />
+          </a>
+        </Button>
+        <IntroVideoDialog />
+      </div>
+      <div
+        className={`${styles.bottom} ${styles.part}`}
+        style={{ "--entrance-order": 4 } as React.CSSProperties}
+      >
+        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+          Based in Pakistan · Open to global remote roles and relocation
+          opportunities.
+        </p>
+        <SocialChips compact variant="primary" showTooltipValue />
+      </div>
     </section>
   );
 }

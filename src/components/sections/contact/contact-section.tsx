@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
-import { useMotionLevel } from "@/hooks/use-motion-level";
+import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,45 +8,22 @@ import { Textarea } from "@/components/ui/textarea";
 import styles from "./contact-section.module.css";
 
 export function ContactSection() {
-  const motionLevel = useMotionLevel();
-  const isFullMotion = motionLevel === "full";
-  const isBalancedMotion = motionLevel === "balanced";
-  const isLiteMotion = motionLevel === "lite";
-  const revealEase = [0.22, 1, 0.36, 1] as const;
-
   return (
     <section
       id="contact"
-      className={`scroll-mt-24 space-y-8 ${styles.contactSection}`}
+      className={`section-shell scroll-mt-24 space-y-8 ${styles.contactSection}`}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.5,
-          ease: revealEase,
-        }}
-      >
+      <Reveal>
         <SectionHeader
           eyebrow="Let’s build"
           title="Contact"
           subtitle="Hiring for your engineering team or have a product in mind? Let’s talk."
         />
-      </motion.div>
+      </Reveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_.8fr] gap-4 items-start">
         {/* Form -> mailto (simple, no backend) */}
-        <motion.div
-          className={`glass rounded-3xl p-6 md:p-7 ${styles.formCard}`}
-          initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 18 : 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.12 }}
-          transition={{
-            duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.65,
-            ease: revealEase,
-          }}
-        >
+        <Reveal className={`glass rounded-2xl p-6 md:p-7 ${styles.formCard}`}>
           <form
             className="space-y-3"
             action="mailto:usama.amjad32@gmail.com"
@@ -57,11 +33,13 @@ export function ContactSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <Input
                 name="name"
+                aria-label="Your name"
                 placeholder="Your name"
                 className={styles.contactField}
               />
               <Input
                 name="email"
+                aria-label="Email"
                 placeholder="Email"
                 type="email"
                 className={styles.contactField}
@@ -69,11 +47,13 @@ export function ContactSection() {
             </div>
             <Input
               name="subject"
+              aria-label="Subject"
               placeholder="Subject (e.g. SaaS dashboard, AI voice agent…)"
               className={styles.contactField}
             />
             <Textarea
               name="message"
+              aria-label="Message"
               placeholder="Message"
               className={styles.contactField}
             />
@@ -94,23 +74,15 @@ export function ContactSection() {
               </Button>
             </div>
           </form>
-        </motion.div>
+        </Reveal>
 
         {/* CTA card */}
-        <motion.div
-          className={`glass rounded-3xl p-6 md:p-7 space-y-3 ${styles.infoCard}`}
-          initial={{ opacity: isLiteMotion ? 1 : 0, y: isFullMotion ? 18 : 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.12 }}
-          transition={{
-            duration: isLiteMotion ? 0 : isBalancedMotion ? 0.25 : 0.65,
-            delay: isFullMotion ? 0.1 : 0,
-            ease: revealEase,
-          }}
+        <Reveal
+          className={`glass rounded-2xl p-6 md:p-7 space-y-3 ${styles.infoCard}`}
         >
-          <div className="text-lg font-semibold tracking-tight">
+          <h3 className="text-xl font-medium tracking-tight">
             Let’s talk engineering
-          </div>
+          </h3>
           <p className="text-sm text-muted-foreground leading-relaxed">
             I’m open to senior frontend, software, full-stack, and product
             engineering roles, including global remote and relocation
@@ -143,7 +115,7 @@ export function ContactSection() {
               (Remote)
             </div>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

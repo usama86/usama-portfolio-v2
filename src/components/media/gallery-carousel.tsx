@@ -10,6 +10,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogHeader,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { useMotionLevel } from "@/hooks/use-motion-level";
 
@@ -39,7 +40,10 @@ export function GalleryCarousel({
   const active = images[activeIndex];
 
   function scrollBy(delta: number) {
-    scrollerRef.current?.scrollBy({ left: delta, behavior: "smooth" });
+    scrollerRef.current?.scrollBy({
+      left: delta,
+      behavior: motionLevel === "lite" ? "instant" : "smooth",
+    });
   }
 
   function openAt(idx: number) {
@@ -171,6 +175,10 @@ export function GalleryCarousel({
         <DialogContent fullscreen className="bg-black/95 p-0 border-0">
           <DialogHeader className="sr-only">
             <DialogTitle>{active?.title ?? "Gallery"}</DialogTitle>
+            <DialogDescription>
+              Project screenshots. Use arrow keys to navigate and Escape to
+              close.
+            </DialogDescription>
           </DialogHeader>
 
           <div className="relative w-full h-full">

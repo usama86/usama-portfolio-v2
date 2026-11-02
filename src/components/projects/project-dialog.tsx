@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
@@ -58,11 +59,12 @@ export function ProjectDialog({
       >
         <DialogHeader className="sr-only">
           <DialogTitle>{project.title}</DialogTitle>
+          <DialogDescription>
+            Project details, technologies, and media.
+          </DialogDescription>
         </DialogHeader>
         {/* Header remains outside the scroll container so body content cannot bleed behind it. */}
-        <div
-          className="relative z-20 shrink-0 rounded-t-lg bg-background px-6 py-4 pr-14 border-b border-border/60"
-        >
+        <div className="relative z-20 shrink-0 rounded-t-lg bg-background px-6 py-4 pr-14 border-b border-border/60">
           <Button
             type="button"
             size="icon"
@@ -98,8 +100,8 @@ export function ProjectDialog({
                   variant="outline"
                   onClick={() => onViewCaseStudy(project.slug)}
                   className={[
-                    "rounded-xl border-black/10 bg-white/85 text-foreground shadow-sm transition-all hover:border-black/20 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:hover:border-white/25 dark:hover:bg-white/[0.11]",
-                    isFullMotion ? "hover:-translate-y-px hover:shadow-md" : "",
+                    "rounded-xl border-border bg-secondary text-foreground hover:border-primary/40 hover:bg-accent",
+                    isFullMotion ? "hover:-translate-y-px" : "",
                   ].join(" ")}
                 >
                   View case study

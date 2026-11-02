@@ -11,7 +11,10 @@ type ProjectVideoEmbedProps = {
   className?: string;
 };
 
-const providerLabel: Record<NonNullable<ProjectVideoEmbedProps["provider"]>, string> = {
+const providerLabel: Record<
+  NonNullable<ProjectVideoEmbedProps["provider"]>,
+  string
+> = {
   loom: "Loom walkthrough",
   "google-drive": "Video walkthrough",
   external: "Project video",
@@ -38,7 +41,7 @@ export function ProjectVideoEmbed({
       ].join(" ")}
     >
       {!loaded ? (
-        <div className="absolute inset-0 z-10 grid place-items-center bg-[linear-gradient(110deg,hsl(var(--muted)),hsl(var(--background)),hsl(var(--muted)))] bg-[length:220%_100%] animate-pulse motion-reduce:animate-none">
+        <div className="absolute inset-0 z-10 grid place-items-center bg-muted">
           <div className="flex flex-col items-center gap-2 text-center text-muted-foreground">
             <LoaderCircle className="h-5 w-5 animate-spin motion-reduce:animate-none" />
             <div className="space-y-0.5">

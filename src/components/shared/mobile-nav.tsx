@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Menu, ExternalLink } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +11,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetDescription,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
@@ -41,17 +42,31 @@ export function MobileNav({ onNavigate }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
   const nav = isHome ? HOME_NAV : INNER_NAV;
 
   function handleNavClick(href: string) {
     setOpen(false);
-    // Wait a tick so Sheet closes before scroll
-    setTimeout(() => {
-      const el = document.querySelector(href);
-      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!href.startsWith("#")) {
+      router.push(href);
       onNavigate?.();
-    }, 50);
+      return;
+    }
+    // Let the sheet release its scroll lock before moving to the section.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = document.querySelector(href);
+        const lite =
+          document.documentElement.dataset.motionLevel === "lite" ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        el?.scrollIntoView({
+          behavior: lite ? "instant" : "smooth",
+          block: "start",
+        });
+        onNavigate?.();
+      });
+    });
   }
 
   return (
@@ -60,30 +75,36 @@ export function MobileNav({ onNavigate }: Props) {
         <Button
           variant="outline"
           size="icon"
-          className="rounded-xl md:hidden"
+          className="rounded-xl lg:hidden"
           aria-label="Open menu"
         >
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
 
-      <SheetContent side="right" className="w-[320px] sm:w-[360px]">
+      <SheetContent
+        side="right"
+        className="w-[min(360px,100vw)] max-w-full overflow-y-auto p-5"
+      >
         <SheetHeader>
           <SheetTitle className="text-left">
             Muhammad Usama
-            <div className="text-xs text-muted-foreground font-normal mt-1">
+            <span className="block text-xs text-muted-foreground font-normal mt-1">
               Senior Software Engineer
-            </div>
+            </span>
           </SheetTitle>
+          <SheetDescription className="sr-only">
+            Portfolio navigation and professional links.
+          </SheetDescription>
         </SheetHeader>
 
-        <div className="mt-6 space-y-2">
+        <div className="mt-3 space-y-2">
           {nav.map((i) => (
             <button
               key={i.href}
               type="button"
               onClick={() => handleNavClick(i.href)}
-              className="w-full text-left rounded-xl px-3 py-2 text-sm hover:bg-muted transition-colors"
+              className="min-h-11 w-full text-left rounded-xl px-3 py-2 text-sm hover:bg-muted transition-colors"
             >
               {i.label}
             </button>

@@ -1,231 +1,61 @@
 .experienceSection {
   position: relative;
 }
-
 .timeline {
   position: relative;
-  isolation: isolate;
+  padding-left: 1.5rem;
 }
-
-/* The rail stays in the icon column, keeping the moving light away from copy. */
 .timeline::before {
+  content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 1.5rem;
-  z-index: 0;
+  left: 0.25rem;
+  top: 1.75rem;
+  bottom: 1.75rem;
   width: 1px;
-  content: "";
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--border);
 }
-
-.timeline::after {
-  position: absolute;
-  top: 0;
-  left: calc(1.5rem - 1px);
-  z-index: 1;
-  width: 3px;
-  height: 88px;
-  content: "";
-  pointer-events: none;
-  opacity: 0;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.18);
-  box-shadow: 0 0 18px 5px rgba(0, 0, 0, 0.08);
-  filter: blur(1px);
-  transform: translateY(-96px);
-  animation: timeline-progress 8.5s ease-in-out infinite;
-}
-
 .experienceCard {
   position: relative;
-  z-index: 2;
-  transition:
-    transform 300ms ease,
-    border-color 300ms ease,
-    box-shadow 300ms ease;
+  transition: border-color var(--motion-fast);
 }
-
-.experienceCard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 0, 0, 0.16);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
-}
-
-.currentRole {
-  overflow: hidden;
-}
-
-.currentRole::after {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.experienceCard::before {
   content: "";
-  pointer-events: none;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: inherit;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.025);
-  animation: current-role-pulse 6s ease-in-out infinite;
+  position: absolute;
+  top: 2rem;
+  left: -1.55rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid var(--background);
+  outline: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--muted-foreground);
 }
-
-.currentRole > * {
-  position: relative;
-  z-index: 1;
+.currentRole {
+  border-color: color-mix(in oklch, var(--primary) 45%, var(--border));
+  background: linear-gradient(
+    110deg,
+    color-mix(in oklch, var(--primary) 4%, var(--card)),
+    var(--card)
+  );
 }
-
+.currentRole::before {
+  background: var(--primary);
+  outline-color: var(--primary);
+}
 .currentRoleIcon {
-  animation: current-role-icon-breathe 5s ease-in-out infinite;
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
 }
-
-:global(.dark) .timeline::before {
-  background: rgba(255, 255, 255, 0.1);
+.experienceCard:hover {
+  border-color: color-mix(in oklch, var(--primary) 45%, var(--border));
 }
-
-:global(.dark) .timeline::after {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 18px 5px rgba(255, 255, 255, 0.1);
-}
-
-:global(.dark) .experienceCard:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
-}
-
-:global(.dark) .currentRole::after {
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.035);
-}
-
-@keyframes timeline-progress {
-  0%,
-  12% {
-    opacity: 0;
-    transform: translateY(-96px);
+@media (max-width: 389px) {
+  .timeline {
+    padding-left: 1rem;
   }
-
-  25%,
-  70% {
-    opacity: 0.8;
+  .experienceCard {
+    padding: 1.1rem;
   }
-
-  88%,
-  100% {
-    opacity: 0;
-    transform: translateY(calc(100% + 96px));
+  .experienceCard::before {
+    left: -1.05rem;
   }
-}
-
-@keyframes current-role-pulse {
-  0%,
-  100% {
-    border-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.025);
-  }
-
-  50% {
-    border-color: rgba(0, 0, 0, 0.16);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-  }
-}
-
-@keyframes current-role-icon-breathe {
-  0%,
-  100% {
-    opacity: 0.9;
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.025);
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
-  }
-}
-
-:global(.dark) .currentRole::after {
-  animation-name: current-role-pulse-dark;
-}
-
-:global(.dark) .currentRoleIcon {
-  animation-name: current-role-icon-breathe-dark;
-}
-
-@keyframes current-role-pulse-dark {
-  0%,
-  100% {
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.035);
-  }
-
-  50% {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.07);
-  }
-}
-
-@keyframes current-role-icon-breathe-dark {
-  0%,
-  100% {
-    opacity: 0.9;
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.025);
-    box-shadow: 0 5px 14px rgba(255, 255, 255, 0.1);
-  }
-}
-
-@media (min-width: 768px) {
-  .timeline::before {
-    left: 1.75rem;
-  }
-
-  .timeline::after {
-    left: calc(1.75rem - 1px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .timeline::after,
-  .currentRole::after,
-  .currentRoleIcon {
-    animation: none;
-  }
-
-  .timeline::after {
-    opacity: 0;
-  }
-
-  .currentRole::after {
-    border-color: rgba(0, 0, 0, 0.1);
-  }
-
-  :global(.dark) .currentRole::after {
-    border-color: rgba(255, 255, 255, 0.12);
-  }
-}
-
-:global(html[data-motion-level="balanced"]) .timeline::after,
-:global(html[data-motion-level="balanced"]) .currentRole::after,
-:global(html[data-motion-level="balanced"]) .currentRoleIcon,
-:global(html[data-motion-level="lite"]) .timeline::after,
-:global(html[data-motion-level="lite"]) .currentRole::after,
-:global(html[data-motion-level="lite"]) .currentRoleIcon {
-  animation: none;
-}
-
-:global(html[data-motion-level="balanced"]) .timeline::after,
-:global(html[data-motion-level="lite"]) .timeline::after {
-  filter: none;
-  opacity: 0;
-}
-
-:global(html[data-motion-level="balanced"]) .experienceCard:hover,
-:global(html[data-motion-level="lite"]) .experienceCard:hover {
-  transform: none;
-  box-shadow: none;
 }

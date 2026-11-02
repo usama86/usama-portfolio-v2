@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ProjectIcon } from "@/components/projects/project-icon";
 import type { Project } from "@/components/projects/types";
-import { useMotionLevel } from "@/hooks/use-motion-level";
 
 type FilterKey =
   | "all"
@@ -96,13 +95,9 @@ const FILTERS: {
 ];
 
 export default function ProjectsPage() {
-  const motionLevel = useMotionLevel();
-  const isFullMotion = motionLevel === "full";
   const [active, setActive] = React.useState<FilterKey>("all");
   const [query, setQuery] = React.useState("");
   const deferredQuery = React.useDeferredValue(query);
-
-  const [fading, setFading] = React.useState(false);
 
   const filtered = React.useMemo(() => {
     const f = FILTERS.find((x) => x.key === active) ?? FILTERS[0];
@@ -125,15 +120,8 @@ export default function ProjectsPage() {
     });
   }, [active, deferredQuery]);
 
-  // Smooth fade transition on filter/search change (no remount blink)
-  React.useEffect(() => {
-    setFading(true);
-    const t = setTimeout(() => setFading(false), 450); // slower
-    return () => clearTimeout(t);
-  }, [active, deferredQuery]);
-
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pt-10 md:pt-16">
       {/* Header */}
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-3">
@@ -157,6 +145,7 @@ export default function ProjectsPage() {
               <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                aria-label="Search projects"
                 placeholder="Search projects (e.g. Next.js, FastAPI, React Native, SaaS...)"
               />
             </div>
@@ -182,6 +171,7 @@ export default function ProjectsPage() {
                   size="sm"
                   variant={isActive ? "default" : "outline"}
                   className="rounded-full"
+                  aria-pressed={isActive}
                   onClick={() => setActive(f.key)}
                 >
                   {f.label}
@@ -203,8 +193,6 @@ export default function ProjectsPage() {
       <div
         className={[
           "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4",
-          "transition-opacity duration-500 ease-in-out",
-          fading ? "opacity-40" : "opacity-100",
         ].join(" ")}
       >
         {filtered.map((p) => (
@@ -212,8 +200,7 @@ export default function ProjectsPage() {
             key={p.slug}
             href={`/projects/${p.slug}`}
             className={[
-              "glass rounded-3xl p-6 hover:border-primary/30 transition-all duration-300",
-              isFullMotion ? "hover:-translate-y-0.5 hover:shadow-2xl" : "",
+              "glass interactive-surface rounded-2xl p-6 hover:border-primary/40",
             ].join(" ")}
           >
             <div className="space-y-3">
@@ -223,7 +210,7 @@ export default function ProjectsPage() {
 
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h2 className="text-base md:text-lg font-semibold tracking-tight truncate">
+                      <h2 className="text-lg font-medium leading-snug tracking-tight">
                         {p.title}
                       </h2>
 
@@ -251,7 +238,7 @@ export default function ProjectsPage() {
                     <Badge
                       key={t}
                       variant="outline"
-                      className="rounded-full border-border/60 bg-black/10"
+                      className="rounded-full border-border/60 bg-secondary/50"
                     >
                       {t}
                     </Badge>

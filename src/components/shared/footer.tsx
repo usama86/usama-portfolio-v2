@@ -1,13 +1,14 @@
+import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { SocialChips } from "@/components/shared/social-chips";
 import styles from "./footer.module.css";
 
 export function Footer() {
   return (
-    <footer className={`mt-16 pb-10 ${styles.footer}`}>
+    <footer className={`mt-24 pb-10 ${styles.footer}`}>
       <Separator className="opacity-60" />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-8 space-y-4">
+      <div className="mx-auto max-w-[1248px] px-5 sm:px-8 lg:px-12 pt-8 space-y-4">
         {/* Row 1: text + nav */}
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="text-sm text-muted-foreground max-w-2xl">
@@ -16,18 +17,18 @@ export function Footer() {
           </div>
 
           <nav className="flex items-center gap-4 text-sm">
-            <a
+            <Link
               className={`text-muted-foreground hover:text-foreground transition-colors ${styles.footerLink}`}
-              href="#projects"
+              href="/#projects"
             >
               Projects
-            </a>
-            <a
+            </Link>
+            <Link
               className={`text-muted-foreground hover:text-foreground transition-colors ${styles.footerLink}`}
-              href="#contact"
+              href="/#contact"
             >
               Contact
-            </a>
+            </Link>
             <a
               className={`text-muted-foreground hover:text-foreground transition-colors ${styles.footerLink}`}
               href="/resume.pdf"

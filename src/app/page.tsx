@@ -7,10 +7,10 @@ import { ContactSection } from "@/components/sections/contact/contact-section";
 
 export default function Page() {
   return (
-    <div className="space-y-14">
+    <div className="space-y-20 md:space-y-28">
       <HeroSection />
 
-      <div id="projects" className="scroll-mt-24">
+      <div className="scroll-mt-24">
         <ProjectsSection />
       </div>
 

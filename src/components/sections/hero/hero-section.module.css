@@ -1,94 +1,114 @@
-.heroCard::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  left: 0;
-  top: 0;
-  background:
-    radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.08) 20%, transparent 42%),
-    radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.12) 22%, transparent 46%);
-  filter: blur(14px);
-  pointer-events: none;
-  animation: hero-corner-glow-a 4.8s ease-in-out infinite;
+.hero {
+  position: relative;
+  padding: clamp(2.5rem, 7vw, 6rem) 0 0;
 }
-
-.heroCard::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.12) 28%, transparent 54%),
-    radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.1) 26%, transparent 52%);
-  filter: blur(14px);
-  pointer-events: none;
-  animation: hero-corner-glow-b 4.8s ease-in-out infinite;
+.eyebrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
 }
-
-.heroContent {
-  z-index: 1;
+.status {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--primary);
 }
-
-:global(.dark) .heroCard::before {
-  background:
-    radial-gradient(circle at 0% 100%, rgba(161, 161, 170, 0.18), rgba(161, 161, 170, 0.08) 20%, transparent 42%),
-    radial-gradient(circle at 100% 0%, rgba(161, 161, 170, 0.28), rgba(161, 161, 170, 0.12) 22%, transparent 46%);
+.headline {
+  max-width: 1050px;
+  margin: 2rem 0 2.5rem;
+  font-size: clamp(2.6rem, 6.25vw, 5rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
 }
-
-:global(.dark) .heroCard::after {
-  background:
-    radial-gradient(circle at 0% 0%, rgba(210, 210, 214, 0.48), rgba(161, 161, 170, 0.22) 28%, transparent 54%),
-    radial-gradient(circle at 100% 100%, rgba(210, 210, 214, 0.42), rgba(161, 161, 170, 0.2) 26%, transparent 52%);
+.headline span {
+  display: block;
+  color: var(--primary);
 }
-
-@keyframes hero-corner-glow-a {
-  0%,
-  100% {
+.introduction {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.8fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  max-width: 1040px;
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.introduction p:last-child {
+  font-size: 0.9375rem;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+.actions > button {
+  margin-left: 0.75rem;
+}
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+:global(html[data-motion-level="full"]) .part {
+  animation: arrive var(--motion-reveal) var(--motion-ease) both;
+  animation-delay: calc(var(--entrance-order) * 55ms);
+}
+:global(html[data-motion-level="balanced"]) .part {
+  animation: settle 220ms ease both;
+}
+@keyframes arrive {
+  from {
+    opacity: 0.75;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes settle {
+  from {
+    opacity: 0.85;
+  }
+  to {
     opacity: 1;
   }
-
-  50% { opacity: 0; }
 }
-
-@keyframes hero-corner-glow-b {
-  0%,
-  100% { opacity: 0; }
-
-  50% { opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heroCard::before {
-    animation: none;
-    filter: none;
-    opacity: 0;
+@media (max-width: 767px) {
+  .introduction {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
-
-  .heroCard::after {
-    animation: none;
-    filter: none;
-    opacity: 0;
+  .headline {
+    margin: 1.75rem 0;
+  }
+  .bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+  .actions > button {
+    margin-left: 0;
   }
 }
-
-:global(html[data-motion-level="balanced"]) .heroCard::before,
-:global(html[data-motion-level="balanced"]) .heroCard::after {
-  animation: none;
-  filter: none;
-}
-
-:global(html[data-motion-level="balanced"]) .heroCard::before {
-  opacity: 0.08;
-}
-
-:global(html[data-motion-level="balanced"]) .heroCard::after {
-  opacity: 0;
-}
-
-:global(html[data-motion-level="lite"]) .heroCard::before,
-:global(html[data-motion-level="lite"]) .heroCard::after {
-  animation: none;
-  filter: none;
-  opacity: 0;
+@media (max-width: 389px) {
+  .actions > a {
+    width: 100%;
+  }
+  .eyebrow {
+    gap: 0.4rem;
+    font-size: 0.6875rem;
+  }
 }

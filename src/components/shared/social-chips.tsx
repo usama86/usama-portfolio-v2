@@ -36,24 +36,18 @@ export function SocialChips({
           const isClickable = s.href && s.href !== "#";
 
           const base =
-            "inline-flex items-center gap-2 rounded-full border transition-all " +
-            (isFullMotion
-              ? "backdrop-blur supports-[backdrop-filter]:bg-background/40"
-              : "bg-background/80");
-
-          const size = compact ? "px-3 py-1 text-xs" : "px-3.5 py-1.5 text-sm";
-
+            "inline-flex min-h-11 max-w-full items-center gap-2 rounded-lg border transition-colors";
+          const size = compact ? "px-3 py-2 text-xs" : "px-3.5 py-2 text-sm";
           const style =
-            "border-border/60 bg-muted/40 text-muted-foreground " +
-            "hover:bg-muted/60 hover:text-foreground hover:border-border " +
-            (isFullMotion ? "hover:-translate-y-[1px] active:translate-y-0" : "");
+            "border-border bg-transparent text-muted-foreground hover:bg-secondary hover:text-primary hover:border-primary/40 " +
+            (isFullMotion ? "interactive-surface" : "");
 
           const content = (
             <>
               <Icon
                 className={cn(
                   compact ? "h-3.5 w-3.5" : "h-4 w-4",
-                  "opacity-80"
+                  "opacity-80",
                 )}
               />
               <span className={cn("truncate")}>{s.title}</span>
@@ -75,7 +69,7 @@ export function SocialChips({
               className={cn(
                 base,
                 size,
-                "border-border/50 bg-muted/30 text-muted-foreground"
+                "border-border/50 bg-muted/30 text-muted-foreground",
               )}
               aria-label={s.title}
             >
