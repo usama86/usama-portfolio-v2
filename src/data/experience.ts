@@ -17,7 +17,7 @@ export type ExperienceItem = {
 export const experience: ExperienceItem[] = [
   {
     id: 1111,
-    title: "Senior Frontend Developer",
+    title: "Senior Software Engineer",
     company: "Allshore Talent (ECCO Select / Walsworth Yearbooks)",
     companyUrl: "https://www.allshoretalent.com/",
     timePeriod: "06/2025 — Present",
@@ -54,7 +54,7 @@ export const experience: ExperienceItem[] = [
     company: "Turing",
     timePeriod: "04/2026 — 06/2026",
     description:
-      "Co-leading AI training and product simulation initiatives focused on enterprise software environments, workflow evaluation, and high-fidelity product replicas used for AI agent training and reinforcement learning programs.",
+      "Co-led AI training and product simulation initiatives focused on enterprise software environments, workflow evaluation, and high-fidelity product replicas used for AI agent training and reinforcement learning programs.",
     descriptionDetail: [
       "Co-led development of a Greenhouse-inspired recruiting platform simulation used for AI training and evaluation.",
       "Delivered 20+ interconnected modules including Job Creation, Interview Plans, Scorecards, Approval Flows, CRM, Offers, Dashboards, Reports, Sourcing, and Career Site functionality.",

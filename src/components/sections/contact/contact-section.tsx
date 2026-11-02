@@ -32,7 +32,7 @@ export function ContactSection() {
         <SectionHeader
           eyebrow="Let’s build"
           title="Contact"
-          subtitle="Tell me what you’re building — I’ll reply with clear next steps, timeline, and approach."
+          subtitle="Hiring for your engineering team or have a product in mind? Let’s talk."
         />
       </motion.div>
 
@@ -109,12 +109,24 @@ export function ContactSection() {
           }}
         >
           <div className="text-lg font-semibold tracking-tight">
-            Fast response, zero fluff
+            Let’s talk engineering
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            I can help with: system design + clean UI, multi-tenant SaaS,
-            integrations, performance, and shipping production-ready features.
+            I’m open to senior frontend, software, full-stack, and product
+            engineering roles, including global remote and relocation
+            opportunities. My work spans enterprise platforms, SaaS products,
+            integrations, and performance.
           </p>
+
+          <Button asChild variant="outline" className="rounded-xl">
+            <a
+              href="https://calendly.com/usama-amjad32/30min"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book a 30-min Call
+            </a>
+          </Button>
 
           <div className="space-y-2 text-sm">
             <div>

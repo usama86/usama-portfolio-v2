@@ -9,11 +9,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Muhammad Usama — Senior Software Engineer",
   description:
-    "6+ years building multi-tenant SaaS, AI voice agents, and high-performance web platforms (Next.js, TypeScript, FastAPI, PostgreSQL).",
+    "Senior Software Engineer with 7+ years building enterprise platforms, full-stack SaaS, AI-powered products, and immersive web experiences with React, Next.js, TypeScript, FastAPI, and Three.js.",
   openGraph: {
     title: "Muhammad Usama — Senior Software Engineer",
     description:
-      "Multi-tenant SaaS • AI Voice Agents • High-performance web platforms",
+      "Senior Software Engineer with 7+ years building enterprise platforms, full-stack SaaS, AI-powered products, and immersive web experiences.",
     type: "website",
   },
 };

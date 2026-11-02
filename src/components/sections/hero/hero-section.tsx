@@ -8,11 +8,6 @@ import { useMotionLevel } from "@/hooks/use-motion-level";
 import { motion } from "motion/react";
 import styles from "./hero-section.module.css";
 
-const CALENDLY_URL = "https://calendly.com/usama-amjad32/30min";
-const UPWORK_URL = "https://www.upwork.com/freelancers/~01798f1c775f13992c";
-const PSEB_URL =
-  "https://portal.techdestination.com/verify-certificate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpc3RyYXRpb25ObyI6IkZMMjEvUFNFQi8yMDI1LzIyMjkyIiwidHlwZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE3NjcwODAwNzIsImV4cCI6MTc3NDg1NjA3Mn0.8poPngm4g1fKYxFxxRFe_nZYfAbK2b_4NVoyJCNVje0";
-
 // const INTRO_SHORT_URL =. (OLD ONE)
 //   "https://youtube.com/shorts/8iUjJhpUKEE?si=nIhtEEkv6_GUHC3u";
 
@@ -27,10 +22,9 @@ export function HeroSection() {
   const isFullMotion = motionLevel === "full";
   const isBalancedMotion = motionLevel === "balanced";
   const isLiteMotion = motionLevel === "lite";
-  const heroWords =
-    "Co-Leading AI Training Programs and Building Enterprise Software".split(" ");
   const heroHeadline =
-    "Co-Leading AI Training Programs and Building Enterprise Software";
+    "Building scalable software, AI-powered products, and immersive web experiences.";
+  const heroWords = heroHeadline.split(" ");
   const revealEase = [0.22, 1, 0.36, 1] as const;
   const lift = isFullMotion ? 10 : 0;
 
@@ -145,7 +139,7 @@ export function HeroSection() {
           initial="hidden"
           animate="show"
         >
-          {/* Row 1: Turing role (left) + Quick Intro header (right) */}
+          {/* Row 1: Engineering experience (left) + Quick Intro header (right) */}
           <motion.div
             className="flex min-w-0 items-start justify-between gap-4 md:col-span-2 md:items-center"
             variants={itemVariants}
@@ -153,16 +147,13 @@ export function HeroSection() {
             <div
               className="flex w-full min-w-0 flex-col items-start gap-0.5 rounded-2xl border border-border/60 bg-muted/40 px-4 py-3 text-sm text-muted-foreground sm:inline-flex sm:w-fit sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:px-3 sm:py-1"
             >
-              <span className="inline-flex min-w-0 flex-wrap items-center gap-x-2">
-                <span>Co-Lead @</span>
-                <span className="font-medium text-primary">Turing</span>
+              <span className="font-medium text-primary">
+                Senior Software Engineer
               </span>
               <span className="hidden sm:inline" aria-hidden="true">
                 ·
               </span>
-              <span className="max-w-full leading-snug">
-                AI Training &amp; Product Simulation
-              </span>
+              <span className="max-w-full leading-snug">7+ Years</span>
             </div>
 
             <div className="hidden md:flex items-center gap-3">
@@ -201,14 +192,20 @@ export function HeroSection() {
               className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl"
               variants={itemVariants}
             >
-              At <span className="font-medium text-foreground/90">Turing</span>,
-              {" "}I co-lead AI product simulation initiatives and contribute to
-              {" "}
-              <span className="font-medium text-foreground/90">
-                Microsoft Research (MSR)
-              </span>{" "}
-              training programs while building enterprise SaaS platforms, complex
-              workflows, and modern web applications.
+              I&apos;m a Senior Software Engineer specializing in React, Next.js,
+              and TypeScript, with experience building enterprise platforms and
+              full-stack SaaS products. I also founded{" "}
+              <a
+                href="https://archwalk.app"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-foreground/90 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              >
+                ArchWalk
+              </a>
+              , an interactive 360° experience platform built with Three.js and
+              FastAPI. Previously, I co-led AI product simulation initiatives at
+              Turing.
             </motion.p>
 
             <motion.div className="flex flex-wrap gap-2" variants={itemVariants}>
@@ -216,9 +213,9 @@ export function HeroSection() {
                 "React",
                 "Next.js",
                 "TypeScript",
-                "AI Training",
-                "Product Simulation",
-                "Enterprise SaaS",
+                "FastAPI",
+                "Three.js",
+                "SaaS",
               ].map((t) => (
                 <motion.div
                   key={t}
@@ -253,12 +250,9 @@ export function HeroSection() {
               >
                 <Button
                   asChild
-                  variant="outline"
                   className="w-full rounded-xl min-[420px]:w-auto"
                 >
-                  <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
-                    Book a 30-min Call
-                  </a>
+                  <a href="#projects">View Projects</a>
                 </Button>
               </motion.div>
 
@@ -275,19 +269,18 @@ export function HeroSection() {
                   variant="secondary"
                   className="w-full rounded-xl min-[420px]:w-auto"
                 >
-                  <a href={UPWORK_URL} target="_blank" rel="noreferrer">
-                    Hire me on Upwork
-                  </a>
+                  <a href="#contact">Get in Touch</a>
                 </Button>
               </motion.div>
-
-              <Badge
-                variant="outline"
-                className="w-fit rounded-full border-border/60 bg-black/10 min-[420px]:col-span-2 sm:col-span-1"
-              >
-                Available for freelance & long-term
-              </Badge>
             </motion.div>
+
+            <motion.p
+              className="text-sm text-muted-foreground leading-relaxed"
+              variants={itemVariants}
+            >
+              Based in Pakistan · Open to global remote roles and relocation
+              opportunities.
+            </motion.p>
 
             <motion.div variants={itemVariants}>
               <SocialChips
@@ -297,18 +290,6 @@ export function HeroSection() {
                 showTooltipValue
               />
             </motion.div>
-
-            <motion.a
-              href={PSEB_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="block w-fit text-xs text-muted-foreground transition-colors hover:text-foreground"
-              variants={itemVariants}
-              whileHover={isFullMotion ? { y: -1, opacity: 1 } : undefined}
-              transition={isFullMotion ? { duration: 0.18, ease: "easeOut" } : undefined}
-            >
-              ✓ PSEB Registered Freelancer
-            </motion.a>
           </motion.div>
 
           {/* Row 2: Video (right) */}

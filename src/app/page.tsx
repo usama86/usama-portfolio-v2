@@ -10,7 +10,7 @@ export default function Page() {
     <div className="space-y-14">
       <HeroSection />
 
-      <div id="projects">
+      <div id="projects" className="scroll-mt-24">
         <ProjectsSection />
       </div>
 
