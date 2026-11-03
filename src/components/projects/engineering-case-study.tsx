@@ -8,6 +8,7 @@ import { LoomVideo } from "@/components/media/loom-video";
 import { GoogleDriveVideo } from "@/components/media/google-drive-video";
 import { Reveal } from "@/components/motion/reveal";
 import { TocNav } from "./toc-nav";
+import { HeroMediaPreview } from "./hero-media-preview";
 import styles from "./engineering-case-study.module.css";
 
 function StorySection({ id, kicker, title, children }: { id: string; kicker: string; title: string; children: React.ReactNode }) {
@@ -21,6 +22,13 @@ function MediaFigure({ image, width, height, caption, priority = false }: { imag
   return <figure className={styles.figure}>
     <div className={styles.imageFrame}><Image src={image.src} alt={image.title} width={width} height={height} sizes="(max-width: 767px) calc(100vw - 56px), (max-width: 1100px) 90vw, 1000px" priority={priority} className={styles.image} /></div>
     <figcaption className={styles.figcaption}><p>{caption}</p><ImageCredit credit={image.credit} /></figcaption>
+  </figure>;
+}
+
+function LeadMediaFigure({ image, leadMedia }: { image: ProjectImage; leadMedia: NonNullable<EngineeringStory["leadMedia"]> }) {
+  return <figure className={`${styles.figure} ${styles.leadFigure}`}>
+    <HeroMediaPreview src={image.src} title={image.title} width={leadMedia.width} height={leadMedia.height} preview={leadMedia.preview} />
+    <figcaption className={styles.figcaption}><p>{leadMedia.caption}</p><ImageCredit credit={image.credit} /></figcaption>
   </figure>;
 }
 
@@ -82,7 +90,7 @@ export function EngineeringCaseStudy({ project, story }: { project: Project; sto
           {(hasLoom || hasDrive) && <a href={hasLoom ? project.links!.videoUrl! : `https://drive.google.com/file/d/${project.links!.videoUrl!}/view`} target="_blank" rel="noreferrer">Watch walkthrough<ArrowUpRight size={15} aria-hidden="true" /></a>}
         </div> : null}
       </div>
-      {lead && story.leadMedia && <MediaFigure image={lead} width={story.leadMedia.width} height={story.leadMedia.height} caption={story.leadMedia.caption} priority />}
+      {lead && story.leadMedia && <LeadMediaFigure image={lead} leadMedia={story.leadMedia} />}
       {story.visualMoments?.length ? <div className={styles.heroMediaStack}>{story.visualMoments.slice(0, 1).map((moment, index) => {
         const image = media[moment.mediaIndex];
         if (!image) return null;

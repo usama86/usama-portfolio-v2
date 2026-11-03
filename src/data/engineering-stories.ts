@@ -104,7 +104,7 @@ export const engineeringStories = {
       { responsibility: "Application", tools: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
       { responsibility: "Product and evaluation", tools: ["Workflow modeling", "Product parity", "AI agent evaluation", "RCA"] },
     ],
-    leadMedia: { mediaIndex: 0, width: 2874, height: 1408, caption: "Actual dashboard from the AI training environment; shown as a simulation, not a live recruiting customer system." },
+    leadMedia: { mediaIndex: 0, width: 2874, height: 1408, caption: "Actual dashboard from the AI training environment; shown as a simulation, not a live recruiting customer system.", preview: { aspectRatio: "3 / 2", objectPosition: "left center", alt: "TalentFlow dashboard close-up showing navigation and company goals" } },
     evidenceIntro: "The gallery shows the dashboard, fixture State Diff, jobs, candidate pipeline, CRM, and reporting surfaces. The owner walkthrough is preserved. Screens prove visible UI; deeper architecture claims are limited to the project record.",
   },
   cleon: {
@@ -151,7 +151,7 @@ export const engineeringStories = {
       { responsibility: "API and data", tools: ["FastAPI", "PostgreSQL", "SQLAlchemy", "Alembic"] },
       { responsibility: "Voice and providers", tools: ["Vapi", "Deepgram", "ElevenLabs", "OrderOut foundation"] },
     ],
-    leadMedia: { mediaIndex: 0, width: 1366, height: 584, caption: "Actual integrations screen from the public Loom walkthrough at about 00:17. Provider tiles show configuration UI, not verified operation for every provider." },
+    leadMedia: { mediaIndex: 0, width: 1366, height: 584, caption: "Actual integrations screen from the public Loom walkthrough at about 00:17. Provider tiles show configuration UI, not verified operation for every provider.", preview: { aspectRatio: "4 / 3", objectPosition: "30% center", alt: "Cleon integrations close-up showing provider configuration cards" } },
     evidenceIntro: "The screenshot is an authentic walkthrough frame of the integrations page. The public Loom video remains linked; architecture details beyond the visible UI are identified as owner-provided project facts.",
   },
 } satisfies Record<string, EngineeringStory>;

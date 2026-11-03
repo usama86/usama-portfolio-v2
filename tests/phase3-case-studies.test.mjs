@@ -67,6 +67,26 @@ test("Cleon qualifies provider and live-order status", () => {
   assert.match(page, /No verified customer order volume/);
 });
 
+for (const [name, slug, source, alt] of [
+  ["TalentFlow", pages.talentflow, "turing-screenshot%2FDashboard-1.png", "TalentFlow dashboard close-up showing navigation and company goals"],
+  ["Cleon", pages.cleon, "cleon%2Fintegrations-walkthrough.webp", "Cleon integrations close-up showing provider configuration cards"],
+]) {
+  test(`${name}: the hero preview uses its real gallery image and offers the full screenshot`, () => {
+    const page = html(slug);
+    assert.match(page, new RegExp(`aria-label="View full screenshot:[^"]+"`));
+    assert.ok(page.includes(`alt="${alt}"`));
+    assert.ok(page.includes(source), `${name} source screenshot missing from page`);
+    assert.match(page, /Product captures/);
+  });
+}
+
+test("ArchWalk retains its original visual moment hero", () => {
+  const page = html(pages.archwalk);
+  assert.doesNotMatch(page, /Application preview/);
+  assert.match(page, /id="archwalk-360"/);
+  assert.match(page, /viewer-solitude.jpg/);
+});
+
 test("older project retains the legacy case-study layout", () => {
   const page = html("query-builder");
   assert.doesNotMatch(page, /data-case-study="engineering"/);

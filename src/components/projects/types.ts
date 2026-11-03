@@ -29,7 +29,13 @@ export type EngineeringStory = {
   delivery: { status: "public" | "implemented" | "foundation"; title: string; detail: string }[];
   technology: { responsibility: string; tools: string[] }[];
   visualMoments?: { id: string; title: string; status: string; mediaIndex: number; width: number; height: number; explanation: string }[];
-  leadMedia?: { mediaIndex: number; width: number; height: number; caption: string };
+  leadMedia?: {
+    mediaIndex: number;
+    width: number;
+    height: number;
+    caption: string;
+    preview: { aspectRatio: "3 / 2" | "4 / 3"; objectPosition: string; alt: string };
+  };
   evidenceIntro: string;
 };
 
