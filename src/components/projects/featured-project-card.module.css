@@ -18,6 +18,7 @@
   background: radial-gradient(ellipse at 100% 15%, color-mix(in oklch, var(--deep-green) 20%, transparent), transparent 65%), var(--card);
 }
 .visual { min-width: 0; }
+.mediaStack { display: grid; gap: 0.7rem; }
 .flagship .visual { grid-area: visual; }
 .flagship .content { grid-area: content; }
 .imageLink {
@@ -29,8 +30,9 @@
   box-shadow: 0 15px 32px -22px #0008;
   transition: transform 550ms var(--motion-ease), box-shadow 550ms ease;
 }
+.secondaryImageLink { margin-top: 0.25rem; }
 .image { display: block; width: 100%; height: auto; border-radius: inherit; }
-.caption { display: flex; gap: 0.45rem; align-items: baseline; margin-top: 0.85rem; font-size: 0.68rem; line-height: 1.5; color: var(--muted-foreground); }
+.caption { display: flex; gap: 0.45rem; align-items: baseline; font-size: 0.68rem; line-height: 1.5; color: var(--muted-foreground); }
 .captionDot { width: 5px; height: 5px; flex-shrink: 0; border-radius: 50%; background: var(--deep-green); }
 .content { display: flex; flex-direction: column; gap: 1.1rem; min-width: 0; }
 .eyebrow { font-size: 0.64rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); line-height: 1.7; }

@@ -49,9 +49,9 @@ export function HeroSection() {
                 >
                   ArchWalk
                 </a>
-                , an immersive 360° experience platform that I architected and
-                built end to end. Previously, I co-led AI product simulation
-                initiatives at Turing.
+                , an immersive 3D and 360° platform that I architected and
+                built. ArchWalk 360 is public; its Architects product is Coming
+                Soon. Previously, I co-led AI product simulation initiatives at Turing.
               </p>
             </div>
             <div

@@ -3,7 +3,7 @@ import type { Project } from "@/components/projects/types";
 export const projects: Project[] = [
   {
   "slug": "archwalk-immersive-experience-platform",
-  "title": "ArchWalk — Immersive 360° Experience Platform",
+  "title": "ArchWalk — Immersive 3D & 360° Experience Platform",
   "cardTitle": "ArchWalk",
   "company": "ArchWalk",
   "role": "Founder & Lead Engineer",
@@ -12,13 +12,13 @@ export const projects: Project[] = [
     "saas",
     "backend"
   ],
-  "seoDescription": "How I engineered ArchWalk 360: a Next.js and Three.js experience platform with FastAPI, PostgreSQL, spatial navigation, publishing, and embeddable integrations.",
+  "seoDescription": "How I engineered ArchWalk across published 360° experiences and an architectural 3D review workspace, including Three.js viewers, GLB processing, navigation, and publishing.",
   "descriptionDetail": [
-    "As Founder & Lead Engineer, I architected and built ArchWalk 360, a full-stack SaaS platform for creating, publishing, and sharing interactive 360° experiences. My ownership spans the React and Next.js application, custom Three.js panorama runtime, FastAPI services, PostgreSQL data model, and media delivery through Cloudflare R2.",
+    "As Founder & Lead Engineer, I architected and developed substantial systems across ArchWalk 360 and ArchWalk for Architects: a published panorama platform and a separate architectural 3D review workspace. My ownership spans the React and Next.js application, custom Three.js runtimes, FastAPI services, PostgreSQL, and Cloudflare R2 media workflows.",
     "Built distinct Creator and public Viewer surfaces: authoring changes remain in draft until an explicit publish creates a snapshot for visitors.",
     "Implemented spatial Step and Doorway navigation, view selection, floor-plan orientation, and Info Points around a shared panorama renderer.",
     "Developed hosted and embedded workflows with a Partner API, scoped Creator sessions, and a read-only Viewer that can be embedded on websites or opened inside mobile WebViews.",
-    "ArchWalk 360 is the current public product. ArchWalk for Architects is a separate direction publicly marked Coming Soon; it is not presented here as a launched product."
+    "ArchWalk 360 is the current public product. ArchWalk for Architects has implemented GLB upload, model processing, browser rendering, and review flows, while its public product page remains Coming Soon."
   ],
   "technologies": [
     "Next.js",
@@ -29,7 +29,9 @@ export const projects: Project[] = [
     "PostgreSQL",
     "SQLAlchemy",
     "Alembic",
-    "Cloudflare R2"
+    "Cloudflare R2",
+    "GLTFLoader",
+    "glTF Transform"
   ],
   "images": [
     {
@@ -49,6 +51,18 @@ export const projects: Project[] = [
         "license": "CC0",
         "licenseUrl": "https://polyhaven.com/license",
         "changes": "Perspective rendered by the actual Viewer; screenshot encoded as JPEG."
+      }
+    },
+    {
+      "src": "/images/projects/archwalk/architects-3d-reference.png",
+      "title": "Review — Architects 3D model runtime",
+      "description": "Actual ArchWalk 3D walkthrough component rendering the CC0 Modern House GLB in Orbit mode in a local reference route. The Walk control needs a prepared collision asset and starting point, so this still demonstrates geometry review rather than a completed walk session. The Architects product is publicly Coming Soon.",
+      "credit": {
+        "label": "Modern House · Grab3D",
+        "source": "https://grab3d.com/models/buildings/modern-house/",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "changes": "GLB loaded in the actual ArchWalk 3D runtime through an isolated local reference route; browser screenshot cropped to the component frame. No UI compositing or private model data."
       }
     },
     {
@@ -110,32 +124,34 @@ export const projects: Project[] = [
   },
   "caseStudy": {
     "problem": [
-      "A panorama alone cannot explain how viewpoints connect or keep a visitor oriented. A useful spatial experience needs navigation, floor-plan context, and controls that remain anchored as the camera moves.",
+      "A panorama needs scene links, floor-plan context, and camera-aware markers to explain how viewpoints connect. An architect also needs to inspect actual building geometry and exchange spatial feedback during design review.",
       "Authoring and public viewing have different trust boundaries. Teams need to prepare changes without altering a live experience, and partners need to embed the result without gaining access to editing tools."
     ],
     "approach": [
-      "Separated the Next.js application into authoring, public viewing, and integration surfaces, with shared rendering and camera math rather than duplicated panorama implementations.",
+      "Built distinct 360° authoring, public viewing, and integration surfaces, then a separate architectural review path for uploaded GLB geometry. Panorama camera math and mesh-based 3D inspection solve different navigation and rendering problems.",
       "Kept content and navigation in an editable draft graph. Publishing validates that graph and creates an immutable revision; the public Viewer reads the published snapshot.",
       "Put experience, navigation, media, and publication rules in FastAPI domain services. Database changes and media operations use explicit validation and scoped access rather than trusting client-supplied relationships."
     ],
     "architecture": [
-      "Frontend: React, Next.js, and TypeScript compose the hosted workspace, embedded Creator, and read-only public Viewer. A custom Three.js runtime handles perspective rendering, camera orientation, zoom, and projected spatial markers.",
+      "Frontend: React, Next.js, and TypeScript compose the 360° Creator and public Viewer plus the architectural review workspace. One custom Three.js runtime maps panorama orientation and projected hotspots; another loads GLB geometry with GLTFLoader and supports orbit and gated walk navigation.",
       "Backend and data: FastAPI services use PostgreSQL through SQLAlchemy, with Alembic migrations. Experiences, panoramas, navigation links, and published revisions have explicit domain relationships.",
-      "Media: managed uploads use presigned Cloudflare R2 transfers. Completion checks validate stored assets; lifecycle rules protect media referenced by publications and schedule eligible draft cleanup.",
+      "Media: 360° assets use managed presigned Cloudflare R2 transfers. The Architects path accepts SketchUp-exported GLB files through resumable multipart upload, validates them, and processes separate optimized visual and collision artifacts before review.",
+      "3D preparation: the backend worker uses glTF Transform, Meshopt, and KTX2 texture encoding, validates the optimized output, and stores visual and collision artifacts separately. The browser runtime decodes Meshopt assets and caps pixel ratio against a performance profile.",
       "Authentication and authorization: signed-in workspace access and scoped Partner API credentials protect management operations. Embedded Creator sessions are distinct from public Viewer access, with organization and experience checks on the server.",
       "Integrations: the hosted Viewer runs in website iframes and mobile WebViews. Origin policies and validated message bridges handle embedding and presentation; embedding does not grant authoring access."
     ],
     "challenges": [
-      "Panorama rendering and lifecycle: large textures require bounded caching, render budgets, and cleanup. The runtime disposes textures, geometry, materials, controls, and rendering resources when they are no longer needed.",
-      "Spatial navigation: hotspots persist yaw and pitch, not screen pixels. Their projections must track camera changes; floor-plan orientation must stay consistent with the active view.",
+      "Rendering and lifecycle: panorama textures need bounded caching and render budgets. Architectural GLB scenes need mesh loading, framing, camera control, collision preparation, and cleanup of scene, material, geometry, texture, and renderer resources.",
+      "Trade-off: a panorama gives high photographic fidelity from authored viewpoints with lightweight scene transitions, but cannot reveal arbitrary new geometry. A GLB walkthrough permits free camera inspection and spatial review, at the cost of heavier uploads, optimization, collision handling, and device-dependent rendering budgets.",
+      "Spatial navigation: 360° hotspots persist yaw and pitch and project into the changing camera view. Geometry-based review uses 3D positions and viewpoints; Walk mode requires a prepared collision asset and starting point, while Orbit mode can inspect the visual GLB alone.",
       "Cross-platform presentation: browser fullscreen and mobile host presentation need separate handling while retaining one Viewer implementation. Message origins and sources must be checked at the boundary.",
       "Publishing and security: draft edits must not leak into public revisions. Authorization, revision checks, and live embedding policies serve different responsibilities and remain separate.",
       "Reliable backend workflows: managed uploads, media attachment, concurrent draft edits, and publication retries need validation and transaction boundaries to keep stored assets and database records consistent."
     ],
     "outcome": [
-      "Shipped a public ArchWalk 360 product surface with Creator and Viewer workflows, spatial navigation, publishing, and hosted or embedded delivery. The public Hallwyl Museum demonstration shows a published Viewer embedded within an independent website.",
-      "The portfolio links to that public demonstration and presents real UI captures from documented reference fixtures. These demonstrate functionality, not customer adoption, revenue, or measured performance gains.",
-      "ArchWalk for Architects remains publicly Coming Soon. No live commercial checkout or payment-provider approval is claimed."
+      "Shipped the public ArchWalk 360 surface with Creator and Viewer workflows, spatial navigation, publishing, and hosted or embedded delivery. The public Hallwyl Museum demonstration shows a published Viewer embedded within an independent website.",
+      "The portfolio includes actual 360° Viewer captures and a separate local capture of the 3D runtime rendering a CC0 architectural GLB. These demonstrate implemented paths, not customer adoption, revenue, or measured performance gains.",
+      "ArchWalk for Architects has implemented review, upload, rendering, and model-processing systems but remains publicly Coming Soon. No public launch, live commercial checkout, or payment-provider approval is claimed."
     ]
   }
 },

@@ -80,6 +80,10 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
   const toc = [
     { id: "overview", label: "Overview" },
+    ...(flagship?.secondaryImage ? [
+      { id: "archwalk-360", label: "ArchWalk 360" },
+      { id: "architects-3d", label: "Architects 3D" },
+    ] : []),
     { id: "problem", label: "Problem" },
     { id: "approach", label: "Approach" },
     { id: "architecture", label: "Architecture" },
@@ -160,7 +164,26 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
         )}
       </div>
 
-      {flagship && <figure className="glass rounded-2xl p-3 sm:p-5">
+      {flagship?.secondaryImage && <div className="grid gap-4 lg:grid-cols-2">
+        <section id="archwalk-360" className="glass scroll-mt-24 rounded-2xl p-3 sm:p-5">
+          <h2 className="mb-3 text-lg font-semibold">ArchWalk 360 <span className="ml-2 text-xs font-normal text-muted-foreground">Public product</span></h2>
+          <figure>
+            <Image src={flagship.image.src} alt={flagship.image.title} width={flagship.image.width} height={flagship.image.height} sizes="(max-width: 1023px) 100vw, 50vw" preload className="w-full h-auto rounded-xl" />
+            <figcaption className="pt-3 space-y-1 text-xs text-muted-foreground"><p>{flagship.caption} · Reference navigation, not connected rooms.</p><ImageCredit credit={project.mediaImages?.[0]?.credit} /></figcaption>
+          </figure>
+          <p className="mt-4 text-sm leading-relaxed text-foreground/80">A panorama runtime maps yaw and pitch to view direction, then projects scene links, Info Points, and floor-plan context into the visitor’s view. Creator drafts publish to a separate read-only Viewer and embed surface.</p>
+        </section>
+        <section id="architects-3d" className="glass scroll-mt-24 rounded-2xl p-3 sm:p-5">
+          <h2 className="mb-3 text-lg font-semibold">ArchWalk for Architects <span className="ml-2 text-xs font-normal text-muted-foreground">Publicly Coming Soon</span></h2>
+          <figure>
+            <Image src={flagship.secondaryImage.src} alt={flagship.secondaryImage.title} width={flagship.secondaryImage.width} height={flagship.secondaryImage.height} sizes="(max-width: 1023px) 100vw, 50vw" className="w-full h-auto rounded-xl" />
+            <figcaption className="pt-3 space-y-1 text-xs text-muted-foreground"><p>{flagship.secondaryCaption}. Actual ArchWalk runtime, Orbit mode, CC0 Modern House reference GLB. Walk mode is not demonstrated by this still.</p><ImageCredit credit={project.mediaImages?.[1]?.credit} /></figcaption>
+          </figure>
+          <p className="mt-4 text-sm leading-relaxed text-foreground/80">SketchUp-exported GLBs enter a multipart upload and preparation pipeline. GLTFLoader renders real meshes for browser review; orbit and camera controls work on model geometry. Walk navigation is gated by collision preparation and a starting point. Review flows carry spatial comments and saved viewpoints.</p>
+        </section>
+      </div>}
+
+      {flagship && !flagship.secondaryImage && <figure className="glass rounded-2xl p-3 sm:p-5">
         <Image src={flagship.image.src} alt={flagship.image.title} width={1440} height={900} sizes="(max-width: 1248px) 100vw, 1152px" preload className="w-full h-auto rounded-xl" />
         <figcaption className="pt-3 space-y-1 text-muted-foreground">
           <p className="text-xs">{flagship.caption} · Reference navigation, not connected rooms.</p>

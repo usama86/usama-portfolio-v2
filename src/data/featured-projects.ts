@@ -10,6 +10,8 @@ export type FeaturedProject = {
   technologies: string[];
   image: ProjectImage & { width: number; height: number };
   caption: string;
+  secondaryImage?: ProjectImage & { width: number; height: number };
+  secondaryCaption?: string;
   flagship?: boolean;
 };
 
@@ -17,11 +19,13 @@ export type FeaturedProject = {
 export const featuredProjects: FeaturedProject[] = [
   {
     slug: "archwalk-immersive-experience-platform", title: "ArchWalk",
-    category: "Immersive 360° Experience Platform", context: "Founder & Lead Engineer", flagship: true,
-    summary: "Architected and built a full-stack SaaS platform for interactive 360° experiences, combining custom Three.js rendering, spatial navigation, publishing workflows, and embeddable integrations.",
+    category: "Immersive 3D & 360° Experience Platform", context: "Founder & Lead Engineer", flagship: true,
+    summary: "Architected substantial systems across two surfaces: published 360° experiences with spatial navigation and an architectural review workspace with GLB model processing and browser-based 3D rendering. The Architects product is publicly Coming Soon.",
     technologies: ["Next.js", "TypeScript", "Three.js", "FastAPI", "PostgreSQL", "Cloudflare R2"],
     image: { width: 1440, height: 900, src: "/images/projects/archwalk/viewer-solitude.jpg", title: "Actual ArchWalk Viewer showing the Solitude reference interior, Step navigation, and view controls" },
-    caption: "Actual Viewer UI · Solitude reference interior",
+    caption: "ArchWalk 360 · Actual Viewer UI · Solitude reference interior",
+    secondaryImage: { width: 1190, height: 504, src: "/images/projects/archwalk/architects-3d-reference.png", title: "Actual ArchWalk 3D walkthrough runtime showing a CC0 Modern House GLB in Orbit review mode" },
+    secondaryCaption: "Architects 3D · Actual runtime with CC0 reference GLB · Public product Coming Soon",
   },
   {
     slug: "talentflow-enterprise-recruiting-platform", title: "TalentFlow",

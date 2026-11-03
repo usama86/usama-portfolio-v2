@@ -15,18 +15,25 @@ export function FeaturedProjectCard({ project, presentation, onOpen }: {
   presentation: FeaturedProject;
   onOpen?: () => void;
 }) {
-  const { flagship, image, title, caption } = presentation;
+  const { flagship, image, title, caption, secondaryImage, secondaryCaption } = presentation;
   const href = `/projects/${project.slug}`;
   return (
     <article className={`${styles.card} ${flagship ? styles.flagship : styles.supporting}`} aria-labelledby={`${project.slug}-title`}>
       <Reveal className={styles.visual} delay={flagship ? 0.12 : 0.06}>
-        <figure>
+        <figure className={styles.mediaStack}>
           <Link href={href} className={styles.imageLink} aria-label={`Explore ${title} engineering case study`}>
             <Image src={image.src} alt={image.title} width={image.width} height={image.height}
               sizes="(max-width: 767px) calc(100vw - 72px), (max-width: 1199px) 50vw, 650px"
               className={styles.image} />
           </Link>
           <figcaption className={styles.caption}><span className={styles.captionDot} aria-hidden="true" />{caption}</figcaption>
+          {secondaryImage && <>
+            <Link href={href} className={`${styles.imageLink} ${styles.secondaryImageLink}`} aria-label={`Explore ${title} 3D architecture case study`}>
+              <Image src={secondaryImage.src} alt={secondaryImage.title} width={secondaryImage.width} height={secondaryImage.height}
+                sizes="(max-width: 767px) calc(100vw - 72px), (max-width: 1199px) 50vw, 650px" className={styles.image} />
+            </Link>
+            <figcaption className={styles.caption}><span className={styles.captionDot} aria-hidden="true" />{secondaryCaption}</figcaption>
+          </>}
         </figure>
       </Reveal>
       <Reveal className={styles.content}>
