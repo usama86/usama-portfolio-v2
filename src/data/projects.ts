@@ -1,8 +1,10 @@
 import type { Project } from "@/components/projects/types";
+import { engineeringStories } from "@/data/engineering-stories";
 
 export const projects: Project[] = [
   {
   "slug": "archwalk-immersive-experience-platform",
+  engineeringStory: engineeringStories.archwalk,
   "title": "ArchWalk — Immersive 3D & 360° Experience Platform",
   "cardTitle": "ArchWalk",
   "company": "ArchWalk",
@@ -161,10 +163,12 @@ export const projects: Project[] = [
 
   {
     slug: "talentflow-enterprise-recruiting-platform",
+    engineeringStory: engineeringStories.talentflow,
     categories: ["company", "saas"],
     title:
       "TalentFlow — Enterprise Recruiting Platform & AI Training Environment",
     cardTitle: "TalentFlow — Enterprise Recruiting Platform",
+    role: "Co-Lead · Product Simulation Engineering",
     highlightsTitle: "Key Contributions",
     company: "Turing (Microsoft Research Programs)",
     timePeriod: "04/2026 — 06/2026",
@@ -275,8 +279,10 @@ export const projects: Project[] = [
 
   {
     slug: "cleon-ai-voice-ordering",
+    engineeringStory: engineeringStories.cleon,
     categories: ["saas", "backend"],
     title: "Cleon – AI Voice Ordering Platform",
+    role: "Full-Stack Product Engineer",
     company: "Personal / SaaS Product",
     timePeriod: "12/2025 — 02/2026",
     descriptionDetail: [

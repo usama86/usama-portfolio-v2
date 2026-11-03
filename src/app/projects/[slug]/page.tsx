@@ -15,6 +15,7 @@ import { LoomVideo } from "@/components/media/loom-video";
 import { GoogleDriveVideo } from "@/components/media/google-drive-video";
 import { GalleryCarousel } from "@/components/media/gallery-carousel";
 import { TocNav } from "@/components/projects/toc-nav";
+import { EngineeringCaseStudy } from "@/components/projects/engineering-case-study";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -67,6 +68,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
   const project = getProjectBySlug(slug);
   if (!project) notFound();
+  if (project.engineeringStory) return <EngineeringCaseStudy project={project} story={project.engineeringStory} />;
 
   const links = project.links;
   const flagship = featuredProjects.find(item => item.slug === slug && item.flagship);
