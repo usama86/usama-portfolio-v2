@@ -28,6 +28,7 @@ type ProjectIconConfig = {
 };
 
 const projectIconMap: Record<string, ProjectIconConfig> = {
+  "archwalk-immersive-experience-platform": { Icon: Globe },
   "talentflow-enterprise-recruiting-platform": {
     Icon: BriefcaseBusiness,
   },

@@ -22,6 +22,7 @@ type Props = {
   onOpenChange: (v: boolean) => void;
   project: Project | null;
   onViewCaseStudy?: (slug: string) => void;
+  onRestoreFocus?: () => void;
 };
 
 export function ProjectDialog({
@@ -29,6 +30,7 @@ export function ProjectDialog({
   onOpenChange,
   project,
   onViewCaseStudy,
+  onRestoreFocus,
 }: Props) {
   const motionLevel = useMotionLevel();
   const isFullMotion = motionLevel === "full";
@@ -48,6 +50,7 @@ export function ProjectDialog({
       src: img.src,
       title: img.title ?? "Screenshot",
       description: img.description,
+      credit: img.credit,
     })) ?? [];
 
   return (
@@ -55,6 +58,12 @@ export function ProjectDialog({
       {/* Centered modal (NOT fullscreen) */}
       <DialogContent
         showCloseButton={false}
+        onCloseAutoFocus={(event) => {
+          if (onRestoreFocus) {
+            event.preventDefault();
+            onRestoreFocus();
+          }
+        }}
         className="w-[calc(100vw-2rem)] sm:max-w-4xl max-h-[90vh] overflow-hidden p-0 gap-0 flex flex-col min-w-0 [&_*]:max-w-full [&_*]:min-w-0"
       >
         <DialogHeader className="sr-only">

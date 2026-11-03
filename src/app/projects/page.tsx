@@ -3,6 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 
+import { getFeaturedProjects, isFeaturedProject } from "@/data/featured-projects";
+
 import { projects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,63 +21,6 @@ type FilterKey =
   | "mobile"
   | "backend";
 
-const FEATURED_SLUGS = new Set<string>([
-  "talentflow-enterprise-recruiting-platform",
-  "cleon-ai-voice-ordering",
-  "query-builder",
-]);
-
-function hasAnyTech(p: Project, keywords: string[]) {
-  const tech = (p.technologies ?? []).map((t: string) => t.toLowerCase());
-  return keywords.some((k) => tech.some((t: string) => t.includes(k)));
-}
-
-function isFreelance(p: Project) {
-  const c = (p.company ?? "").toLowerCase();
-  return (
-    c.includes("freelance") ||
-    c.includes("client") ||
-    c.includes("personal") ||
-    c.includes("product")
-  );
-}
-
-function isCompany(p: Project) {
-  const c = (p.company ?? "").toLowerCase();
-  return !!c && !isFreelance(p);
-}
-
-function isMobile(p: Project) {
-  return hasAnyTech(p, ["react native"]);
-}
-
-function isBackend(p: Project) {
-  return hasAnyTech(p, [
-    "fastapi",
-    "node",
-    "express",
-    "nestjs",
-    "sqlalchemy",
-    "alembic",
-    "postgres",
-    "postgresql",
-    "mongodb",
-    "dynamodb",
-  ]);
-}
-
-function isSaaS(p: Project) {
-  const text = `${p.title ?? ""} ${
-    p.descriptionDetail?.join(" ") ?? ""
-  }`.toLowerCase();
-
-  return (
-    text.includes("saas") ||
-    text.includes("multi-tenant") ||
-    hasAnyTech(p, ["multi-tenant", "postgresql", "fastapi", "next.js"])
-  );
-}
-
 const FILTERS: {
   key: FilterKey;
   label: string;
@@ -85,13 +30,13 @@ const FILTERS: {
   {
     key: "featured",
     label: "Featured",
-    predicate: (p) => FEATURED_SLUGS.has(p.slug),
+    predicate: (p) => isFeaturedProject(p),
   },
-  { key: "company", label: "Company", predicate: isCompany },
-  { key: "freelance", label: "Freelance", predicate: isFreelance },
-  { key: "saas", label: "SaaS", predicate: isSaaS },
-  { key: "mobile", label: "Mobile", predicate: isMobile },
-  { key: "backend", label: "Backend", predicate: isBackend },
+  { key: "company", label: "Company", predicate: (p) => p.categories?.includes("company") ?? false },
+  { key: "freelance", label: "Freelance", predicate: (p) => p.categories?.includes("freelance") ?? false },
+  { key: "saas", label: "SaaS", predicate: (p) => p.categories?.includes("saas") ?? false },
+  { key: "mobile", label: "Mobile", predicate: (p) => p.categories?.includes("mobile") ?? false },
+  { key: "backend", label: "Backend", predicate: (p) => p.categories?.includes("backend") ?? false },
 ];
 
 export default function ProjectsPage() {
@@ -101,7 +46,7 @@ export default function ProjectsPage() {
 
   const filtered = React.useMemo(() => {
     const f = FILTERS.find((x) => x.key === active) ?? FILTERS[0];
-    const base = projects.filter(f.predicate);
+    const base = active === "featured" ? getFeaturedProjects() : projects.filter(f.predicate);
 
     const q = deferredQuery.trim().toLowerCase();
     if (!q) return base;
@@ -214,7 +159,7 @@ export default function ProjectsPage() {
                         {p.title}
                       </h2>
 
-                      {FEATURED_SLUGS.has(p.slug) ? (
+                      {isFeaturedProject(p) ? (
                         <Badge className="rounded-full" variant="secondary">
                           Featured
                         </Badge>

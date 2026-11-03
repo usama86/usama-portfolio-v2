@@ -16,9 +16,15 @@ export type ProjectImage = {
   src: string;
   title: string;
   description?: string;
+  credit?: { label: string; source: string; license: string; licenseUrl: string; changes: string; additionalSources?: { label: string; href: string }[] };
 };
 
+export type ProjectCategory = "company" | "freelance" | "saas" | "mobile" | "backend";
+
 export type Project = {
+  categories?: ProjectCategory[];
+  role?: string;
+  seoDescription?: string;
   slug: string;
   title: string;
   cardTitle?: string;

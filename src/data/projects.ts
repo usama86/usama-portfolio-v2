@@ -1,12 +1,151 @@
 import type { Project } from "@/components/projects/types";
 
 export const projects: Project[] = [
+  {
+  "slug": "archwalk-immersive-experience-platform",
+  "title": "ArchWalk — Immersive 360° Experience Platform",
+  "cardTitle": "ArchWalk",
+  "company": "ArchWalk",
+  "role": "Founder & Lead Engineer",
+  "timePeriod": "08/2026 — Present",
+  "categories": [
+    "saas",
+    "backend"
+  ],
+  "seoDescription": "How I engineered ArchWalk 360: a Next.js and Three.js experience platform with FastAPI, PostgreSQL, spatial navigation, publishing, and embeddable integrations.",
+  "descriptionDetail": [
+    "As Founder & Lead Engineer, I architected and built ArchWalk 360, a full-stack SaaS platform for creating, publishing, and sharing interactive 360° experiences. My ownership spans the React and Next.js application, custom Three.js panorama runtime, FastAPI services, PostgreSQL data model, and media delivery through Cloudflare R2.",
+    "Built distinct Creator and public Viewer surfaces: authoring changes remain in draft until an explicit publish creates a snapshot for visitors.",
+    "Implemented spatial Step and Doorway navigation, view selection, floor-plan orientation, and Info Points around a shared panorama renderer.",
+    "Developed hosted and embedded workflows with a Partner API, scoped Creator sessions, and a read-only Viewer that can be embedded on websites or opened inside mobile WebViews.",
+    "ArchWalk 360 is the current public product. ArchWalk for Architects is a separate direction publicly marked Coming Soon; it is not presented here as a launched product."
+  ],
+  "technologies": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Three.js",
+    "FastAPI",
+    "PostgreSQL",
+    "SQLAlchemy",
+    "Alembic",
+    "Cloudflare R2"
+  ],
+  "images": [
+    {
+      "src": "/images/projects/archwalk/viewer-solitude.jpg",
+      "title": "ArchWalk 360 Viewer — Solitude reference interior",
+      "description": "Actual Viewer UI with Step navigation and view selection. Reference views use alternate orientations of one panorama, not connected rooms."
+    }
+  ],
+  "mediaImages": [
+    {
+      "src": "/images/projects/archwalk/viewer-solitude.jpg",
+      "title": "Explore — the public Viewer",
+      "description": "Real Viewer controls and a spatial Step marker. Solitude Interior is reference photography; the navigation fixture is illustrative.",
+      "credit": {
+        "label": "Andreas Mischok · Poly Haven",
+        "source": "https://polyhaven.com/a/solitude_interior",
+        "license": "CC0",
+        "licenseUrl": "https://polyhaven.com/license",
+        "changes": "Perspective rendered by the actual Viewer; screenshot encoded as JPEG."
+      }
+    },
+    {
+      "src": "/images/projects/archwalk/creator-reference.jpg",
+      "title": "Build — the embedded Creator",
+      "description": "Real Creator UI with panorama selection, starting-view controls, Inspector, Draft state, and Publish action. Hotel Room is a reference workspace; this still does not show a completed publication.",
+      "credit": {
+        "label": "Greg Zaal · Poly Haven",
+        "source": "https://polyhaven.com/a/hotel_room",
+        "license": "CC0",
+        "licenseUrl": "https://polyhaven.com/license",
+        "changes": "Actual Creator screenshot using a local reference fixture; JPEG encoding."
+      }
+    },
+    {
+      "src": "/images/projects/archwalk/viewer-navigation.jpg",
+      "title": "Navigate — reference view switching",
+      "description": "The real Viewer with its second reference view selected. Both views are different orientations of the same Hotel Room panorama, not separate rooms.",
+      "credit": {
+        "label": "Greg Zaal · Poly Haven",
+        "source": "https://polyhaven.com/a/hotel_room",
+        "license": "CC0",
+        "licenseUrl": "https://polyhaven.com/license",
+        "changes": "Actual Viewer screenshot using a local reference fixture; JPEG encoding."
+      }
+    },
+    {
+      "src": "/images/projects/archwalk/hallwyl-viewer.webp",
+      "title": "Share — independent Hallwyl Museum demonstration",
+      "description": "Published Viewer UI with scene selection, floor-plan mini-map, and an artwork Info Point. An independent demonstration, not a museum customer or partnership claim.",
+      "credit": {
+        "label": "Photography: Jan Ainali",
+        "source": "https://commons.wikimedia.org/wiki/File:Interior_of_Hallwylska_360_degree_11.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Photography rendered by the published Viewer; browser screenshot encoded as WebP. Resized for display. Floor plan: Hallwyl Museum / Jenny Bergensten, public domain.",
+          "additionalSources": [
+            {"label": "Hallwyl panorama 23", "href": "https://commons.wikimedia.org/wiki/File:Interior_of_Hallwylska_360_degree_23.JPG"},
+            {"label": "Hallwyl panorama 26", "href": "https://commons.wikimedia.org/wiki/File:Interior_of_Hallwylska_360_degree_26.JPG"},
+            {"label": "Hallwyl panorama 13", "href": "https://commons.wikimedia.org/wiki/File:Interior_of_Hallwylska_360_degree_13.JPG"},
+            {"label": "Floor plan", "href": "https://commons.wikimedia.org/wiki/File:Ritning._plan_-_Hallwylska_museet_-_10438.tif"}
+          ]
+      }
+    }
+  ],
+  "links": {
+    "webLink": [
+      {
+        "id": "demo",
+        "title": "Live Demo",
+        "link": "https://demo.archwalk.app/viewer"
+      },
+      {
+        "id": "site",
+        "title": "Visit Website",
+        "link": "https://archwalk.app"
+      }
+    ]
+  },
+  "caseStudy": {
+    "problem": [
+      "A panorama alone cannot explain how viewpoints connect or keep a visitor oriented. A useful spatial experience needs navigation, floor-plan context, and controls that remain anchored as the camera moves.",
+      "Authoring and public viewing have different trust boundaries. Teams need to prepare changes without altering a live experience, and partners need to embed the result without gaining access to editing tools."
+    ],
+    "approach": [
+      "Separated the Next.js application into authoring, public viewing, and integration surfaces, with shared rendering and camera math rather than duplicated panorama implementations.",
+      "Kept content and navigation in an editable draft graph. Publishing validates that graph and creates an immutable revision; the public Viewer reads the published snapshot.",
+      "Put experience, navigation, media, and publication rules in FastAPI domain services. Database changes and media operations use explicit validation and scoped access rather than trusting client-supplied relationships."
+    ],
+    "architecture": [
+      "Frontend: React, Next.js, and TypeScript compose the hosted workspace, embedded Creator, and read-only public Viewer. A custom Three.js runtime handles perspective rendering, camera orientation, zoom, and projected spatial markers.",
+      "Backend and data: FastAPI services use PostgreSQL through SQLAlchemy, with Alembic migrations. Experiences, panoramas, navigation links, and published revisions have explicit domain relationships.",
+      "Media: managed uploads use presigned Cloudflare R2 transfers. Completion checks validate stored assets; lifecycle rules protect media referenced by publications and schedule eligible draft cleanup.",
+      "Authentication and authorization: signed-in workspace access and scoped Partner API credentials protect management operations. Embedded Creator sessions are distinct from public Viewer access, with organization and experience checks on the server.",
+      "Integrations: the hosted Viewer runs in website iframes and mobile WebViews. Origin policies and validated message bridges handle embedding and presentation; embedding does not grant authoring access."
+    ],
+    "challenges": [
+      "Panorama rendering and lifecycle: large textures require bounded caching, render budgets, and cleanup. The runtime disposes textures, geometry, materials, controls, and rendering resources when they are no longer needed.",
+      "Spatial navigation: hotspots persist yaw and pitch, not screen pixels. Their projections must track camera changes; floor-plan orientation must stay consistent with the active view.",
+      "Cross-platform presentation: browser fullscreen and mobile host presentation need separate handling while retaining one Viewer implementation. Message origins and sources must be checked at the boundary.",
+      "Publishing and security: draft edits must not leak into public revisions. Authorization, revision checks, and live embedding policies serve different responsibilities and remain separate.",
+      "Reliable backend workflows: managed uploads, media attachment, concurrent draft edits, and publication retries need validation and transaction boundaries to keep stored assets and database records consistent."
+    ],
+    "outcome": [
+      "Shipped a public ArchWalk 360 product surface with Creator and Viewer workflows, spatial navigation, publishing, and hosted or embedded delivery. The public Hallwyl Museum demonstration shows a published Viewer embedded within an independent website.",
+      "The portfolio links to that public demonstration and presents real UI captures from documented reference fixtures. These demonstrate functionality, not customer adoption, revenue, or measured performance gains.",
+      "ArchWalk for Architects remains publicly Coming Soon. No live commercial checkout or payment-provider approval is claimed."
+    ]
+  }
+},
   /* =========================
      FEATURED PROJECTS
   ========================== */
 
   {
     slug: "talentflow-enterprise-recruiting-platform",
+    categories: ["company", "saas"],
     title:
       "TalentFlow — Enterprise Recruiting Platform & AI Training Environment",
     cardTitle: "TalentFlow — Enterprise Recruiting Platform",
@@ -120,6 +259,7 @@ export const projects: Project[] = [
 
   {
     slug: "cleon-ai-voice-ordering",
+    categories: ["saas", "backend"],
     title: "Cleon – AI Voice Ordering Platform",
     company: "Personal / SaaS Product",
     timePeriod: "12/2025 — 02/2026",
@@ -151,11 +291,16 @@ export const projects: Project[] = [
     images: [
       {
         src: "/images/projects/CleonLogo.png",
-        title: "Cleon Admin Dashboard",
+        title: "Cleon brand mark",
         description:
-          "Multi-tenant admin to manage restaurants, voice agents, and integrations.",
+          "Original Cleon product branding.",
       },
     ],
+    mediaImages: [{
+      src: "/images/projects/cleon/integrations-walkthrough.webp",
+      title: "Cleon integrations — walkthrough still",
+      description: "Actual integrations screen from Muhammad Usama’s public Loom walkthrough, approximately 00:17. Cropped to remove playback chrome, webcam, and unused lower space; no UI has been added. This frame shows configuration options, not proof that every provider is operational.",
+    }],
     links: {
       videoType: "loom",
       videoUrl: "https://www.loom.com/share/2d9104b7478f40e29c58bf606b8ceeb5",
@@ -189,6 +334,7 @@ export const projects: Project[] = [
 
   {
     slug: "query-builder",
+    categories: ["company", "backend"],
     title: "Query Builder (Drag & Drop + Expert Mode)",
     company: "Zones",
     timePeriod: "2023 — 2024",
@@ -244,6 +390,7 @@ export const projects: Project[] = [
 
   {
     slug: "graana-real-estate-platform",
+    categories: ["company", "mobile", "backend"],
     title: "Graana – Real Estate Platform",
     company: "Graana",
     timePeriod: "05/2022 — 05/2023",
@@ -314,6 +461,7 @@ export const projects: Project[] = [
 
   {
     slug: "zdp-ui-components-library",
+    categories: ["company"],
     title: "ZDP Components Library",
     company: "Zones",
     timePeriod: "2022 — 2024",
@@ -367,6 +515,7 @@ export const projects: Project[] = [
 
   {
     slug: "aqers-property-search",
+    categories: ["freelance"],
     title: "Aqers – Property Search Platform",
     company: "Freelance",
     timePeriod: "—",
@@ -413,6 +562,7 @@ export const projects: Project[] = [
 
   {
     slug: "yamar-company-spa",
+    categories: ["freelance"],
     title: "Yamar – Company Info Single Page App",
     company: "Freelance",
     timePeriod: "—",
@@ -450,6 +600,7 @@ export const projects: Project[] = [
 
   {
     slug: "bulky-delivery-platform",
+    categories: ["freelance"],
     title: "Bulky – Delivery Service Platform",
     company: "Freelance",
     timePeriod: "—",
@@ -488,6 +639,7 @@ export const projects: Project[] = [
 
   {
     slug: "sentratainment",
+    categories: ["freelance", "mobile", "backend"],
     title: "Sentrataiment – Streaming + Food Ordering",
     company: "Freelance",
     timePeriod: "—",
@@ -552,6 +704,7 @@ export const projects: Project[] = [
 
   {
     slug: "elixir-tango-plus",
+    categories: ["company", "saas", "backend"],
     title: "Elixir Tango+",
     company: "Elixir Technologies",
     timePeriod: "—",
@@ -603,6 +756,7 @@ export const projects: Project[] = [
 
   {
     slug: "artbot-youtube-like-platform",
+    categories: ["company", "backend"],
     title: "Artbot – Video Streaming Platform",
     company: "Artbot LLC",
     timePeriod: "08/2019 — 12/2019",
@@ -649,6 +803,7 @@ export const projects: Project[] = [
 
   {
     slug: "jobtask-service-platform",
+    categories: ["freelance", "mobile", "backend"],
     title: "JobTask – Service Ordering Platform",
     company: "Freelance",
     timePeriod: "—",
@@ -690,6 +845,7 @@ export const projects: Project[] = [
 
   {
     slug: "dmv-ez",
+    categories: ["freelance"],
     title: "dmv-ez",
     company: "Freelance",
     timePeriod: "—",
@@ -728,6 +884,7 @@ export const projects: Project[] = [
 
   {
     slug: "atomic-vault-admin",
+    categories: ["freelance", "backend"],
     title: "Atomic Vault UI – Admin Panel",
     company: "Freelance",
     timePeriod: "—",
@@ -769,6 +926,7 @@ export const projects: Project[] = [
 
   {
     slug: "store-walk-pwa",
+    categories: ["freelance", "backend"],
     title: "Store Walk (Progressive Web App)",
     company: "Freelance",
     timePeriod: "—",
@@ -801,6 +959,7 @@ export const projects: Project[] = [
 
   {
     slug: "tyft-food-truck",
+    categories: ["freelance", "mobile", "backend"],
     title: "TYFT (Find Food Truck Application)",
     company: "Freelance",
     timePeriod: "—",
@@ -862,6 +1021,7 @@ export const projects: Project[] = [
 
   {
     slug: "nomadiq-resident-operations",
+    categories: ["freelance", "mobile", "backend"],
     title: "NOMADIQ – Resident Operations Platform",
     company: "Client Project",
     timePeriod: "2024",
@@ -900,6 +1060,7 @@ export const projects: Project[] = [
 
   {
     slug: "fitness-block-app",
+    categories: ["freelance", "mobile", "backend"],
     title: "Fitness App (Block App)",
     company: "Freelance",
     timePeriod: "—",

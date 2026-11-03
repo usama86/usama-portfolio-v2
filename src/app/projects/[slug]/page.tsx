@@ -1,4 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
+import type { Metadata } from "next";
+import { projects } from "@/data/projects";
+import { featuredProjects } from "@/data/featured-projects";
+import { SITE_ORIGIN } from "@/lib/site";
+import { ImageCredit } from "@/components/media/image-credit";
 import { notFound } from "next/navigation";
 
 import { getProjectBySlug } from "@/data/get-project";
@@ -13,6 +19,27 @@ import { TocNav } from "@/components/projects/toc-nav";
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export function generateStaticParams() {
+  return projects.map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const project = getProjectBySlug((await params).slug);
+  if (!project) notFound();
+  const title = `${project.cardTitle ?? project.title} — Engineering Case Study | Muhammad Usama`;
+  const description = project.seoDescription ?? project.descriptionDetail[0];
+  const url = `${SITE_ORIGIN}/projects/${project.slug}`;
+  const presentation = featuredProjects.find(item => item.slug === project.slug);
+  const image = presentation?.image ?? project.images[0];
+  return {
+    title, description, alternates: { canonical: url },
+    openGraph: {
+      title, description, url, type: "article",
+      images: image ? [{ url: `${SITE_ORIGIN}${image.src}`, alt: image.title }] : [],
+    },
+  };
+}
 
 function Section({
   id,
@@ -42,6 +69,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
   if (!project) notFound();
 
   const links = project.links;
+  const flagship = featuredProjects.find(item => item.slug === slug && item.flagship);
   const hasLoom = !!links?.videoUrl && links?.videoType === "loom";
   const hasDrive = !!links?.videoUrl && links?.videoType === "googleDrive";
 
@@ -78,6 +106,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           {project.title}
         </h1>
 
+        {project.role && <p className="text-primary text-sm font-medium">{project.role}</p>}
         {(project.company || project.timePeriod) && (
           <p className="text-sm md:text-base text-muted-foreground">
             {project.company ?? ""}
@@ -131,13 +160,21 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
         )}
       </div>
 
+      {flagship && <figure className="glass rounded-2xl p-3 sm:p-5">
+        <Image src={flagship.image.src} alt={flagship.image.title} width={1440} height={900} sizes="(max-width: 1248px) 100vw, 1152px" preload className="w-full h-auto rounded-xl" />
+        <figcaption className="pt-3 space-y-1 text-muted-foreground">
+          <p className="text-xs">{flagship.caption} · Reference navigation, not connected rooms.</p>
+          <ImageCredit credit={project.mediaImages?.[0]?.credit} />
+        </figcaption>
+      </figure>}
+
       {/* Layout: sticky TOC + content */}
       <div className="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-6 items-start">
         {/* TOC */}
         <aside className="lg:sticky lg:top-24 space-y-3">
           <div className="glass rounded-2xl p-4">
             <div className="text-sm font-semibold mb-2">On this page</div>
-            <TocNav items={toc} />
+            <TocNav items={toc} className="flex gap-1 overflow-x-auto whitespace-nowrap pb-1 lg:block lg:overflow-visible lg:whitespace-normal" />
           </div>
         </aside>
 

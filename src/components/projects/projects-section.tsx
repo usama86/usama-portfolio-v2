@@ -6,6 +6,9 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 
+import { featuredProjects, getFeaturedProjects, isFeaturedProject } from "@/data/featured-projects";
+import { FeaturedProjectCard } from "./featured-project-card";
+
 import { projects } from "@/data/projects";
 import type { Project } from "@/components/projects/types";
 
@@ -13,33 +16,29 @@ import { ProjectCard } from "@/components/projects/project-card";
 import { ProjectDialog } from "@/components/projects/project-dialog";
 import styles from "./projects-section.module.css";
 
-const FEATURED_SLUGS = new Set<string>([
-  "talentflow-enterprise-recruiting-platform",
-  "cleon-ai-voice-ordering",
-  "query-builder",
-]);
-
 const HOME_SELECTED_LIMIT = 8;
 
 export function ProjectsSection() {
   const router = useRouter();
+  const openerRef = React.useRef<HTMLElement | null>(null);
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState<Project | null>(null);
 
   const featured = React.useMemo(
-    () => projects.filter((p) => FEATURED_SLUGS.has(p.slug)),
+    () => getFeaturedProjects(),
     [],
   );
 
   const selected = React.useMemo(
     () =>
       projects
-        .filter((p) => !FEATURED_SLUGS.has(p.slug))
+        .filter((p) => !isFeaturedProject(p))
         .slice(0, HOME_SELECTED_LIMIT),
     [],
   );
 
   function openProject(p: Project) {
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setActive(p);
     setOpen(true);
   }
@@ -83,20 +82,11 @@ export function ProjectsSection() {
           </Link>
         </div>
 
-        <div className="project-grid items-stretch">
-          {featured.map((p, index) => (
-            <Reveal
-              key={p.slug}
-              delay={index * 0.045}
-              className={styles.featuredCard}
-            >
-              <ProjectCard
-                project={p}
-                featured
-                onOpen={() => openProject(p)}
-                className="h-full"
-              />
-            </Reveal>
+        <div className={styles.featuredGrid}>
+          {featured.map((p) => (
+            <FeaturedProjectCard key={p.slug} project={p}
+              presentation={featuredProjects.find(item => item.slug === p.slug)!}
+              onOpen={() => openProject(p)} />
           ))}
         </div>
       </div>
@@ -136,6 +126,7 @@ export function ProjectsSection() {
           else setOpen(true);
         }}
         project={active}
+        onRestoreFocus={() => openerRef.current?.focus({ preventScroll: true })}
         onViewCaseStudy={(slug) => {
           closeProject();
           router.push(`/projects/${slug}`);

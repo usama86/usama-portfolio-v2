@@ -39,7 +39,7 @@ export function TocNav({ items, className }: Props) {
           key={t.id}
           href={`#${t.id}`}
           onClick={onClick(t.id)}
-          className="flex min-h-11 items-center text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg px-2 py-1 hover:bg-muted"
+          className="flex min-h-11 shrink-0 items-center text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg px-2 py-1 hover:bg-muted"
         >
           {t.label}
         </a>

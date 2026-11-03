@@ -14,11 +14,9 @@ import {
 } from "@/components/ui/dialog";
 import { useMotionLevel } from "@/hooks/use-motion-level";
 
-export type GalleryImage = {
-  src: string;
-  title: string;
-  description?: string;
-};
+import type { ProjectImage } from "@/components/projects/types";
+import { ImageCredit } from "./image-credit";
+export type GalleryImage = ProjectImage;
 
 type Props = {
   images: GalleryImage[];
@@ -29,7 +27,7 @@ type Props = {
 export function GalleryCarousel({
   images,
   sectionTitle = "Screenshots",
-  sectionDescription = "Key flows and configuration screens from the production system.",
+  sectionDescription = "Product screens, reference demonstrations, and supporting media.",
 }: Props) {
   const motionLevel = useMotionLevel();
   const isFullMotion = motionLevel === "full";
@@ -140,7 +138,8 @@ export function GalleryCarousel({
                   src={img.src}
                   alt={img.title}
                   fill
-                  className={`object-cover transition-transform duration-300 ${
+                  sizes="(max-width: 767px) 100vw, 640px"
+                  className={`object-contain transition-transform duration-300 ${
                     isFullMotion ? "group-hover:scale-[1.015]" : ""
                   }`}
                 />
@@ -160,6 +159,7 @@ export function GalleryCarousel({
             {/* Title + description */}
             <div className="px-1 pt-2 space-y-1">
               <div className="text-sm font-medium">{img.title}</div>
+              <ImageCredit credit={img.credit} />
               {img.description ? (
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {img.description}
@@ -223,19 +223,21 @@ export function GalleryCarousel({
             ) : null}
 
             {/* Image */}
-            <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10">
+            <div className="absolute inset-0 flex items-center justify-center px-6 pt-16 pb-36 md:px-10 md:pb-28">
               <div className="relative w-full h-full">
                 {active?.src ? (
                   <Image
                     src={active.src}
                     alt={active.title}
                     fill
+                    sizes="100vw"
                     className="object-contain"
                   />
                 ) : null}
               </div>
             </div>
 
+            {active?.credit && <div className="absolute bottom-10 inset-x-6 max-h-24 overflow-y-auto text-white/80 md:inset-x-16"><ImageCredit credit={active.credit} /></div>}
             {/* Bottom hint */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 text-xs text-white/60">
               Use ← → keys to navigate • Esc to close
