@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "./types";
+import styles from "./projects-section.module.css";
 import { ProjectIcon } from "./project-icon";
 
 type Props = {
@@ -25,9 +26,9 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
       aria-label={`Explore ${project.cardTitle ?? project.title}`}
     >
       <Card
-        className={`glass interactive-surface h-full overflow-hidden rounded-2xl py-0 shadow-none ${className ?? ""}`}
+        className={`glass interactive-surface ${styles.projectCard} h-full overflow-hidden rounded-2xl py-0 shadow-none ${className ?? ""}`}
       >
-        <CardContent className="flex h-full flex-col gap-5 p-6 md:p-7">
+        <CardContent className="flex h-full flex-col gap-4 p-5 md:p-6">
           <div className="flex items-center justify-between gap-3">
             <ProjectIcon slug={project.slug} title={project.title} />
             {featured ? (
@@ -76,7 +77,10 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
           ) : null}
           <div className="mt-auto flex min-h-11 items-end justify-between border-t border-border pt-4 text-xs text-primary">
             <span>Explore project</span>
-            <ArrowUpRight className="size-4" aria-hidden="true" />
+            <ArrowUpRight
+              className={`${styles.cardArrow} size-4`}
+              aria-hidden="true"
+            />
           </div>
         </CardContent>
       </Card>

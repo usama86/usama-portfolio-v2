@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
+import styles from "./intro-video-dialog.module.css";
 import { ExternalLink, Play } from "lucide-react";
 import {
   Dialog,
@@ -16,18 +18,42 @@ const INTRO_URL = "https://www.youtube.com/shorts/CtqX_YgKrF4";
 
 export function IntroVideoDialog() {
   const [open, setOpen] = useState(false);
+  const [posterAvailable, setPosterAvailable] = useState(true);
   const titleRef = useRef<HTMLHeadingElement>(null);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <button
           type="button"
-          className="group inline-flex min-h-11 items-center gap-3 rounded-xl px-1 text-sm text-foreground transition-colors hover:text-primary"
+          className={styles.preview}
+          aria-label="Watch my 73-second intro"
         >
-          <span className="grid size-9 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10">
-            <Play className="size-3.5 fill-current" aria-hidden="true" />
+          <span className={styles.poster}>
+            <span className={styles.fallback} aria-hidden="true">
+              MU
+            </span>
+            {posterAvailable ? (
+              <Image
+                src="/images/intro-youtube.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 768px) 640px, 384px"
+                preload
+                className={styles.posterImage}
+                onError={() => setPosterAvailable(false)}
+              />
+            ) : null}
+            <span className={styles.duration}>01:13</span>
+            <span className={styles.play} aria-hidden="true">
+              <Play className="size-5 fill-current" />
+            </span>
           </span>
-          Watch my 73-second intro
+          <span className={styles.caption}>
+            <span className={styles.captionTitle}>Muhammad Usama</span>
+            <span className={styles.captionAction}>
+              Watch my 73-second intro <span aria-hidden="true">↗</span>
+            </span>
+          </span>
         </button>
       </DialogTrigger>
       <DialogContent

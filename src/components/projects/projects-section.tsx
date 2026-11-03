@@ -51,7 +51,7 @@ export function ProjectsSection() {
 
   return (
     <section
-      className={`${styles.projectsSection} section-shell scroll-mt-24 space-y-10`}
+      className={`${styles.projectsSection} section-shell scroll-mt-24`}
       id="projects"
     >
       {/* Header */}
@@ -59,13 +59,19 @@ export function ProjectsSection() {
         <SectionHeader
           eyebrow="Selected engineering work"
           title="Projects"
-          subtitle="AI training environments, enterprise SaaS platforms, product simulations, and real production systems built across web, AI, and automation."
+          right={
+            <p className="max-w-lg text-sm leading-relaxed text-muted-foreground md:max-w-[30rem] md:pb-1">
+              AI training environments, enterprise SaaS platforms, product
+              simulations, and real production systems built across web, AI, and
+              automation.
+            </p>
+          }
         />
       </Reveal>
 
       {/* Featured Case Studies */}
-      <div className="space-y-4">
-        <div className="flex items-end justify-between gap-4">
+      <div className={styles.projectGroup}>
+        <div className={styles.groupHeading}>
           <h3 className="text-base md:text-lg font-medium tracking-tight">
             Featured case studies
           </h3>
@@ -96,8 +102,8 @@ export function ProjectsSection() {
       </div>
 
       {/* Selected Work */}
-      <div className="space-y-4">
-        <div className="flex items-end justify-between gap-4">
+      <div className={styles.projectGroup}>
+        <div className={styles.groupHeading}>
           <h3 className="text-base md:text-lg font-medium tracking-tight">
             Selected work
           </h3>

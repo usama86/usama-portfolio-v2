@@ -12,7 +12,7 @@
   top: 1.75rem;
   bottom: 1.75rem;
   width: 1px;
-  background: var(--border);
+  background: linear-gradient(var(--primary), var(--border) 28%, var(--border));
 }
 .experienceCard {
   position: relative;
@@ -34,7 +34,7 @@
   border-color: color-mix(in oklch, var(--primary) 45%, var(--border));
   background: linear-gradient(
     110deg,
-    color-mix(in oklch, var(--primary) 4%, var(--card)),
+    color-mix(in oklch, var(--primary) 7%, var(--card)),
     var(--card)
   );
 }

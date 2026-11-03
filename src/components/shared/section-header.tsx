@@ -8,7 +8,7 @@ type Props = {
 export function SectionHeader({ eyebrow, title, subtitle, right }: Props) {
   return (
     <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-      <div className="space-y-3">
+      <div className="space-y-2">
         {eyebrow ? <div className="eyebrow">{eyebrow}</div> : null}
         <h2 className="text-3xl font-medium tracking-[-0.04em] md:text-[2.75rem] md:leading-tight">
           {title}

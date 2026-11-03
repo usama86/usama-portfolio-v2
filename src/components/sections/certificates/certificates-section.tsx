@@ -25,7 +25,7 @@ export function CertificatesSection() {
   return (
     <section
       id="certificates"
-      className={`section-shell scroll-mt-24 space-y-8 ${styles.certificateSection}`}
+      className={`section-shell scroll-mt-24 ${styles.certificateSection}`}
     >
       <Reveal>
         <SectionHeader

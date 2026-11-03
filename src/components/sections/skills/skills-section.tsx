@@ -10,7 +10,7 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className={`section-shell scroll-mt-24 space-y-8 ${styles.skillsSection}`}
+      className={`section-shell scroll-mt-24 ${styles.skillsSection}`}
     >
       <Reveal>
         <SectionHeader

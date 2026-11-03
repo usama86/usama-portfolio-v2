@@ -5,7 +5,7 @@ import styles from "./footer.module.css";
 
 export function Footer() {
   return (
-    <footer className={`mt-24 pb-10 ${styles.footer}`}>
+    <footer className={`mt-[var(--section-gap)] pb-10 ${styles.footer}`}>
       <Separator className="opacity-60" />
 
       <div className="mx-auto max-w-[1248px] px-5 sm:px-8 lg:px-12 pt-8 space-y-4">

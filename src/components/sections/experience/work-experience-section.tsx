@@ -12,7 +12,7 @@ export function WorkExperienceSection() {
   return (
     <section
       id="experience"
-      className={`section-shell scroll-mt-24 space-y-8 ${styles.experienceSection}`}
+      className={`section-shell scroll-mt-24 ${styles.experienceSection}`}
     >
       <Reveal>
         <SectionHeader

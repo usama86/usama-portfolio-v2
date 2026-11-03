@@ -70,7 +70,11 @@
   --surface-elevated: #ebede4;
   --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --motion-fast: 180ms;
-  --motion-reveal: 480ms;
+  --motion-reveal: 640ms;
+  --hero-inset: clamp(1.5rem, 3vw, 2.5rem);
+  --section-gap: clamp(2rem, 3.5vw, 3rem);
+  --section-inset: 1.5rem;
+  --section-content-gap: 1.25rem;
 }
 
 .dark {
@@ -151,7 +155,21 @@
   }
   .section-shell {
     border-top: 1px solid var(--border);
-    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: var(--section-inset);
+  }
+  .homepage {
+    display: grid;
+    gap: var(--section-gap);
+  }
+  .homepage .section-shell {
+    display: grid;
+    gap: var(--section-content-gap);
+  }
+  html[data-motion-level="full"] [data-slot="button"]:hover {
+    transform: translateY(-2px);
+  }
+  html[data-motion-level="full"] [data-slot="button"]:active {
+    transform: translateY(0);
   }
   .eyebrow {
     color: var(--primary);
@@ -162,7 +180,7 @@
   }
   .interactive-surface {
     transition:
-      transform var(--motion-fast) var(--motion-ease),
+      transform 280ms var(--motion-ease),
       border-color var(--motion-fast) ease,
       background-color var(--motion-fast) ease;
   }
@@ -171,7 +189,7 @@
     border-color: color-mix(in oklch, var(--primary) 55%, var(--border));
   }
   html[data-motion-level="full"] .interactive-surface:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
   }
   .project-grid {
     display: grid;

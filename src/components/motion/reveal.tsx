@@ -26,12 +26,12 @@ export function Reveal({
       className={className}
       initial={false}
       animate={{
-        opacity: inView || staticMode ? 1 : 0.88,
-        y: inView || level !== "full" ? 0 : 10,
+        opacity: inView || staticMode ? 1 : 0.9,
+        y: inView || staticMode ? 0 : level === "full" ? 22 : 5,
       }}
       transition={{
-        duration: staticMode ? 0 : level === "balanced" ? 0.22 : 0.48,
-        delay: inView && level === "full" ? Math.min(delay, 0.18) : 0,
+        duration: staticMode ? 0 : level === "balanced" ? 0.28 : 0.64,
+        delay: inView && level === "full" ? Math.min(delay, 0.24) : 0,
         ease: revealEase,
       }}
     >

@@ -11,7 +11,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className={`section-shell scroll-mt-24 space-y-8 ${styles.contactSection}`}
+      className={`section-shell scroll-mt-24 ${styles.contactSection}`}
     >
       <Reveal>
         <SectionHeader

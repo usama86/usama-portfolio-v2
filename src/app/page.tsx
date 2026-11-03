@@ -7,7 +7,7 @@ import { ContactSection } from "@/components/sections/contact/contact-section";
 
 export default function Page() {
   return (
-    <div className="space-y-20 md:space-y-28">
+    <div className="homepage">
       <HeroSection />
 
       <div className="scroll-mt-24">
