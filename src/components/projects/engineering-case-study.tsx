@@ -12,7 +12,7 @@ import styles from "./engineering-case-study.module.css";
 
 function StorySection({ id, kicker, title, children }: { id: string; kicker: string; title: string; children: React.ReactNode }) {
   return <Reveal><section id={id} className={styles.section}>
-    <div className={styles.sectionHeading}><p className={styles.kicker}>{kicker}</p><h2>{title}</h2></div>
+    <div className={styles.sectionHeading}><p className={styles.kicker}>{kicker}</p><h2 tabIndex={-1}>{title}</h2></div>
     {children}
   </section></Reveal>;
 }
@@ -47,6 +47,8 @@ function Architecture({ architecture }: { architecture: EngineeringStory["archit
 const deliveryLabel = { public: "Public", implemented: "Implemented", foundation: "Foundation / boundary" } as const;
 
 export function EngineeringCaseStudy({ project, story }: { project: Project; story: EngineeringStory }) {
+  const [projectName, ...subtitleParts] = project.title.split(/\s+[—–]\s+/);
+  const projectSubtitle = subtitleParts.join(" — ");
   const media = project.mediaImages?.length ? project.mediaImages : project.images;
   const lead = story.leadMedia ? media[story.leadMedia.mediaIndex] : undefined;
   const hasLoom = project.links?.videoType === "loom" && !!project.links.videoUrl;
@@ -66,10 +68,13 @@ export function EngineeringCaseStudy({ project, story }: { project: Project; sto
 
   return <article className={styles.page} data-case-study="engineering">
     <Link href="/projects" className={styles.back}><ArrowLeft size={16} aria-hidden="true" /> All projects</Link>
-    <header className={`${styles.hero} ${lead ? styles.heroWithLead : ""}`}>
+    <header className={styles.hero}>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}>{story.eyebrow}</p>
-        <h1>{project.title}</h1>
+        <h1 aria-label={project.title}>
+          <span className={styles.heroTitleName}>{projectName}</span>
+          {projectSubtitle && <span className={styles.heroTitleSubtitle}>{projectSubtitle}</span>}
+        </h1>
         <p className={styles.dek}>{story.summary}</p>
         <div className={styles.meta}><span>{project.role ?? "Engineering project"}</span><span aria-hidden="true">·</span><span>{project.company}</span><span aria-hidden="true">·</span><span>{project.timePeriod}</span></div>
         {(project.links?.webLink?.length || hasLoom || hasDrive) ? <div className={styles.heroLinks}>
@@ -82,7 +87,7 @@ export function EngineeringCaseStudy({ project, story }: { project: Project; sto
         const image = media[moment.mediaIndex];
         if (!image) return null;
         return <section key={moment.id} id={moment.id} className={`${styles.visualMoment} ${styles.section}`}>
-          <div className={styles.visualHeading}><div><p className={styles.kicker}>Product surface {index + 1}</p><h2>{moment.title}</h2></div><span>{moment.status}</span></div>
+          <div className={styles.visualHeading}><div><p className={styles.kicker}>Product surface {index + 1}</p><h2 tabIndex={-1}>{moment.title}</h2></div><span>{moment.status}</span></div>
           <MediaFigure image={image} width={moment.width} height={moment.height} caption={moment.explanation} priority={index === 0} />
         </section>;
       })}</div> : null}
@@ -99,7 +104,7 @@ export function EngineeringCaseStudy({ project, story }: { project: Project; sto
           const image = media[moment.mediaIndex];
           if (!image) return null;
           return <Reveal key={moment.id}><section id={moment.id} className={`${styles.visualMoment} ${styles.section}`}>
-            <div className={styles.visualHeading}><div><p className={styles.kicker}>Product surface {index + 2}</p><h2>{moment.title}</h2></div><span>{moment.status}</span></div>
+            <div className={styles.visualHeading}><div><p className={styles.kicker}>Product surface {index + 2}</p><h2 tabIndex={-1}>{moment.title}</h2></div><span>{moment.status}</span></div>
             <MediaFigure image={image} width={moment.width} height={moment.height} caption={moment.explanation} />
           </section></Reveal>;
         })}

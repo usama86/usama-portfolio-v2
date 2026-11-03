@@ -40,6 +40,9 @@ type Props = {
 
 export function MobileNav({ onNavigate }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -67,6 +70,14 @@ export function MobileNav({ onNavigate }: Props) {
         onNavigate?.();
       });
     });
+  }
+
+  // Radix's generated dialog ID can differ between streamed server markup and
+  // the first client render. Keep an identical trigger placeholder until mount.
+  if (!mounted) {
+    return <Button variant="outline" size="icon" className="rounded-xl lg:hidden" aria-label="Open menu" disabled>
+      <Menu className="h-5 w-5" />
+    </Button>;
   }
 
   return (

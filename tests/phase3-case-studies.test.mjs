@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const repo = process.cwd();
@@ -73,4 +73,19 @@ test("older project retains the legacy case-study layout", () => {
   assert.match(page, />Overview</);
   assert.match(page, />Problem</);
   assert.match(page, />Demo \/ Media</);
+});
+
+test("every prerendered project TOC links only to existing sections", () => {
+  const directory = join(repo, ".next/server/app/projects");
+  for (const file of readdirSync(directory).filter(name => name.endsWith(".html"))) {
+    const page = readFileSync(join(directory, file), "utf8");
+    const targets = [...page.matchAll(/href="#([a-z0-9-]+)"/g)]
+      .map(match => match[1]).filter(id => id !== "main-content");
+    assert.ok(targets.length > 0, `${file} has no section navigation`);
+    for (const target of targets) {
+      assert.ok(page.includes(`id="${target}"`), `${file} links to missing ${target}`);
+    }
+    assert.equal([...page.matchAll(/aria-current="location"/g)].length, 1,
+      `${file} must render one initial active TOC item`);
+  }
 });

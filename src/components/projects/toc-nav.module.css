@@ -1,0 +1,4 @@
+.link { border-left: 2px solid transparent; color: var(--muted-foreground); }
+.link:hover { color: var(--foreground); background: var(--muted); }
+.link[aria-current="location"] { border-left-color: var(--primary); background: color-mix(in oklch, var(--primary) 13%, var(--card)); color: var(--foreground); font-weight: 650; }
+.link:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }

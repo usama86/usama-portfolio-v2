@@ -53,7 +53,7 @@ function Section({
 }) {
   return (
     <section id={id} className="section-shell scroll-mt-24 space-y-4">
-      <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+      <h2 tabIndex={-1} className="text-xl md:text-2xl font-semibold tracking-tight">
         {title}
       </h2>
       <div className="text-sm md:text-base text-foreground/85 leading-relaxed space-y-2">
@@ -86,11 +86,11 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
       { id: "archwalk-360", label: "ArchWalk 360" },
       { id: "architects-3d", label: "Architects 3D" },
     ] : []),
-    { id: "problem", label: "Problem" },
-    { id: "approach", label: "Approach" },
-    { id: "architecture", label: "Architecture" },
-    { id: "challenges", label: "Challenges" },
-    { id: "outcome", label: "Outcome" },
+    ...(project.caseStudy?.problem?.length ? [{ id: "problem", label: "Problem" }] : []),
+    ...(project.caseStudy?.approach?.length ? [{ id: "approach", label: "Approach" }] : []),
+    ...(project.caseStudy?.architecture?.length ? [{ id: "architecture", label: "Architecture" }] : []),
+    ...(project.caseStudy?.challenges?.length ? [{ id: "challenges", label: "Challenges" }] : []),
+    ...(project.caseStudy?.outcome?.length ? [{ id: "outcome", label: "Outcome" }] : []),
     { id: "tech", label: "Tech stack" },
     { id: "media", label: "Demo / Media" },
   ];
@@ -168,7 +168,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
       {flagship?.secondaryImage && <div className="grid gap-4 lg:grid-cols-2">
         <section id="archwalk-360" className="glass scroll-mt-24 rounded-2xl p-3 sm:p-5">
-          <h2 className="mb-3 text-lg font-semibold">ArchWalk 360 <span className="ml-2 text-xs font-normal text-muted-foreground">Public product</span></h2>
+          <h2 tabIndex={-1} className="mb-3 text-lg font-semibold">ArchWalk 360 <span className="ml-2 text-xs font-normal text-muted-foreground">Public product</span></h2>
           <figure>
             <Image src={flagship.image.src} alt={flagship.image.title} width={flagship.image.width} height={flagship.image.height} sizes="(max-width: 1023px) 100vw, 50vw" preload className="w-full h-auto rounded-xl" />
             <figcaption className="pt-3 space-y-1 text-xs text-muted-foreground"><p>{flagship.caption} · Reference navigation, not connected rooms.</p><ImageCredit credit={project.mediaImages?.[0]?.credit} /></figcaption>
@@ -176,7 +176,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           <p className="mt-4 text-sm leading-relaxed text-foreground/80">A panorama runtime maps yaw and pitch to view direction, then projects scene links, Info Points, and floor-plan context into the visitor’s view. Creator drafts publish to a separate read-only Viewer and embed surface.</p>
         </section>
         <section id="architects-3d" className="glass scroll-mt-24 rounded-2xl p-3 sm:p-5">
-          <h2 className="mb-3 text-lg font-semibold">ArchWalk for Architects <span className="ml-2 text-xs font-normal text-muted-foreground">Publicly Coming Soon</span></h2>
+          <h2 tabIndex={-1} className="mb-3 text-lg font-semibold">ArchWalk for Architects <span className="ml-2 text-xs font-normal text-muted-foreground">Publicly Coming Soon</span></h2>
           <figure>
             <Image src={flagship.secondaryImage.src} alt={flagship.secondaryImage.title} width={flagship.secondaryImage.width} height={flagship.secondaryImage.height} sizes="(max-width: 1023px) 100vw, 50vw" className="w-full h-auto rounded-xl" />
             <figcaption className="pt-3 space-y-1 text-xs text-muted-foreground"><p>{flagship.secondaryCaption}. Actual ArchWalk runtime, Orbit mode, CC0 Modern House reference GLB. Walk mode is not demonstrated by this still.</p><ImageCredit credit={project.mediaImages?.[1]?.credit} /></figcaption>
