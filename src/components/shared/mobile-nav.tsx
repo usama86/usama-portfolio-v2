@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, ExternalLink } from "lucide-react";
+import { Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -30,8 +30,6 @@ const INNER_NAV = [
   { label: "All projects", href: "/projects", type: "route" as const },
 ];
 
-const PSEB_URL =
-  "https://portal.techdestination.com/verify-certificate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpc3RyYXRpb25ObyI6IkZMMjEvUFNFQi8yMDI1LzIyMjkyIiwidHlwZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE3NjcwODAwNzIsImV4cCI6MTc3NDg1NjA3Mn0.8poPngm4g1fKYxFxxRFe_nZYfAbK2b_4NVoyJCNVje0";
 const GITHUB_REPO_URL = "https://github.com/usama86/usama-portfolio-v2";
 
 type Props = {
@@ -60,6 +58,7 @@ export function MobileNav({ onNavigate }: Props) {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         const el = document.querySelector(href);
+        if (window.location.hash !== href) window.location.hash = href;
         const lite =
           document.documentElement.dataset.motionLevel === "lite" ||
           window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -148,15 +147,7 @@ export function MobileNav({ onNavigate }: Props) {
           </Button>
         </div>
 
-        <a
-          href={PSEB_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-6 inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <span>PSEB Registered Freelancer • 2025–2026</span>
-          <ExternalLink className="h-3.5 w-3.5 opacity-70" />
-        </a>
+        <p className="mt-6 text-xs text-muted-foreground">PSEB Registered Freelancer • 2025–2026</p>
       </SheetContent>
     </Sheet>
   );

@@ -73,7 +73,8 @@ for (const [name, slug, source, alt] of [
 ]) {
   test(`${name}: the hero preview uses its real gallery image and offers the full screenshot`, () => {
     const page = html(slug);
-    assert.match(page, new RegExp(`aria-label="View full screenshot:[^"]+"`));
+    assert.match(page, /Application preview/);
+    assert.match(page, /View full screenshot/);
     assert.ok(page.includes(`alt="${alt}"`));
     assert.ok(page.includes(source), `${name} source screenshot missing from page`);
     assert.match(page, /Product captures/);

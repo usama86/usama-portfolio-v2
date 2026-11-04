@@ -51,7 +51,7 @@ export function FeaturedProjectCard({ project, presentation, onOpen }: {
           </Button>
           <div className={styles.secondary}>
             {flagship ? project.links?.webLink?.map(link => <a key={link.id} href={link.link} target="_blank" rel="noreferrer">{link.title}<ArrowUpRight size={14} aria-hidden="true" /></a>) : <>
-              {onOpen && <button type="button" onClick={onOpen} aria-label={`Preview ${title}`}>Quick look<ArrowUpRight size={14} aria-hidden="true" /></button>}
+              {onOpen && <button type="button" onClick={onOpen} aria-label={`Quick look at ${title}`}>Quick look<ArrowUpRight size={14} aria-hidden="true" /></button>}
               {project.links?.videoType === "loom" && <a href={project.links.videoUrl} target="_blank" rel="noreferrer"><Play size={13} aria-hidden="true" />Watch walkthrough</a>}
             </>}
           </div>

@@ -5,8 +5,10 @@ import { Footer } from "@/components/shared/footer";
 import { MotionLevelAttribute } from "@/components/motion/motion-level-attribute";
 
 import type { Metadata } from "next";
+import { SITE_ORIGIN } from "@/lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_ORIGIN),
   title: "Muhammad Usama — Senior Software Engineer",
   description:
     "Senior Software Engineer with 7+ years of experience. React, Next.js, TypeScript, and full-stack product engineering, from architecture to production.",
@@ -15,7 +17,10 @@ export const metadata: Metadata = {
     description:
       "Senior Software Engineer with 7+ years of experience. React, Next.js, TypeScript, and full-stack product engineering, from architecture to production.",
     type: "website",
+    siteName: "Muhammad Usama — Portfolio",
   },
+  twitter: { card: "summary_large_image" },
+  robots: process.env.VERCEL_ENV === "preview" ? { index: false, follow: false } : undefined,
 };
 
 export default function RootLayout({

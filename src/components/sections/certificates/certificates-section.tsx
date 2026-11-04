@@ -11,7 +11,6 @@ const certs = [
     title: "PSEB Registered Freelancer",
     meta: "2025 — 2026",
     note: "Government-registered freelancer status (Pakistan).",
-    href: "https://portal.techdestination.com/verify-certificate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWdpc3RyYXRpb25ObyI6IkZMMjEvUFNFQi8yMDI1LzIyMjkyIiwidHlwZSI6ImZyZWVsYW5jZXIiLCJpYXQiOjE3NjcwODAwNzIsImV4cCI6MTc3NDg1NjA3Mn0.8poPngm4g1fKYxFxxRFe_nZYfAbK2b_4NVoyJCNVje0",
   },
   {
     title: "React / Frontend Certification",
@@ -57,7 +56,7 @@ export function CertificatesSection() {
               </Badge>
             </div>
 
-            <div>
+            {c.href && <div>
               <Button
                 asChild
                 variant="outline"
@@ -67,7 +66,7 @@ export function CertificatesSection() {
                   View credential
                 </a>
               </Button>
-            </div>
+            </div>}
           </Reveal>
         ))}
       </div>

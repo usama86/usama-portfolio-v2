@@ -26,7 +26,6 @@ export function IntroVideoDialog() {
         <button
           type="button"
           className={styles.preview}
-          aria-label="Watch my 73-second intro"
         >
           <span className={styles.poster}>
             <span className={styles.fallback} aria-hidden="true">

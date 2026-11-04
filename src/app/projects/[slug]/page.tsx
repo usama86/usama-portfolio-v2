@@ -28,7 +28,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const project = getProjectBySlug((await params).slug);
   if (!project) notFound();
-  const title = `${project.cardTitle ?? project.title} — Engineering Case Study | Muhammad Usama`;
+  const title = `${project.cardTitle ?? project.title} — ${project.engineeringStory ? "Engineering Case Study" : "Project Case Study"} | Muhammad Usama`;
   const description = project.seoDescription ?? project.descriptionDetail[0];
   const url = `${SITE_ORIGIN}/projects/${project.slug}`;
   const presentation = featuredProjects.find(item => item.slug === project.slug);
@@ -39,6 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title, description, url, type: "article",
       images: image ? [{ url: `${SITE_ORIGIN}${image.src}`, alt: image.title }] : [],
     },
+    twitter: { card: "summary_large_image", title, description, images: image ? [`${SITE_ORIGIN}${image.src}`] : [] },
   };
 }
 

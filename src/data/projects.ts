@@ -105,7 +105,7 @@ export const projects: Project[] = [
             {"label": "Hallwyl panorama 23", "href": "https://commons.wikimedia.org/wiki/File:Interior_of_Hallwylska_360_degree_23.JPG"},
             {"label": "Hallwyl panorama 26", "href": "https://commons.wikimedia.org/wiki/File:Interior_of_Hallwylska_360_degree_26.JPG"},
             {"label": "Hallwyl panorama 13", "href": "https://commons.wikimedia.org/wiki/File:Interior_of_Hallwylska_360_degree_13.JPG"},
-            {"label": "Floor plan", "href": "https://commons.wikimedia.org/wiki/File:Ritning._plan_-_Hallwylska_museet_-_10438.tif"}
+            {"label": "Floor plan", "href": "https://commons.wikimedia.org/wiki/File:Ritning_v%C3%A5ning_1,_Hallwylska_palatset_-_Hallwylska_museet_-_101109.tif"}
           ]
       }
     }
@@ -699,11 +699,6 @@ export const projects: Project[] = [
           title: "GitHub (Mobile)",
           link: "https://github.com/usama86/Sentratainment-Travel-App",
         },
-        {
-          id: 3503,
-          title: "GitHub (Backend)",
-          link: "https://github.com/usama86/Sentertainment-backend",
-        },
       ],
     },
     caseStudy: {
@@ -753,7 +748,7 @@ export const projects: Project[] = [
       videoType: "googleDrive",
       videoUrl: "1_EhyjcX0WAGXSA07xCyCFzzS_VfudBv1",
       webLink: [
-        { id: 5555, title: "Product", link: "https://elixir.com/product" },
+        { id: 5555, title: "Elixir Technologies", link: "https://elixir.com/about" },
       ],
     },
     caseStudy: {
@@ -1000,13 +995,6 @@ export const projects: Project[] = [
     links: {
       videoType: "googleDrive",
       videoUrl: "1qaVeI9WgAUh9X_EY26OyFfPbmAwB6dV4",
-      webLink: [
-        {
-          id: 3901,
-          title: "App Store",
-          link: "https://apps.apple.com/pk/app/tyft/id6739187254",
-        },
-      ],
       github: [
         {
           id: 3699,

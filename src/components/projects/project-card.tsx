@@ -23,7 +23,6 @@ export function ProjectCard({ project, onOpen, featured, className }: Props) {
       onClick={onOpen}
       className="group h-full w-full rounded-2xl text-left"
       type="button"
-      aria-label={`Explore ${project.cardTitle ?? project.title}`}
     >
       <Card
         className={`glass interactive-surface ${styles.projectCard} h-full overflow-hidden rounded-2xl py-0 shadow-none ${className ?? ""}`}

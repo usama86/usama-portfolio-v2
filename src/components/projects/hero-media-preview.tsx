@@ -13,7 +13,7 @@ export function HeroMediaPreview({ src, title, width, height, preview }: { src: 
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   return <>
-    <button ref={triggerRef} type="button" className={styles.trigger} onClick={() => setOpen(true)} aria-label={`View full screenshot: ${title}`}>
+    <button ref={triggerRef} type="button" className={styles.trigger} onClick={() => setOpen(true)}>
       <span className={styles.topline}><span>Application preview</span><span className={styles.action}>View full screenshot <ArrowUpRight size={14} aria-hidden="true" /></span></span>
       <span className={styles.viewport} style={{ aspectRatio: preview.aspectRatio }}>
         <Image src={src} alt={preview.alt} fill priority sizes="(max-width: 899px) calc(100vw - 64px), (max-width: 1440px) 44vw, 590px" className={styles.crop} style={{ objectPosition: preview.objectPosition }} />
