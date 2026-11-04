@@ -11,7 +11,7 @@ import { Github } from "lucide-react";
 import { useMotionLevel } from "@/hooks/use-motion-level";
 import styles from "./navbar.module.css";
 
-const GITHUB_REPO_URL = "https://github.com/usama86/usama-portfolio-v2";
+const GITHUB_REPO_URL = "https://github.com/usama86";
 
 const HOME_NAV = [
   { label: "Projects", href: "#projects", type: "hash" as const },

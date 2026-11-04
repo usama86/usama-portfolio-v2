@@ -873,7 +873,7 @@ export const projects: Project[] = [
     technologies: ["React"],
     images: [
       {
-        src: "/images/projects/DMVlogo.png",
+        src: "/images/projects/dmvLogo.png",
         title: "dmv-ez",
         description: "Simplified flows for multi-state DMV-style applications.",
       },
